@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ 
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+   <td width="49%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+       <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;">
+             <img src='tecblic.png' alt="ERROR" />
+           </td>
+         </tr>
+       
+           <td> </td>
+         </tr>
+         </table></td>
+     </tr>
+    
+   </table></td>
+   <td width="51%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;" align="right"></td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;"  align="right"> </td>
+     </tr>
+    
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px; margin-right: 25px;" align="right">Tecblic Private Limited</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 35px;"  align="right">A305/306 Stellar Complex</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;" align="right">Sindhu Bhavan Road, Bodakdev</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 70px;" align="right">Ahmedabad  380054</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 110px;" align="right">Gujarat, India</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 90px;" align="right">www.tecblic.com</td>
+     </tr>
+   </table></td>
+ </tr>
+{% for invoice in invoice %}
+ <table style="width:100%;margin-top: 20px;">
+   <p style="text-align: center;font-size: 25px;margin-top: 40px;">TAX INVOICE – Original for Recipient</p>
+   <tr  >
+     <td style="font-size: 13px;">Invoice No.:</td>
+     <td  style="font-size: 13px; margin-right: 10px;"><span style="font-weight:bold;">{{invoice.invoice_no}}</span></td>
+     <td  style="font-size: 13px;">Payment Mode:</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.payment_method}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;">Invoice Date:</td>
+     <td  style="font-size: 13px; font-weight: bold;">{{invoice.invoice_date}}</td>
+     <td  style="font-size: 13px;">SAC Code:</td>
+     <td  style="font-size: 13px; font-weight: bold;">{{invoice.sac_code}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;">Client Name:</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.client.clientName}}</td>
+     <td style="font-size: 13px;">Kind Attn.:</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.client.kindAttn}}</td>
+   </tr>
+   <tr >
+     <td style="font-size: 13px; ">Client Address:</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.client.clientAddress}}</td>
+     <td style="font-size: 13px;">Place of Supply:</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.client.placeofSupply}}</td>
+   </tr>
+   <tr >
+     <td style="font-size: 13px;">Client GSTIN/VAT:</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.client.clientGSTIN}}</td>
+     <td  style="font-size: 13px;">Client PAN/Unique ID</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.client.clientPAN}}</td>
+   </tr>
+ </table>
+
+ <!-- SECOND -->
+ <table style="width:100%;border: 1px solid rgb(250, 237, 237);margin-top: 30px;height: 30px;">
+   <tr >
+     <th style="font-size: 13px; border: 1px solid rgb(250, 237, 237); width: 65px;">Sr No.:</th>
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237); width: 350px;"><span style="font-weight:bold">Description</span></th>
+     {% if invoice.qty_type == 'NONE' %}
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 100px;">Quantity</th>
+     {% endif %}
+
+     {% if invoice.qty_type == 'HRS' or invoice.qty_type == 'DAY' %}
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 100px;">Quantity({{invoice.qty_type}})</th>
+     {% endif %}
+
+     {% if invoice.currency_type == 'INR' %}
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 120px;">Cost Per Unit
+       (INR)</th>
+     <th style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 100px;">Total Cost (INR)</th>
+     {% endif %}
+
+     {% if invoice.currency_type == 'EUR' %}
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 120px;">Cost Per Unit
+       (EUR)</th>
+     <th style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 100px;">Total Cost (EUR)</th>
+     {% endif %}
+
+     {% if invoice.currency_type == 'USD' %}
+     <th  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 120px;">Cost Per Unit
+       (USD)</th>
+     <th style="font-size: 13px;border: 1px solid rgb(250, 237, 237);width: 100px;">Total Cost (USD)</th>
+     {% endif %}
+   </tr>
+
+   <tr>
+     <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">1</td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);">{{desc}}</td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{{invoice.quantity}}</td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{{invoice.cost_per_unit}}</td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{% widthratio invoice.cost_per_unit 1 invoice.quantity %}</td>
+   </tr>
+   {% if invoice.gst_type == "IMPORT" %}
+     <tr>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: right; margin-right: 5px;"><span style="font-weight: bold;">SGST @9%</span></td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{{sgst}}</td>
+     </tr>
+     <tr>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: right; margin-right: 5px;"><span style="font-weight: bold;">CGST @9%</span> </td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{{cgst}}</td>
+     </tr>
+   {% else %}
+     <tr>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: right; margin-right: 5px;"><span style="font-weight: bold;">IGST @18%</span> </td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+       <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;">{{igst}}</td>
+     </tr>
+   {% endif %}
+
+   <tr>
+     <td style="font-size: 13px;margin-left: 3px;border: 1px solid rgb(250, 237, 237);"></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"><span style="font-weight: bold; margin-left: 5px;">Gross Amount</span></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);text-align: center;font-weight: bold;">{{final_amt}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;margin-left: 3px;border: 1px solid rgb(250, 237, 237);"></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"><span style="font-weight: bold; margin-left: 5px;">{{invoice.currency_type}} {{gross_amount_words}} Only</span></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237); "></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+     <td  style="font-size: 13px;border: 1px solid rgb(250, 237, 237);"></td>
+   </tr>
+ </table>
+
+ <table style="margin-top: 30px;">
+   <p style="text-align: center;font-size: 14px;margin-top: 45px;font-weight: bold;">Supplier Details</p>
+   <tr >
+     <td style="font-size: 13px;">Bank Name:</td>
+     <td  style="font-size: 13px;"><span style="font-weight:bold">{{invoice.bank.bank_name}}</span></td>
+     <td  style="font-size: 13px;">CIN</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.bank.cin}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;">ACCOUNT NUMBER</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.bank.account_no}}</td>
+     <td  style="font-size: 13px;">PAN/IEC</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.bank.supplier_pan}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;">IFSC CODE:</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.bank.ifsc_code}}</td>
+     <td style="font-size: 13px;">GSTIN</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.bank.supplier_gstin}}</td>
+   </tr>
+   <tr style="width: 30px;">
+     <td style="font-size: 13px; ">Bank Branch:</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.bank.bank_branch}}</td>
+     <td style="font-size: 13px;">ARN</td>
+     <td style="font-size: 13px;font-weight: bold;">{{invoice.bank.arn}}</td>
+   </tr>
+   <tr>
+     <td style="font-size: 13px;">SWIFT CODE:</td>
+     <td  style="font-size: 13px;font-weight: bold;">{{invoice.bank.swift_code}}</td>
+     <td  style="font-size: 13px;"></td>
+     <td  style="font-size: 13px;"></td>
+     
+   </tr>
+   
+  
+ </table>
+
+ 
+<!--     -->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 140px;">
+ <tr>
+   <td colspan="2"> </td>
+ </tr>
+ <tr>
+   <br/>
+   <td width="49%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tr>
+       <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;"> <img src="tecblic.png" alt=""></td>
+         </tr>
+       
+           <td> </td>
+         </tr>
+         </table></td>
+     </tr>
+    
+   </table></td>
+   <td width="51%" valign="top">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;" align="right"></td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;"  align="right"> </td>
+     </tr>
+    
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px; margin-right: 25px;" align="right">Tecblic Private Limited</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 35px;"  align="right">A305/306 Stellar Complex</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;" align="right">Sindhu Bhavan Road, Bodakdev</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 70px;" align="right">Ahmedabad  380054</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 110px;" align="right">Gujarat, India</td>
+     </tr>
+     <tr>
+       <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 90px;" align="right">www.tecblic.com</td>
+     </tr>
+   </table></td>
+ </table>
+ <td width="51%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 15px;">
+   <tr>
+     <td align="right"><img src="logo.png" alt="" width="150"  /></td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;" align="right"></td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;"  align="right"> </td>
+   </tr>
+  
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:25px; margin-right: 19px;" align="left">Terms and Conditions:</td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 35px;"  align="left">1) Currency :
+       {{invoice.currency_type}}.</td><br/>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;padding-top:5px;" align="left">{{invoice.t_2}}</td><br/>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 70px;padding-top:5px;" align="left">{{invoice.t_3}}</td><br/>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 110px;padding-top:5px;" align="left">{{invoice.t_4}}</td><br/>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 90px;padding-top:5px;" align="left">{{invoice.t_5}}</td><br/>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 90px;padding-top:5px;" align="left">6) Subject to Ahmedabad Jurisdiction.</td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="color: white;"><br/></td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; " align="right">This document is digitally signed by</td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 82px;"  align="right">Authorised Signatory</td>
+   </tr>
+   <tr>
+     <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px;margin-right: 82px;" align="right">Shinoj Nair - Director</td>
+   </tr>
+   </td>
+ </table>
+ {% endfor %}
+</table>
+
+</body>
+</html>
