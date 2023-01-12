@@ -86,93 +86,95 @@
 
 {% endblock %}
 <hr>
+    <div class="container">
 
-    <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
+      <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
-            <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Add/Update Bank Details</h4>
-            <form id="form" action="bank_form"  method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="bank_id" id="bank_id">
-                {{form.as_p}}
-                <input type="submit" class="btn btn-success" id="bankbtnsave" value="Save">
-            </form>
+          <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Add/Update Bank Details</h4>
+          <form id="form" action="bank_form"  method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="bank_id" id="bank_id">
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" id="bankbtnsave" value="Save">
+          </form>
         </div>
         <div class="col-sm-7" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Bank Details</h4>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Bank Name</th>
-                        <th scope="col">Account No</th>
-                        <th scope="col">IFSC Code</th>
-                        <th scope="col">Bank Branch</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="tbody">
+          <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Bank Details</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Account No</th>
+                <th scope="col">IFSC Code</th>
+                <th scope="col">Bank Branch</th>
+                
+              </tr>
+            </thead>
+            <tbody id="tbody">
                     {% for bank in bankdetails %}
                     <tr>
-                        <td>{{ bank.id }}</td>
-                        <td>{{ bank.bank_name }}</td>
-                        <td>{{bank.account_no  }}</td>
-                        <td>{{ bank.ifsc_code  }}</td>
-                        <td>{{bank.bank_branch }}</td>
-                        <td><input type="button" data-sid="{{bank.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
-                        <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td>
-
+                      <td>{{ bank.id }}</td>
+                      <td>{{ bank.bank_name }}</td>
+                      <td>{{bank.account_no  }}</td>
+                      <td>{{ bank.ifsc_code  }}</td>
+                      <td>{{bank.bank_branch }}</td>
+                      <td><input type="button" data-sid="{{bank.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
+                      <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td>
+                      
                     </tr>
-                   
-
+                    
+                    
                     {% endfor %}
-                </tbody>
-
-            </table>
-
-        </div>
-    </div>
-<script>
-    $("tbody").on("click",".btn-del",function(){
-        console.log('delete butto clicked');
+                  </tbody>
+                  
+                </table>
+                
+              </div>
+            </div>
+            </div>
+            <script>
+              $("tbody").on("click",".btn-del",function(){
+                console.log('delete butto clicked');
         let id=$(this).attr("data-sid");
         var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-       
+        
         mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
         mythis=this;
         $.ajax({
-            url:"{% url 'delete_banks' %}",
-            method:"POST",
-            data:mydata,
-            success:function(data){
-                if(data.status==1){
-                    $(mythis).closest("tr").fadeOut();
-                    alert('You data is deleted successfully')
-                }
+          url:"{% url 'delete_banks' %}",
+          method:"POST",
+          data:mydata,
+          success:function(data){
+            if(data.status==1){
+              $(mythis).closest("tr").fadeOut();
+              alert('You data is deleted successfully')
             }
+          }
         })
-    })
-
-    $("tbody").on("click",".btn-edit",function(){
+      })
+      
+      $("tbody").on("click",".btn-edit",function(){
         console.log('edit butto clicked');
         let id=$(this).attr("data-sid");
         var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-       
+        
         mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
-       
+        
         $.ajax({
-            url:"{% url 'edit_bank' %}",
-            method:"POST",
+          url:"{% url 'edit_bank' %}",
+          method:"POST",
             data:mydata,
             dataType:"json",
             success:function(data){
-                console.log(data.id)
-                $("#bank_id").val(data.id);
-                $("#banknameid").val(data.bank_name);
-                $("#ifscid").val(data.ifsc);
-                
-                $("#branchid").val(data.bank_branch);
-                $("#accountid").val(data.account_no);
-                $("#supplier_panid").val(data.supplier_pan);
+              console.log(data.id)
+              $("#bank_id").val(data.id);
+              $("#banknameid").val(data.bank_name);
+              $("#ifscid").val(data.ifsc);
+              
+              $("#branchid").val(data.bank_branch);
+              $("#accountid").val(data.account_no);
+              $("#supplier_panid").val(data.supplier_pan);
                 $("#supplier_gstinid").val(data.supplier_gstin);
                 $("#swiftcode_id").val(data.swift_code);
                 $("#cin_id").val(data.cin);

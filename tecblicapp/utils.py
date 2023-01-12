@@ -39,4 +39,3 @@ def render_to_pdf(template_src, filename , context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
-

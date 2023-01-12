@@ -4,7 +4,7 @@ from django.db import models
 class clientDetail(models.Model):
     clientName=models.CharField(max_length=50,null=True,blank=True)
     clientEmail=models.EmailField(null=True,blank=True)
-    clientAddress=models.CharField(max_length=70,null=True,blank=True)
+    clientAddress=models.CharField(max_length=200,null=True,blank=True)
     clientGSTIN=models.CharField(max_length=15,null=True,blank=True)
     clientPAN=models.CharField(max_length=10,null=True,blank=True)
     kindAttn=models.CharField(max_length=40,null=True,blank=True)
@@ -41,17 +41,19 @@ class BankDetails(models.Model):
 
 class Invoice(models.Model):
     Method = [
-    ('CASH', 'CASH'),
-    ('ONLINE', 'ONLINE'),
-    ('CHEQUE', 'CHEQUE'),
+    ('----','----'),
+    ('Cash', 'Cash'),
+    ('Online', 'Online'),
+    ('Cheque', 'Cheque'),
+    ('Swift Transfer', 'Swift Transfer'),
     ]
 
     imp=[
-        ('IMPORT','IMPORT'),
-        ('EXPORT','EXPORT')
+        ('DOMESTIC','DOMESTIC'),
+        ('EXPORT','EXPORT'),
+        ('Inter State', 'Inter State'),
+
     ]
-
-
 
     Currency = [
     ('INR', 'INR'),
@@ -70,27 +72,35 @@ class Invoice(models.Model):
         ('generate_and_send','Generate And Send Mail')
     ]
     quantity_type = [
-        ('NONE', 'NONE'),
+        ("No's", "No's"),
         ('HRS', 'HRS'),
         ('DAY', 'DAY'),
 
     ]
 
     invoice_no = models.IntegerField(primary_key=True, blank=True)
-    cost_per_unit = models.IntegerField(null=True, blank=True)
     sac_code = models.CharField(null=True, blank=True, max_length=6)
     invoice_date = models.DateField(null=True, blank=True)
-    payment_method = models.CharField(choices=Method, default='CASH', max_length=100)
-    payment_status = models.CharField(choices=STATUS, default='PENDING', max_length=100)
+    payment_method = models.CharField(choices=Method, default='Cash', max_length=100)
+    payment_status = models.CharField(choices=STATUS, default='PAID', max_length=100)
     gross_amount=models.IntegerField(null=True,blank=True)
-    description=models.CharField(max_length=100,null=True,blank=True)
-    quantity=models.IntegerField(null=True,blank=True)
     cgst = models.CharField(max_length=20, null=True, blank=True,default=0)
     sgst = models.CharField(max_length=20, null=True, blank=True,default=0)
     igst = models.CharField(max_length=20, null=True, blank=True,default=0)
     currency_type=models.CharField(choices=Currency,max_length=5,default='INR')
     qty_type = models.CharField(choices=quantity_type, default='HRS', max_length=5)
-    gst_type=models.CharField(choices=imp,default='IMPORT',max_length=6)
+    gst_type=models.CharField(choices=imp,default='DOMESTIC',max_length=20)
+
+    # description1 = models.CharField(max_length=100, null=True, blank=True)
+    # description2 = models.CharField(max_length=100, null=True, blank=True, default="")
+    # description3 = models.CharField(max_length=100, null=True, blank=True, default="")
+
+    # quantity1 = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
+    # cost_per_unit1 = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
+    # quantity2 = models.DecimalField(max_digits =9,null=True, blank=True, default=0, decimal_places=2)
+    # cost_per_unit2 = models.DecimalField(max_digits =9,null=True, blank=True, default=0, decimal_places=2)
+    # quantity3 = models.DecimalField(max_digits =9,null=True, blank=True, default=0, decimal_places=2)
+    # cost_per_unit3 = models.DecimalField(max_digits =9,null=True, blank=True, default=0, decimal_places=2)
 
     t_2 = models.TextField(
         default="2) This Bill is payable by Electronic transfer/ DD/ Cheque in favor of Tecblic Private Limited. For payment made by electronic fund transfer, please send details to accounts@tecblic.com (Invoice number, Invoice amount, Tecblic Bank name and Account number, Payment date, Amount paid, TDS if applicable). Queries can be sent to us at accounts@tecblic.com.")
@@ -105,21 +115,19 @@ class Invoice(models.Model):
     client = models.ForeignKey(clientDetail, blank=True, null=True, on_delete=models.SET_NULL)
     send_email=models.CharField(choices=emails,max_length=20,default='only_generate')
     bank = models.ForeignKey(BankDetails, blank=True, null=True, on_delete=models.SET_NULL)
-    
+
     #Utility fields
-    uniqueId = models.CharField(null=True, blank=True, max_length=100)
-    slug = models.SlugField(max_length=500, unique=True, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True,blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True,blank=True, null=True)
 
-
-    
 
 class Bank(models.Model):
     bank_info=models.ForeignKey(BankDetails,max_length=50,null=True,blank=True,on_delete=models.SET_NULL)
 
     
-
-
-
-
+class InvoiceDesription(models.Model):
+    description_id = models.AutoField(primary_key=True)
+    description = models.CharField(max_length=100, null=True, blank=True)
+    quantity = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
+    cost_per_unit = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)

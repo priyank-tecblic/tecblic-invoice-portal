@@ -10,6 +10,7 @@ admin.site.register(BankDetails)
 admin.site.register(Bank)
 admin.site.register(AutoNumber)
 admin.site.register(gstValue)
+admin.site.register(InvoiceDesription)
 
 
 

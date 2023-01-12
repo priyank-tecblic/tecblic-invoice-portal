@@ -25,7 +25,7 @@ SECRET_KEY = '$0f9i54n2h1-z%110-_vl7rnl_$5b&ky4t4$cg^*&2c)*+*(3u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,24 +74,24 @@ WSGI_APPLICATION = 'Tecblic_dashboard.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Tecblic_Invoice_Portal',
-        'USER': 'postgres',
-
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'Tecblic_Invoice_Portal',
+#         'USER': 'postgres',
+#
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -135,8 +135,8 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER='amanpandey.tecblic@gmail.com'
-EMAIL_HOST_PASSWORD='Aman@#1234'
+EMAIL_HOST_USER='priyank.imscit18@gmail.com'
+EMAIL_HOST_PASSWORD='gasfvnaypfwnebkn'
 
 
 

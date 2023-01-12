@@ -21,27 +21,30 @@
 <div style="font-family: Georgia, 'Times New Roman', Times, serif; ">
 
     <br>
-    <table class="table table-striped table-hover table-bordered table-sm">
-        <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">GST DETAILS</h4>
-        <thead>
-        <tr>
-            <th scope="col">SGST</th>
-            <th scope="col">CGST</th>
-            <th scope="col">IGST</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        {% for i in gst %}
-        <tr>
-            <td>{{ i.sgst}}</td>
-            <td>{{ i.cgst}}</td>
-            <td>{{ i.igst}}</td>
+    <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">GST DETAILS</h4>
+    <div class="container">
 
-        {% endfor %}
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <table class="table table-striped table-hover table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">SGST</th>
+                    <th scope="col">CGST</th>
+                    <th scope="col">IGST</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                {% for i in gst %}
+                <tr>
+                    <td>{{ i.sgst}}</td>
+                    <td>{{ i.cgst}}</td>
+                    <td>{{ i.igst}}</td>
+                    
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
 </form>
 </body>
 </html>

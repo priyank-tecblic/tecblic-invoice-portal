@@ -24,6 +24,27 @@
     </div>
 
     {% endfor %}
+    {% for i in invoice_detail %}
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Description{{forloop.counter}}</label>
+        <div class="col-auto">
+            <label><input type="text" class="form-control",id="desription{{forloop.counter}}" name = "description{{forloop.counter}}" value="{{i.description}}" placeholder="Description" required></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Quantity{{forloop.counter}}</label>
+        <div class="col-auto">
+            <input type="number" value="{{i.quantity}}" name="quantity{{forloop.counter}}" class="form-control",id="quantity{{forloop.counter}}" placeholder="quantity" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Cost of Unit{{forloop.counter}}</label>
+        <div class="col-auto">
+            <input type="number" name="cost{{forloop.counter}}" value="{{i.cost_per_unit}}" class="form-control",id="cost{{forloop.counter}}" placeholder="Cost Per Unit" required>
+            
+        </div>
+    </div>
+    {% endfor %}
     <br/>
     <input type="submit" value="SUBMIT" class="btn btn-success">
 </form>

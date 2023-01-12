@@ -86,6 +86,7 @@
 
 {% endblock %}
 <hr>
+<div class="container">
 
     <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
@@ -107,7 +108,7 @@
                         <th scope="col">Client Address</th>
                         <th scope="col">Client GSTIN</th>
                         <th scope="col">Client PAN</th>
-
+                        
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -120,91 +121,92 @@
                         <td>{{ cl.clientPAN }}</td>
                         <td><input type="button" data-sid="{{cl.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
                         <td><input type="button" data-sid="{{cl.id}}" class="btn btn-danger btn-del" value="Delete"></td>
-
+                        
                     </tr>
-                   
-
+                    
+                    
                     {% endfor %}
                 </tbody>
-
+                
             </table>
-
+            
         </div>
     </div>
-<script>
-    $('#btnsave').click(function(){
+</div>
+    <script>
+        $('#btnsave').click(function(){
     
-       let client_id=$("#client_id").val();
-    
-       let name=$("#nameid").val();
-      
-      
-       let address=$('#addressid').val();
-       
-       let gstin=$('#gstinid').val();
-       
-       let pan=$('#panid').val();
-       let email=$('#emailid').val()
-       let kind=$('#kindattnid').val()
-       let place=$('#placeid').val()
-      
-    
-       
-       var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
-   
-
-       if(name==""){
-           console.log('Please enter name')
-       }else if(address==""){
-           console.log('Please enter Adress')
-       }else if(gstin==""){
-           console.log('Please enter GSTIN')
-       }else if(pan==""){
-           console.log('Please enter PAN')
-       }else{
-       
-        mydata={name:name,address:address,gstin:gstin,pan:pan,'csrfmiddlewaretoken':csrf_token,'cli_id':client_id,email:email,kind:kind,place:place}
-        $.ajax({
-            url:"{% url 'save' %}",
-            method:"POST",
-            data:mydata,
-            success:function(data){
-              
-                if(data.status=="Save"){
-                    console.log('form submitted successfully')
-                    alert('Your data saved successfully')
-                    
-                    $("form")[0].reset();
-
-                }
-                if(data.status==0){
-                    console.log('your form not submitted')
-                }
+            let client_id=$("#client_id").val();
+            
+            let name=$("#nameid").val();
+            
+            
+            let address=$('#addressid').val();
+            
+            let gstin=$('#gstinid').val();
+            
+            let pan=$('#panid').val();
+            let email=$('#emailid').val()
+            let kind=$('#kindattnid').val()
+            let place=$('#placeid').val()
+            
+            
+            
+            var csrf_token = $('input[name="csrfmiddlewaretoken"]').val()
+            
+            
+            if(name==""){
+                console.log('Please enter name')
+            }else if(address==""){
+                console.log('Please enter Adress')
+            }else if(gstin==""){
+                console.log('Please enter GSTIN')
+            }else if(pan==""){
+                console.log('Please enter PAN')
+            }else{
                 
-                
+                mydata={name:name,address:address,gstin:gstin,pan:pan,'csrfmiddlewaretoken':csrf_token,'cli_id':client_id,email:email,kind:kind,place:place}
+                $.ajax({
+                    url:"{% url 'save' %}",
+                    method:"POST",
+                    data:mydata,
+                    success:function(data){
+                        
+                        if(data.status=="Save"){
+                            console.log('form submitted successfully')
+                            alert('Your data saved successfully')
+                            
+                            $("form")[0].reset();
+                            
+                        }
+                        if(data.status==0){
+                            console.log('your form not submitted')
+                        }
+                        
+                        
+                    }
+                })
             }
-        })
-       }
-       
-      
-    });
-
-    $("tbody").on("click",".btn-del",function(){
-        console.log('delete butto clicked');
-        let id=$(this).attr("data-sid");
-        var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-       
-        mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
-        mythis=this;
-        $.ajax({
-            url:"{% url 'delete' %}",
-            method:"POST",
-            data:mydata,
-            success:function(data){
-                if(data.status==1){
-                    $(mythis).closest("tr").fadeOut();
-                    alert('You data is deleted successfully')
-                }
+            
+            
+        });
+        
+        $("tbody").on("click",".btn-del",function(){
+            console.log('delete butto clicked');
+            let id=$(this).attr("data-sid");
+            var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+            
+            mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
+            mythis=this;
+            $.ajax({
+                url:"{% url 'delete' %}",
+                method:"POST",
+                data:mydata,
+                success:function(data){
+                    if(data.status==1){
+                        $(mythis).closest("tr").fadeOut();
+                        alert('You data is deleted successfully')
+                    }
             }
         })
     })
@@ -213,9 +215,9 @@
         console.log('edit butto clicked');
         let id=$(this).attr("data-sid");
         var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-       
+        
         mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
-       
+        
         $.ajax({
             url:"{% url 'edit' %}",
             method:"POST",
@@ -232,14 +234,14 @@
                 $("#emailid").val(data.email);
                 $("#kindattnid").val(data.kind);
                 $("#placeid").val(data.place);
-
+                
                 
                 
             }
         })
     })
     
-   
+    
 </script>
 
 

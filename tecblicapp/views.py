@@ -1,29 +1,67 @@
-from io import BytesIO
+import os.path
+import time
+
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.db.models import Q
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.template.loader import get_template
-from xhtml2pdf import pisa
 import datetime
 from .forms import bankDetailForm, bankForm, clientDetailForm, invoiceForm
 from .utils import render_to_pdf
-from .models import BankDetails, clientDetail,Invoice, AutoNumber,gstValue
+from .models import BankDetails, clientDetail,Invoice, AutoNumber,gstValue,InvoiceDesription
 from django.core.mail import EmailMessage
 from num2words import num2words
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.conf import settings
-#from django.views.decorators.csrf import csrf_exempt
-from django.core.files.storage import default_storage
+import csv
 
 # Create your views here.
 SOURCE_DIR=r"/home/tecblic/Downloads"
 DEST_DIR=r"/home/tecblic/finance/receivables/"
 
-#Login Page
+def append_to_csv():
+    invoice = Invoice.objects.all().values()
+    isExist = os.path.exists(DEST_DIR)
+
+    def makeinvoice():
+        with open(DEST_DIR + 'tecblic_invoice.csv', 'w') as f:
+            fieldname = ['Invoice No', 'Invoice Date', 'Client Name', 'Description of services', 'Currency',
+                         'Invoice Amount', 'SGST', 'CGST', 'IGST', 'Payment Status'
+                         ]
+            writer = csv.DictWriter(f, fieldnames=fieldname)
+            writer.writeheader()
+
+            for i in invoice:
+                dict = {}
+                dict['Invoice No'] = i["invoice_no"]
+                dict['Invoice Date'] = i["invoice_date"]
+                dict['Invoice Amount'] = i["gross_amount"]
+
+                client = clientDetail.objects.get(id=i["client_id"])
+                dict['Client Name'] = client
+
+                dict['Description of services'] = i["description"]
+                dict['Currency'] = i["currency_type"]
+                dict['Invoice Amount'] = i["gross_amount"]
+                dict['SGST'] = i["sgst"]
+                dict['CGST'] = i["cgst"]
+                dict['IGST'] = i["igst"]
+                dict['Payment Status'] = i["payment_status"]
+                writer.writerow(dict)
+
+    if not isExist:
+        os.makedirs(DEST_DIR)
+        makeinvoice()
+    if isExist:
+        makeinvoice()
+# append_to_csv()
+#Login Pager
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('home_page')
@@ -34,10 +72,10 @@ def login_user(request):
             user=authenticate(username=username, password=password)
             if user is not None:
                 login(request,user)
+                # append_to_csv()
                 return redirect('home_page')
             else:
                 messages.info(request,'Wrong User name or Password')
-
         context={}
         return render(request,'tecblicapp/login.html',context)
     # if request.method=='POST':
@@ -51,7 +89,7 @@ def login_user(request):
     #         return render(request,'tecblicapp/login.html',{'error':'Wrong Username And Password..!!'})
     # else:
     #     return render(request, 'tecblicapp/login.html')
-
+filter_data = None
 def logout_user(request):
     logout(request)
     return redirect('login')
@@ -59,6 +97,8 @@ def logout_user(request):
 #home Page
 @login_required(login_url='login')
 def homePage(request):
+    invoice = Invoice.objects.all()
+    # append_to_csv()
     return render(request,'tecblicapp/home_page.html',)
 
 #Client Form
@@ -146,32 +186,65 @@ def generate_invoice(request):
         if form.is_valid():
             
             inv_date = request.POST['invoice_date']
+            # if 'payment_method' not in request.POST:
+            #     pay_method = '----'
+            # else:
             pay_method = request.POST['payment_method']
             sac = request.POST['sac_code']
             #print(pay_method)
             pay_status = request.POST['payment_status']
-            c_per_unit = request.POST['cost_per_unit']
             # g_amount=request.POST['gross_amount']
             cl_detail = request.POST['client']
             bank_detail = request.POST['bank_info']
-            desc = request.POST['description']
-            qty = request.POST['quantity']
             c_type = request.POST['currency_type']
             selectid = request.POST['gst_type']
-          
+
             qty_type = request.POST['qty_type']
             t2 = request.POST['t_2']
             t3 = request.POST['t_3']
             t4 = request.POST['t_4']
             t5 = request.POST['t_5']
+            quantity = []
+            desc = []
+            c_per_unit = []
+            k = 1
+            a = "hello"
+            while True:
+                a=request.POST.get(f"description{k}","")
+                if a=="":
+                    break
+                desc.append(request.POST.get(f"description{k}",""))
+                quantity.append(int(request.POST.get(f"quantity{k}",0)))
+                c_per_unit.append(int(request.POST.get(f"cost{k}",0)))
+                k=k+1
+            print("description=",desc)
+            print("qty=",quantity)
+            print("c_per_unit=",c_per_unit)
+
+            # desc1 = request.POST['description1']
+
+            # desc2 = request.POST['description2']
+            # desc3 = request.POST['description3']
+            # c_per_unit1 = request.POST['cost_per_unit1']
+            # qty1 = request.POST['quantity1']
+            # c_per_unit2 = request.POST['cost_per_unit2']
+            # qty2 = request.POST['quantity2']
+            # c_per_unit3 = request.POST['cost_per_unit3']
+            # print('**************************************************', c_per_unit3)
+            # qty3 = request.POST['quantity3']
+
+
             #print(selectid)
             client_name = clientDetail.objects.get(id=cl_detail)
-
+            
             # Invoice no auto generate
-            def num():
+            def num():                
                 num_id = AutoNumber.objects.all().order_by('number').last()
-                new_id = num_id.number
-                new_number = int(new_id) + 1
+                if num_id is None:
+                    new_number = 1000
+                else:
+                    new_id = num_id.number
+                    new_number = int(new_id) + 1
                 s=AutoNumber(number=new_number)
                 s.save()
                 return new_number
@@ -223,30 +296,73 @@ def generate_invoice(request):
 
             invoice_detail_obj = invoice_num()
             # GST and Final Amount
-            g = c_per_unit
+            g1=[]
+
+            # g1 = float(c_per_unit1) * float(qty1)
+            # g2 = float(c_per_unit2) * float(qty2)
+            # g3 = float(c_per_unit3) * float(qty3)
+            g= 0
+            qty = 0
+            for (a, b) in zip(quantity,c_per_unit):
+                qty = a+qty
+                g1.append(float(a)*float(b))
+                g = g+(float(a)*float(b))
+            
+        
+
+            # g = g1 + g2 + g3
+            # print("AMOUNT======================", g)
+            # qty = float(qty1) + float(qty2) + float(qty3)
+            print("QTY======================", qty,g)
+
+            total_cost = g
+
             gstno = gstValue.objects.get(id=1)
 
             bank_detail_obj = BankDetails.objects.get(id=bank_detail)
             client_detail_obj = clientDetail.objects.get(id=cl_detail)
 
-            if selectid == 'IMPORT':
-                cgst = (int(g) * int(gstno.cgst) / 100)
-                sgst = (int(g) * int(gstno.cgst) / 100)
-                final_amount = (int(cgst) + int(sgst) + int(g))
+            if selectid == 'DOMESTIC':
+                cgst = round((total_cost * float(gstno.cgst) / 100),2)
+                print("CGST=====================", cgst)
+                sgst = round((total_cost * float(gstno.sgst) / 100),2)
+                print("SGST=====================", sgst)
+                a = float(float(cgst) + float(sgst) + float(total_cost))
+                final_amount = round(a,2)
+
                 s = Invoice(invoice_no=invoice_detail_obj, invoice_date=inv_date, payment_method=pay_method,sac_code=sac,
-                            payment_status=pay_status, cost_per_unit=c_per_unit, quantity=qty, currency_type=c_type,
-                            t_2=t2, t_3=t3, t_4=t4, t_5=t5,
-                            description=desc, client=client_name, cgst=cgst, sgst=sgst, gross_amount=final_amount,qty_type=qty_type)
-                s.save()
-            else:
-                igst = (int(g) * int(gstno.igst) / 100)
-                final_amount = (int(igst) + int(g))
-                s = Invoice(invoice_no=invoice_detail_obj, invoice_date=inv_date, payment_method=pay_method,
-                            sac_code=sac,t_2=t2,t_3=t3,t_4=t4,t_5=t5,
-                            payment_status=pay_status, cost_per_unit=c_per_unit, quantity=qty, currency_type=c_type,
-                            description=desc, client=client_name,igst=igst, gross_amount=final_amount,qty_type=qty_type)
+                            payment_status=pay_status,  currency_type=c_type,
+                            t_2=t2, t_3=t3, t_4=t4, t_5=t5,bank=bank_detail_obj,client=client_name, cgst=cgst,
+                            sgst=sgst, gross_amount=final_amount,qty_type=qty_type)
                 s.save()
 
+            elif selectid == 'Inter State':
+                igst = round((total_cost * float(gstno.igst) / 100), 2)
+                print("IGST=====================", igst)
+
+                a = float(float(igst) + float(total_cost))
+                final_amount = round(a, 2)
+                print("FINAL AMOUNT==============",final_amount)
+
+                s = Invoice(invoice_no=invoice_detail_obj, invoice_date=inv_date, payment_method=pay_method,
+                            sac_code=sac,
+                            payment_status=pay_status, currency_type=c_type,
+                            t_2=t2, t_3=t3, t_4=t4, t_5=t5, bank=bank_detail_obj, client=client_name, igst=igst,
+                            gross_amount=final_amount, qty_type=qty_type)
+                s.save()
+            else:
+                # final_amount = (int(igst) + int(g))
+                igst = round(float(g),2)
+                a = round(float(g), 2)
+                final_amount = float(a)
+                s = Invoice(invoice_no=invoice_detail_obj, invoice_date=inv_date, payment_method=pay_method,
+                            sac_code=sac,t_2=t2,t_3=t3,t_4=t4,t_5=t5,
+                            currency_type=c_type,bank=bank_detail_obj,
+                            client=client_name,igst=0, gross_amount=final_amount,qty_type=qty_type)
+                s.save()
+            for (a, b,c) in zip(quantity,c_per_unit,desc):
+                invoicedesription = InvoiceDesription(description=c,quantity=a,cost_per_unit=b,invoice = s)
+                invoicedesription.save()
             # invoice_detail_obj = request.POST.get('invoice_no')
             # print("INVOICE=" + invoice_detail_obj)
             a = datetime.datetime.now()
@@ -254,14 +370,26 @@ def generate_invoice(request):
             fiscal_year_new=fiscal_year()
             client_name = client_detail_obj.clientName + '_'+inv_date+'_'+str(a.second)+'_'+str(fiscal_year_new)
             s_email = request.POST['send_email']
+            a = num2words(final_amount, to='cardinal', lang='en_IN')
+            convert_word_num = a.replace(",", "")
             if s_email == 'only_generate':
                 filename = f'{client_name}.pdf'
+                # pdf = render_to_pdf('tecblicapp/invoice_pdf.html',filename,
+                #                     {'client': client_detail_obj, 'invoice': invoice,'pay_method':pay_method,
+                #                      'desc1': desc1, 'desc2': desc2, 'desc3': desc3, 'gstno':gstno,'sac':sac, 'total':total_cost,
+                #                      'invoice_date' :inv_date,'bank': bank_detail_obj, 'gross_amount': final_amount,
+                #                      'qty_type':qty_type, 'g1':round(g1,2),'g2':round(g2,2),'g3':round(g3,2),
+                #                      'gross_amount_words':convert_word_num.title()}
+                #                     )
                 pdf = render_to_pdf('tecblicapp/invoice_pdf.html',filename,
                                     {'client': client_detail_obj, 'invoice': invoice,'pay_method':pay_method,
-                                     'desc':desc, 'gstno':gstno,'sac':sac,
-                                     'invoice_date' :inv_date,'bank': bank_detail_obj, 'gross_amount': final_amount,'qty_type':qty_type,
-                                     'gross_amount_words': num2words(final_amount, to='cardinal', lang='en_IN')}
+ 'gstno':gstno,'sac':sac, 'total':total_cost,
+                                     'invoice_date' :inv_date,'bank': bank_detail_obj, 'gross_amount': final_amount,
+                                     'qty_type':qty_type,
+                                     'gross_amount_words':convert_word_num.title(),'zip':zip(desc,quantity,c_per_unit,g1)}
                                     )
+
+
                 if pdf:
                     filename = f'{client_name}.pdf'
                     response = HttpResponse(pdf, content_type='application/pdf')
@@ -272,19 +400,21 @@ def generate_invoice(request):
 
             elif s_email == 'generate_and_send':
                 filename = f'{client_name}.pdf'
-                pdf = render_to_pdf('tecblicapp/invoice_pdf.html', filename,
-                                    {'client': client_detail_obj, 'invoice': invoice, 'pay_method': pay_method,
-                                     'desc': desc, 'gstno': gstno, 'sac': sac,
-                                     'invoice_date': inv_date, 'bank': bank_detail_obj, 'gross_amount': final_amount,
-                                     'qty_type': qty_type,
-                                     'gross_amount_words': num2words(final_amount, to='cardinal', lang='en_IN')}
+                pdf = render_to_pdf('tecblicapp/invoice_pdf.html',filename,
+                                    {'client': client_detail_obj, 'invoice': invoice,'pay_method':pay_method,
+ 'gstno':gstno,'sac':sac, 'total':total_cost,
+                                     'invoice_date' :inv_date,'bank': bank_detail_obj, 'gross_amount': final_amount,
+                                     'qty_type':qty_type,
+                                     'gross_amount_words':convert_word_num.title(),'zip':zip(desc,quantity,c_per_unit,g1)}
                                     )
                 to_emails = [f'{client_detail_obj.clientEmail}']
                 subject = "Tecblic"
                 email = EmailMessage(subject, "hello", from_email=settings.EMAIL_HOST_USER, to=to_emails)
                 email.attach(filename, pdf.getvalue(), "application/pdf")
                 email.send(fail_silently=False)
+
             return redirect('/')
+        # append_to_csv()
     else:
         return HttpResponse('GET request')
 
@@ -320,7 +450,6 @@ def bank_data(request):
         else:
             return JsonResponse({'status':0})
 
-
 #Delete bank data
 @login_required(login_url='login')
 def delete_bank_details(request):
@@ -348,25 +477,62 @@ def generate_invoice_and_send_mail_form(request):
     return render(request,'tecblicapp/invoice_send_pdf.html',{'invoices':invoices,'bank_details':bank_details})
 
 @login_required(login_url='login')
+def filter_invoice(request):
+    global filter_data
+    if request.method == "POST":
+        filter_data = Invoice.objects.filter(Q(invoice_date__gte = request.POST['startdate'])& Q(invoice_date__lte = request.POST['enddate']))
+        paginator = Paginator(filter_data,3)
+        page_number = request.GET.get('page')
+        finaldata =  paginator.get_page(page_number)
+        totalpage = finaldata.paginator.num_pages
+        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+    else:
+        paginator = Paginator(filter_data,3)
+        page_number = request.GET.get('page')
+        finaldata =  paginator.get_page(page_number)
+        totalpage = finaldata.paginator.num_pages
+        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+
+@login_required(login_url='login')
 def check_invoice(request):
     inv_obj=Invoice.objects.all()
-    return render(request,'tecblicapp/check_invoice_status_demo.html',{'inv':inv_obj})
+    paginator = Paginator(inv_obj,3)
+    page_number = request.GET.get('page')
+    finaldata =  paginator.get_page(page_number)
+    totalpage = finaldata.paginator.num_pages
+    return render(request,'tecblicapp/check_invoice_status_demo.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
 
 @login_required(login_url='login')
 def edit_invoice(request, pk):
     invoice = Invoice.objects.get(invoice_no=pk)
+    invoice_det = InvoiceDesription.objects.filter(invoice=invoice)
     form = invoiceForm(instance=invoice)
     if request.method == 'POST':
         form = invoiceForm(request.POST, instance=invoice)
         if form.is_valid():
             #selectid=request.POST['gst_type']
             form.save()
-            invoice_detail=Invoice.objects.all()
-            inv_obj=invoice_detail.filter(invoice_no=pk)
 
+            invoice_detail=Invoice.objects.all()
+            # InvoiceDesription.objects.filter(invoice = )
+            inv_obj=invoice_detail.filter(invoice_no=pk)
+            invoice_det = InvoiceDesription.objects.filter(invoice=inv_obj[0])
+            quantity = []
+            desc = []
+            c_per_unit = []
+            k = 1
+            a = "hello"
+            while True:
+                a=request.POST.get(f"description{k}","")
+                if a=="":
+                    break
+                desc.append(request.POST.get(f"description{k}",""))
+                quantity.append(float(request.POST.get(f"quantity{k}",0)))
+                c_per_unit.append(float(request.POST.get(f"cost{k}",0)))
+                k=k+1
             def fiscal_year():
-                retrieved_date = str(i.invoice_date)
-                convert_to_date = datetime.datetime.strptime(retrieved_date, '%Y-%m-%d')
+                retrieved_date = i.invoice_date
+                convert_to_date = datetime.datetime.strptime(str(retrieved_date), '%Y-%m-%d')
                 year = convert_to_date.year
                 month = convert_to_date.month
                 day = convert_to_date.day
@@ -381,26 +547,80 @@ def edit_invoice(request, pk):
                     year_b = str(year - 1)
                     fiscal_year = year_b + '-' + year_a
                     return fiscal_year
+            g1=[]
+            g= 0
+            qty = 0
+            for (a, b) in zip(quantity,c_per_unit):
+                qty = a+qty
+                g1.append(float(a)*float(b))
+                g = g+(float(a)*float(b))
 
             for i in inv_obj:
-                cost=i.cost_per_unit
-                qty=i.quantity
+                selcid = request.POST.get('gst_type')
+                print("SELECTTTTTTTTTTT", selcid)
+
+                # first = i.cost_per_unit1 * i.quantity1
+                # second = i.cost_per_unit2 * i.quantity2
+                # third = i.cost_per_unit3 * i.quantity3
+
+                total = g
+
                 fiscal_year_new = fiscal_year()
                 a = datetime.datetime.now()
                 client_name=i.client.clientName+'_' + str(i.invoice_date) + '_' + str(a.second) + '_' + str(fiscal_year_new)
-                igst=cost*qty*18/100
-                cgst=cost*qty*9/100
-                sgst=cost*qty*9/100
-                total_amt=cost*qty
-                amt_after_gst=total_amt*18/100
-                final_amt=amt_after_gst+total_amt
-                generate_or_mail=i.send_email
 
-                client_email=i.client.clientEmail
+                if selcid=="DOMESTIC":
+                    cgst = round(total * 9 / 100,2)
+                    sgst = round(total * 9 / 100,2)
+                    igst=0
+                    total_amt = total
+                    amt_after_gst = total_amt + cgst + sgst
+                    a = round(amt_after_gst,2)
+                    final_amt = float(a)
+                    generate_or_mail=i.send_email
+                    client_email=i.client.clientEmail
+                    inv_obj.update(cgst=cgst,
+                            sgst=sgst,igst=0,gross_amount=final_amt)
 
-            if generate_or_mail=='only_generate':    
+                elif selcid=="Inter State":
+                    cgst=0
+                    sgst=0
+                    igst = round(total * 18 / 100,2)
+                    total_amt = total
+                    amt_after_gst = total_amt + igst
+                    a = round(amt_after_gst,2)
+                    final_amt = float(a)
+                    generate_or_mail=i.send_email
+                    client_email=i.client.clientEmail
+                    inv_obj.update(cgst=cgst,
+                            sgst=sgst,igst=igst, gross_amount=final_amt)
+
+                else:
+                    cgst = 0
+                    sgst = 0
+                    igst=0
+                    total_amt = total
+                    a = round(total_amt,2)
+                    final_amt = float(a)
+                    generate_or_mail = i.send_email
+                    client_email = i.client.clientEmail
+                    inv_obj.update(cgst=cgst,
+                            sgst=sgst,igst=igst,gross_amount=final_amt)
+
+            a = num2words(final_amt, to='cardinal', lang='en_IN')
+            convert_word_num = a.replace(",", "")
+            for a,b,c,d in zip(desc,quantity,c_per_unit,invoice_det):
+                d.description = a
+                d.quantity = b
+                d.cost_per_unit = c
+                d.save()
+                print("d = ",d.description)
+
+            if generate_or_mail=='only_generate':
                 filename = f'{client_name}'
-                pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj,'igst':igst,'sgst':sgst,'cgst':cgst,'final_amt':int(final_amt),'gross_amount_words': num2words(int(final_amt), to='cardinal', lang='en_IN')})
+                pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj, 'igst':igst,
+                      'inv_date':str(invoice.invoice_date),'sgst':sgst,'cgst':cgst,'final_amt':final_amt,
+                      'gross_amount_words': convert_word_num.title(),'zip':zip(desc,quantity,c_per_unit,g1)})
                 if pdf:
                     filename = f"{client_name}.pdf"
                     response = HttpResponse(pdf, content_type='application/pdf')
@@ -409,19 +629,21 @@ def edit_invoice(request, pk):
                     return response
             else:
                 filename = f'{client_name}.pdf'
-                pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj,'igst':igst,'sgst':sgst,'cgst':cgst,'final_amt':int(final_amt),'gross_amount_words': num2words(int(final_amt), to='cardinal', lang='en_IN')})
-
+                pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj, 'igst':igst,
+                      'inv_date':str(invoice.invoice_date),'sgst':sgst,'cgst':cgst,'final_amt':final_amt,
+                      'gross_amount_words': convert_word_num.title(),'zip':zip(desc,quantity,c_per_unit,g1)})
                 to_emails = [f'{client_email}']
                 subject = "Tecblic"
                 email = EmailMessage(subject, "hello", from_email=settings.EMAIL_HOST_USER, to=to_emails)
                 email.attach(filename, pdf.getvalue(), "application/pdf")
                 email.send(fail_silently=False)
                 return redirect('/')
-                
             return HttpResponse("NOT FOUND..!!")
 
         return redirect('/')
-    context = {'form': form}
+    # append_to_csv()
+    print("invoice_detail = >",invoice_det)
+    context = {'form': form,'invoice_detail':invoice_det}
     return render(request, 'tecblicapp/invoice_edit_form.html', context)
 
 @login_required(login_url='login')
@@ -437,5 +659,3 @@ def delete_invoice(request,pk):
 def gst(request):
     gst = gstValue.objects.all()
     return render(request,'tecblicapp/gst.html',{'gst':gst})
-
-
