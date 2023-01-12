@@ -18,12 +18,20 @@
 {% endblock %}
 <hr>
 <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Check Invoice</h4> 
-<div style="text-align: right;margin-right: 5%;" >
-<form action="/filter/" method="post">
-    {% csrf_token %}
-    <input type="date" name="startdate" class="mx-1" required><input name="enddate" type="date" class="mx-3" required><input class="btn-sm btn-dark" type="submit" value="Search">  
-</form>
-</div>
+<div style="text-align: right;margin-right: 5%;" class="row" >
+    <div class="col-7"></div>
+    <form action="/filter/" class="col-5" method="post">
+        {% csrf_token %}
+        <div class="row my-1">
+            <label for="" style="text-align:left;" class="col-3 "><b style="text-align:left;">Start Date</b></label>
+            <label for="" class="col-5" style="text-align:center;"><b >End Date</b></label>
+        </div>
+        <div class="row">
+            <input type="date" name="startdate" class="col-4 mx-1" required><input name="enddate" type="date" class="col-4 mx-3" required><input class="btn-sm btn-dark col-2"  type="submit" value="Search">
+        </div>    
+    </form>
+    </div>
+    
 <div class="container">
 
     <form action="" method="post" style="height:250px">
@@ -39,7 +47,7 @@
                         <th scope="col">Client Address</th>
                         <th scope="col">Bank Name</th>
                         <th scope="col">Payment Method</th>
-                        <th scope="col">Description</th>
+
                         
                         <th scope="col">Payment Status</th>
                         <!-- <th scope="col">CGST</th>
@@ -61,7 +69,7 @@
             <td>{{ i.client.clientAddress }}</td>
             <td>{{  i.bank.bank_name }}</td>
             <td>{{ i.payment_method}}</td>
-            <td>{{ i.description1}}</td>
+
             
             {% if i.payment_status == "PENDING" %}<td style="color:red;">{{ i.payment_status }}</td>
             {% else %}<td style="color:green;">{{ i.payment_status }}</td>
@@ -86,8 +94,6 @@
         <ul class="pagination" style="justify-content: center;">
             {% if inv.has_previous %}
             <li class="page-item"><a class="page-link text-dark" href="/check?page={{inv.previous_page_number}}">Previous</a></li>
-            {% else %}
-            <li class="page-item" disabled><button class="page-link text-dark" disabled>Previous</button></li>
             {% endif %}
             {% for i in totalpages %}
             <li class="page-item "><a class="page-link 
@@ -100,9 +106,7 @@
                 {% endfor %}
                 {% if inv.has_next %}
                 <li class="page-item"><a class="page-link text-dark" href="/check?page={{inv.next_page_number}}">Next</a></li>
-                {% else %}
-                <li class="page-item" disabled><button class="page-link text-dark" disabled>Next</button></li>
-                {% endif %}
+                               {% endif %}
             </ul>
         </nav>
 

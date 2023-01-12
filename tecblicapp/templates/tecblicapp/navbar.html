@@ -5,7 +5,7 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav">
      <a class="navbar-brand" href="{% url 'home_page' %}">
-        <h3> Tec<b>blic</b></h3>
+        <h3 class="mx-3"> Tec<b>blic</b></h3>
       </a>
       <span class="nav-item nav-link"> {{request.user}} </span>
       <a class="nav-item nav-link" href=" {% url 'home_page' %}">Dashboard</a>
@@ -15,6 +15,7 @@
       <a class="nav-item nav-link" href="{% url 'check_invoices' %}">Check Invoice</a>
       <a class="nav-item nav-link" href="{% url 'gst' %}">GST</a>
       <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+      <form method="GET" action="/search"><input class="mt-1 form-control mr-sm-2" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search"></form>
     </div>
   </div>
 </nav>

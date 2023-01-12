@@ -22,6 +22,7 @@ urlpatterns =[
     path('edit_invoice/<int:pk>/', views.edit_invoice, name="edit_invoice"),
     path('delete_invoice/<int:pk>/', views.delete_invoice, name='delete_invoice'),
     path('gst', views.gst, name="gst"),
+    path('search',views.search,name ='search'),
     path('filter/',views.filter_invoice,name="filter")
     
 

@@ -24,7 +24,7 @@ import csv
 # Create your views here.
 SOURCE_DIR=r"/home/tecblic/Downloads"
 DEST_DIR=r"/home/tecblic/finance/receivables/"
-
+inv = None
 def append_to_csv():
     invoice = Invoice.objects.all().values()
     isExist = os.path.exists(DEST_DIR)
@@ -659,3 +659,19 @@ def delete_invoice(request,pk):
 def gst(request):
     gst = gstValue.objects.all()
     return render(request,'tecblicapp/gst.html',{'gst':gst})
+
+@login_required(login_url='login')
+def search(request):
+    global inv
+    query = request.GET.get('query',0)
+    if query==0:
+        pass
+    else:
+        inv =Invoice.objects.filter(Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
+
+    paginator = Paginator(inv,3)
+    page_number = request.GET.get('page')
+    ServiceDatafinal = paginator.get_page(page_number)
+    totalpage = ServiceDatafinal.paginator.num_pages
+    params = {'inv':ServiceDatafinal,'totalpages':[n+1 for n in range(totalpage)]}
+    return render(request,'tecblicapp/search.html',params)
