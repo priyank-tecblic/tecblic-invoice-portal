@@ -667,7 +667,10 @@ def search(request):
     if query==0:
         pass
     else:
-        inv =Invoice.objects.filter(Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
+        if query.isnumeric():
+            inv =Invoice.objects.filter(Q(invoice_no = int(query))| Q(gross_amount = int(query))|Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
+        else:            
+            inv =Invoice.objects.filter(Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
 
     paginator = Paginator(inv,3)
     page_number = request.GET.get('page')
