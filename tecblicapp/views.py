@@ -130,7 +130,8 @@ def save_data(request):
             user.save()
             data_obj=clientDetail.objects.values()
             client_data_obj=list(data_obj)
-            return JsonResponse({'status':'Save','cdata':client_data_obj})
+            return redirect("/add")
+            # return JsonResponse({'status':'Save','cdata':client_data_obj})
         else:
             return JsonResponse({'status':0})
            
@@ -446,7 +447,7 @@ def bank_data(request):
             else:
                 s=BankDetails(id=id,bank_name=name,account_no=account,ifsc_code=ifsc,swift_code=swift,supplier_pan=pan,supplier_gstin=gstin,cin=cin,arn=arn,bank_branch=branch)
             s.save()
-            return redirect('/')
+            return redirect('/bank')
         else:
             return JsonResponse({'status':0})
 
@@ -626,7 +627,7 @@ def edit_invoice(request, pk):
                     response = HttpResponse(pdf, content_type='application/pdf')
                     content = f"attachment; filename={filename}"
                     response['Content-Disposition'] = content
-                    return response
+                    return response 
             else:
                 filename = f'{client_name}.pdf'
                 pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj, 'igst':igst,

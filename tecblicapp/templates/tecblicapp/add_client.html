@@ -77,6 +77,10 @@
             margin-top: 0;
           }
         }
+        #s4
+            {
+                color: white;
+            }
         </style>
    
     
@@ -84,6 +88,8 @@
 </head>
 <body>
 {% include 'tecblicapp/navbar.html' %}
+{% block AddClient %}active{% endblock  %}
+
 {% block content %}
 
 {% endblock %}
@@ -95,9 +101,9 @@
             <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Add/Update Client Details</h4>
             <form id="form" action="add" method="POST">
                 {% csrf_token %}
-                <input type="hidden" name="client_id" id="client_id">
+                <input type="hidden" name="cli_id" id="client_id">
                 {{form.as_p}}
-                <input type="button" class="btn btn-success" id="btnsave" value="Save">
+                <input type="submit" class="btn btn-success" id="btnsave" value="Save">
             </form>
         </div>
         <div class="col-sm-7" style="font-family: Georgia, 'Times New Roman', Times, serif;">
