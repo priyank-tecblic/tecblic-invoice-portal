@@ -11,15 +11,16 @@
         <h3 class="mx-3"> Tec<b>blic</b></h3>
       </a>
       <img src="" alt="">
-      <span class="nav-item nav-link" id="s1"> {{request.user}} </span>
       <a class="nav-item nav-link  " id="s2" href=" {% url 'home_page' %}">Dashboard</a>
       <a class="nav-item nav-link " id="s3" href="{% url 'invoice_details' %}">Generate Invoice</a>
       <a class="nav-item nav-link" id="s4" href="{% url 'client-detail' %}">Add Client</a>
       <a class="nav-item nav-link {% block BankDetail %}{% endblock  %}" id="s5" href="{% url 'bank-detail' %}">Bank Details</a>
       <a class="nav-item nav-link {% block CheckInvoice %}{% endblock  %}" id="s6" href="{% url 'check_invoices' %}">Check Invoice</a>
       <a class="nav-item nav-link {% block gst %}{% endblock  %}"  id="s7" href="{% url 'gst' %}">GST</a>
-      <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
       <form method="GET" action="/search"><input class="mt-1 form-control mr-sm-2" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search"></form>
+      
+      <span class="nav-item nav-link" style="position:absolute;right:5%;" id="s1"> {{request.user}} </span>
+      <a class="nav-item nav-link btn btn-outline-success" style="border-radius: 10px;position:absolute;right:2px;" href="{% url 'logout' %}">Logout</a>
     </div>
   </div>
 </nav>
