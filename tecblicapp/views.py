@@ -114,7 +114,7 @@ def save_data(request):
     if request.method=='POST':
         form=clientDetailForm(request.POST)
         if form.is_valid():
-            id=request.POST['cli_id']
+            id=request.POST.get('cli_id','')
             name=request.POST['name']
             address=request.POST['address']
             gstin=request.POST['gstin']
@@ -432,7 +432,7 @@ def bank_data(request):
     if request.method=='POST':
         form=bankForm(request.POST)
         if form.is_valid():
-            id=request.POST['bank_id']
+            id=request.POST.get('bank_id')
             name=request.POST['bank_name']
             account=request.POST['account_no']
             ifsc=request.POST['ifsc_code']
