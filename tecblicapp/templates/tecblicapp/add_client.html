@@ -199,6 +199,25 @@
         </div>
     </div>
 </div>
+<nav aria-label="Page navigation example" class="mt-4" style="margin: auto;width: 25%;">
+    <ul class="pagination" style="justify-content: center;">
+        {% if clientdetails.has_previous %}
+        <li class="page-item"><a class="page-link text-dark" href="/add?page={{clientdetails.previous_page_number}}">Previous</a></li>
+        {% endif %}
+        {% for i in totalpages %}
+        <li class="page-item "><a class="page-link 
+            {% if clientdetails.number == i %}
+            bg-dark text-light 
+            {% else %}
+             bg-light text-dark
+            {% endif %}
+            " href="/add?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+            {% if clientdetails.has_next %}
+            <li class="page-item"><a class="page-link text-dark" href="/add?page={{clientdetails.next_page_number}}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
     <script>
         $('#btnsave').click(function(){
     

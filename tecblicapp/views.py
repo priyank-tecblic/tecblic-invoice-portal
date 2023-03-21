@@ -106,6 +106,12 @@ def homePage(request):
 def client_detail(request):
     form=clientDetailForm()
     clientdetails1=clientDetail.objects.all()
+    paginator = Paginator(clientdetails1,2)
+    page_number = request.GET.get('page',paginator)
+    finaldata =  paginator.get_page(page_number)
+    totalpage = finaldata.paginator.num_pages
+    return render(request,'tecblicapp/add_client.html',{'clientdetails':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+
     return render(request,'tecblicapp/add_client.html',{'form':form,'clientdetails':clientdetails1})
 
 #Save Client Data
@@ -424,7 +430,12 @@ def generate_invoice(request):
 def bank_detail_view(request):
     form=bankForm()
     data=BankDetails.objects.all()
-    return render(request,'tecblicapp/bank_details.html',{'form':form,'bankdetails':data})
+    paginator = Paginator(data,2)
+    page_number = request.GET.get('page',paginator)
+    finaldata =  paginator.get_page(page_number)
+    totalpage = finaldata.paginator.num_pages
+    return render(request,'tecblicapp/bank_details.html',{'bankdetails':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+    # return render(request,'tecblicapp/bank_details.html',{'form':form,'bankdetails':data})
 
 #Save Bank Data
 @login_required(login_url='login')

@@ -105,7 +105,7 @@
         </div> -->
         <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
           {% csrf_token %}
-          <h4 class="text-center alert alert-info" style="font-size: 35px;background-color: #e6f7ff;">Bank Details</h4>
+          <h4 class="text-center alert alert-info" style="font-size: 35px;background-color: #e6f7ff;font-weight: 550;">Bank Details</h4>
           <button type="button" class="btn btn-outline-secondary" style="position: relative;bottom: 65px;left:93%" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add
           </button>
@@ -210,6 +210,27 @@
               </div>
             </div>
             </div>
+
+            <nav aria-label="Page navigation example" class="mt-4" style="margin: auto;width: 25%;">
+              <ul class="pagination" style="justify-content: center;">
+                  {% if bankdetails.has_previous %}
+                  <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.previous_page_number}}">Previous</a></li>
+                  {% endif %}
+                  {% for i in totalpages %}
+                  <li class="page-item "><a class="page-link 
+                      {% if bankdetails.number == i %}
+                      bg-dark text-light 
+                      {% else %}
+                       bg-light text-dark
+                      {% endif %}
+                      " href="/bank?page={{i}}">{{i}}</a></li>
+                      {% endfor %}
+                      {% if bankdetails.has_next %}
+                      <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.next_page_number}}">Next</a></li>
+                      {% endif %}
+                  </ul>
+              </nav>
+          
             <script>
     //           $("tbody").on("click",".btn-del",function(){
     //             console.log('delete butto clicked');
