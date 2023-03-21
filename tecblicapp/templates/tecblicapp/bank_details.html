@@ -93,7 +93,7 @@
 <hr>
     <div class="container">
 
-      <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
+      <!-- <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
           <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Add/Update Bank Details</h4>
           <form id="form" action="bank_form"  method="POST">
@@ -102,30 +102,102 @@
             {{form.as_p}}
             <input type="submit" class="btn btn-success" id="bankbtnsave" value="Save">
           </form>
+        </div> -->
+        <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+          {% csrf_token %}
+          <h4 class="text-center alert alert-info" style="font-size: 35px;background-color: #e6f7ff;">Bank Details</h4>
+          <button type="button" class="btn btn-outline-secondary" style="position: relative;bottom: 65px;left:93%" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title font-weight-bold bg-light" style="margin-left:33%;font-size: 35px;" id="exampleModalLabel">Add Bank</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="bank_form" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="bank_name"  placeholder="name@example.com">
+                            <label for="floatingInput">Bank Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" name="account_no"  placeholder="name@example.com">
+                          <label for="floatingInput">Account No</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="ifsc_code"  placeholder="name@example.com">
+                        <label for="floatingInput">IFSC CODE</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="bank_branch"  placeholder="name@example.com">
+                      <label for="floatingInput">Bank Branch</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="swift_code"  placeholder="name@example.com">
+                    <label for="floatingInput">Swift Code</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="supplier_pan"  placeholder="name@example.com">
+                  <label for="floatingInput">Supplier Pan</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="supplier_gstin"  placeholder="name@example.com">
+                <label for="floatingInput">Supplier GSTIN</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" name="cin"  placeholder="name@example.com">
+              <label for="floatingInput">CIN</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="arn"  placeholder="name@example.com">
+            <label for="floatingInput">ARN</label>
         </div>
-        <div class="col-sm-7" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-          <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Bank Details</h4>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-dark">Save</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        
           <table class="table table-hover">
             <thead>
-              <tr>
-                <th scope="col">ID</th>
+              <tr id="heading">
                 <th scope="col">Bank Name</th>
                 <th scope="col">Account No</th>
                 <th scope="col">IFSC Code</th>
                 <th scope="col">Bank Branch</th>
+                <th scope="col">Swift Code</th>
+                <th scope="col">Cin</th>
+                <th scope="col">Supplier Pan</th>
+                <th scope="col">Supplier GSTIN</th>
+                <th scope="col">ARN</th>
+                <th scope="col">Edit</th>
                 
               </tr>
             </thead>
             <tbody id="tbody">
                     {% for bank in bankdetails %}
                     <tr>
-                      <td>{{ bank.id }}</td>
-                      <td>{{ bank.bank_name }}</td>
-                      <td>{{bank.account_no  }}</td>
-                      <td>{{ bank.ifsc_code  }}</td>
-                      <td>{{bank.bank_branch }}</td>
-                      <td><input type="button" data-sid="{{bank.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
-                      <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td>
+                      <td id="name{{bank.id}}">{{ bank.bank_name }}</td>
+                      <td id="account_no{{bank.id}}">{{bank.account_no  }}</td>
+                      <td id="ifsc{{bank.id}}">{{ bank.ifsc_code  }}</td>
+                      <td id="bank_branch{{bank.id}}">{{bank.bank_branch }}</td>
+                      <td id="swift_code{{bank.id}}">{{bank.swift_code }}</td>
+                      <td id="cin{{bank.id}}">{{bank.cin }}</td>
+                      <td id="pan{{bank.id}}">{{bank.supplier_pan }}</td>
+                      <td id="gstin{{bank.id}}">{{bank.supplier_gstin }}</td>
+                      <td id="arn{{bank.id}}">{{bank.arn }}</td>
+                      <td><input type="button" data-sid="{{bank.id}}" id="e{{bank.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
+                      <!-- <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td> -->
                       
                     </tr>
                     
@@ -139,59 +211,143 @@
             </div>
             </div>
             <script>
-              $("tbody").on("click",".btn-del",function(){
-                console.log('delete butto clicked');
-        let id=$(this).attr("data-sid");
-        var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    //           $("tbody").on("click",".btn-del",function(){
+    //             console.log('delete butto clicked');
+    //     let id=$(this).attr("data-sid");
+    //     var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
         
-        mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
-        mythis=this;
-        $.ajax({
-          url:"{% url 'delete_banks' %}",
-          method:"POST",
-          data:mydata,
-          success:function(data){
-            if(data.status==1){
-              $(mythis).closest("tr").fadeOut();
-              alert('You data is deleted successfully')
-            }
-          }
-        })
-      })
+    //     mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
+    //     mythis=this;
+    //     $.ajax({
+    //       url:"{% url 'delete_banks' %}",
+    //       method:"POST",
+    //       data:mydata,
+    //       success:function(data){
+    //         if(data.status==1){
+    //           $(mythis).closest("tr").fadeOut();
+    //           alert('You data is deleted successfully')
+    //         }
+    //       }
+    //     })
+    //   })
       
-      $("tbody").on("click",".btn-edit",function(){
+    //   $("tbody").on("click",".btn-edit",function(){
+    //     console.log('edit butto clicked');
+    //     let id=$(this).attr("data-sid");
+    //     var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+        
+    //     mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
+        
+    //     $.ajax({
+    //       url:"{% url 'edit_bank' %}",
+    //       method:"POST",
+    //         data:mydata,
+    //         dataType:"json",
+    //         success:function(data){
+    //           console.log(data.id)
+    //           $("#bank_id").val(data.id);
+    //           $("#banknameid").val(data.bank_name);
+    //           $("#ifscid").val(data.ifsc);
+              
+    //           $("#branchid").val(data.bank_branch);
+    //           $("#accountid").val(data.account_no);
+    //           $("#supplier_panid").val(data.supplier_pan);
+    //             $("#supplier_gstinid").val(data.supplier_gstin);
+    //             $("#swiftcode_id").val(data.swift_code);
+    //             $("#cin_id").val(data.cin);
+    //             $("#arn_id").val(data.arn);
+                
+                
+    //         }
+    //     })
+    // })
+
+    $("tbody").on("click",".btn-edit",function(){
         console.log('edit butto clicked');
         let id=$(this).attr("data-sid");
-        var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
         
-        mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
+        console.log(id)
+        $('#name'+id).html('<input type="text" value="'+$('#name'+id).html()+'">')
+        $('#account_no'+id).html('<input type="text" value="'+$('#account_no'+id).html()+'">')
+        $('#ifsc'+id).html('<input type="text" value="'+$('#ifsc'+id).html()+'">')
+        $('#bank_branch'+id).html('<input type="text" value="'+$('#bank_branch'+id).html()+'">')
+        $('#swift_code'+id).html('<input type="text" value="'+$('#swift_code'+id).html()+'">')
+        $('#cin'+id).html('<input type="text" value="'+$('#cin'+id).html()+'">')
+        $('#pan'+id).html('<input type="text" value="'+$('#pan'+id).html()+'">')
+        $('#gstin'+id).html('<input type="text" value="'+$('#gstin'+id).html()+'">')
+        $('#arn'+id).html('<input type="text" value="'+$('#arn'+id).html()+'">')
+        $(this).val("Submit")
+        // $('#d'+id).val("cancel")
         
+        $(this).attr('id', $(this).attr('id').replace('e', 's'));
+        $(this).attr('class', $(this).attr('class').replace('btn-edit', 'sub'));
+        $('<td><input type="button"  id="c'+id+'" class="button btn btn-danger cancel"  value="Cancel"></td>').insertAfter($(this).parent());
+        // $('#d'+id).addClass('cancel');
+        // $('#d'+id).attr('class', $('#d'+id).attr('class').replace('btn-del', ' dd'));
+        // $('#d'+id).attr('id', $('#d'+id).attr('id').replace('d', 'c'));
+        // console.log($('#name'+id).children()[0].value)
+        $("#heading").append('<th scope="col">Cancel</th>')
+        
+    });
+
+    $("tbody").on("click",".sub",function(){
+
+let id=$(this).attr("data-sid");
+var name = $('#name'+id).children()[0].value
+var account_no = $('#account_no'+id).children()[0].value
+var ifsc = $('#ifsc'+id).children()[0].value
+var bank_branch = $('#bank_branch'+id).children()[0].value
+var swift_code = $('#swift_code'+id).children()[0].value
+var cin = $('#cin'+id).children()[0].value
+var pan = $('#pan'+id).children()[0].value
+var gstin = $('#gstin'+id).children()[0].value
+var arn = $('#arn'+id).children()[0].value
+
+var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+// mydata={cid:id,'csrfmiddlewaretoken':csrf_token}
+mydata={'bank_id':id,'bank_name':name,'account_no':account_no,'ifsc_code':ifsc,'bank_branch':bank_branch,'swift_code':swift_code,'supplier_pan':pan,'supplier_gstin':gstin,'cin':cin,'arn':arn,'csrfmiddlewaretoken':csrf_token}
+console.log(mydata)
         $.ajax({
-          url:"{% url 'edit_bank' %}",
-          method:"POST",
+            url:"bank_form",
+            method:"POST",
             data:mydata,
-            dataType:"json",
             success:function(data){
-              console.log(data.id)
-              $("#bank_id").val(data.id);
-              $("#banknameid").val(data.bank_name);
-              $("#ifscid").val(data.ifsc);
-              
-              $("#branchid").val(data.bank_branch);
-              $("#accountid").val(data.account_no);
-              $("#supplier_panid").val(data.supplier_pan);
-                $("#supplier_gstinid").val(data.supplier_gstin);
-                $("#swiftcode_id").val(data.swift_code);
-                $("#cin_id").val(data.cin);
-                $("#arn_id").val(data.arn);
                 
+                
+                if(data.status==0){
+                    console.log('your form not submitted')
+                }
+                else{
+                    console.log('form submitted successfully')
+                                                
+                    location.reload();
+                    
+                }
                 
             }
         })
-    })
+    });
 
-    
-    
+        
+    $("tbody").on("click",".cancel",function(){
+        // let id=$(this).attr("id");
+        // id = id.split("")[1]
+        // var address = $('#address'+id).children()[0].value
+        // var gstin = $('#gst'+id).children()[0].value
+        // var pan = $('#pan'+id).children()[0].value
+        // var name = $('#name'+id).children()[0].value
+        // var email = $('#email'+id).children()[0].value
+        // var kind = $('#kind'+id).children()[0].value
+        // var place = $('#place'+id).children()[0].value
+        // $('#address'+id).html(address)
+        // $('#gst'+id).html(gstin)
+        // $('#pan'+id).html(pan)
+        // $('#name'+id).html(name)
+        // $('#email'+id).html(email)
+        // $('#kind'+id).html(kind)
+        // $('#place'+id).html(place)
+        location.reload()
+    });
 </script>
 
 

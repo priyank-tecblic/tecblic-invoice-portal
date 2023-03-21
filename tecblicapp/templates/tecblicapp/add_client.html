@@ -106,11 +106,63 @@
         </div> -->
         {% csrf_token %}
         <div class="text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Client Details</h4>
+            <h4 class="text-center alert alert-info" style="font-size: 35px;background-color: #e6f7ff;">Client Details</h4>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-secondary" style="position: relative;bottom: 65px;left: 45.9%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold bg-light" style="margin-left:33%;font-size: 35px;" id="exampleModalLabel">Add Client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'save' %}" method="post">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="name"  placeholder="name@example.com">
+                    <label for="floatingInput">Client Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
+                    <label for="floatingInput">Client Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="address" placeholder="name@example.com">
+                    <label for="floatingInput">Client Address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="gstin" placeholder="name@example.com">
+                    <label for="floatingInput">Client GSTIN</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="pan" placeholder="name@example.com">
+                    <label for="floatingInput">Client PAN</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="kind" placeholder="name@example.com">
+                    <label for="floatingInput">Kind Attn</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="place" id="floatingInput" placeholder="Ahmedabad ">
+                    <label for="floatingInput">Place of Supply</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+  </div>
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th scope="col">ID</th>
+                    <tr id="heading">
                         <th scope="col">Client Name</th>
                         <th scope="col">Client Email</th>
                         <th scope="col">Client Address</th>
@@ -119,7 +171,7 @@
                         <th scope="col">KindAttn</th>
                         <th scope="col">Place of Supply</th>
                         <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <!-- <th scope="col">Delete</th> -->
                         
                     </tr>
                 </thead>
@@ -127,7 +179,6 @@
                     {% for cl in clientdetails %}
                     <tr>
                         <!-- <td>{{ cl.id }}</td> -->
-                        <td id="id{{ cl.id }}">{{ cl.id }}</td>
                         <td id="name{{ cl.id }}">{{ cl.clientName }}</td>
                         <td id="email{{ cl.id }}">{{ cl.clientEmail }}</td>
                         <td id="address{{ cl.id }}">{{ cl.clientAddress }}</td>
@@ -136,8 +187,7 @@
                         <td id="kind{{ cl.id }}">{{ cl.kindAttn }}</td>
                         <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
                         <td><input type="button" data-sid="{{cl.id}}" id="e{{cl.id}}" class="button btn btn-warning btn-edit" value="Edit"></td>
-                        <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del" value="Delete"></td>
-                        
+                        <!-- <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del"  value="Delete"></td> -->
                     </tr>
                     
                     
@@ -244,10 +294,12 @@
         
         $(this).attr('id', $(this).attr('id').replace('e', 's'));
         $(this).attr('class', $(this).attr('class').replace('btn-edit', 'sub'));
-        $('#d'+id).addClass('cancel');
-        $('#d'+id).attr('class', $('#d'+id).attr('class').replace('btn-del', ' dd'));
-        $('#d'+id).attr('id', $('#d'+id).attr('id').replace('d', 'c'));
+        $('<td><input type="button"  id="c'+id+'" class="button btn btn-danger cancel"  value="Cancel"></td>').insertAfter($(this).parent());
+        // $('#d'+id).addClass('cancel');
+        // $('#d'+id).attr('class', $('#d'+id).attr('class').replace('btn-del', ' dd'));
+        // $('#d'+id).attr('id', $('#d'+id).attr('id').replace('d', 'c'));
         // console.log($('#name'+id).children()[0].value)
+        $("#heading").append('<th scope="col">Cancel</th>')
         
     })
     
