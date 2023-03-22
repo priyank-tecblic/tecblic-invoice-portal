@@ -12,6 +12,11 @@
     <script src="jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/tecblic.png">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  
+    <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
 
 <style>
         * {
@@ -19,8 +24,9 @@
         }
         #s5
             {
-                color: white;
-            }
+              color: aliceblue;
+            font-weight: bold;
+                      }
         input[type=text], select, textarea {
           width: 100%;
           padding: 12px;
@@ -80,7 +86,17 @@
             margin-top: 0;
           }
         }
-        </style>
+        i{
+                opacity: 0.5;
+            }
+        i:hover{
+            opacity: 1;
+            text-shadow: 0 0 2px black;
+        }
+        .form-control, .is-focused .form-control {
+    background-image: linear-gradient(to top, #000000 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+}
+</style>
    
     
     <title>Document</title>
@@ -90,8 +106,15 @@
 {% block content %}
 
 {% endblock %}
-<hr>
-    <div class="container">
+
+    <div class="container" style="  box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07)
+    ;background-color: white;border-radius: 40px;" >
 
       <!-- <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
@@ -105,17 +128,15 @@
         </div> -->
         <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
           {% csrf_token %}
-          <h4 class="text-center alert alert-info" style="font-size: 35px;background-color: #e6f7ff;">Bank Details</h4>
-          <button type="button" class="btn btn-outline-secondary" style="position: relative;bottom: 65px;left:93%" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Add
-          </button>
+          <h4 class="text-center text-dark" style="font-size: 35px;font-weight: 800">Bank Details</h4>
+          <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 93%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i>
           
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
+              <div class="modal-content" style="border-radius: 20px;"">
                 <div class="modal-header">
-                  <h5 class="modal-title font-weight-bold bg-light" style="margin-left:33%;font-size: 35px;" id="exampleModalLabel">Add Bank</h5>
+                  <h5 class="modal-title font-weight-bold" style="margin-left:33%;font-size: 35px;" id="exampleModalLabel">Add Bank</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -124,43 +145,43 @@
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name="bank_name"  placeholder="name@example.com">
-                            <label for="floatingInput">Bank Name</label>
+                            <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Name</label>
                         </div>
                         <div class="form-floating mb-3">
                           <input type="text" class="form-control" name="account_no"  placeholder="name@example.com">
-                          <label for="floatingInput">Account No</label>
+                          <label  class="bmd-label-floating text-dark" for="floatingInput">Account No</label>
                       </div>
                       <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="ifsc_code"  placeholder="name@example.com">
-                        <label for="floatingInput">IFSC CODE</label>
+                        <label  class="bmd-label-floating text-dark" for="floatingInput">IFSC CODE</label>
                     </div>
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" name="bank_branch"  placeholder="name@example.com">
-                      <label for="floatingInput">Bank Branch</label>
+                      <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Branch</label>
                   </div>
                   <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="swift_code"  placeholder="name@example.com">
-                    <label for="floatingInput">Swift Code</label>
+                    <label  class="bmd-label-floating text-dark" for="floatingInput">Swift Code</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" name="supplier_pan"  placeholder="name@example.com">
-                  <label for="floatingInput">Supplier Pan</label>
+                  <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier Pan</label>
               </div>
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="supplier_gstin"  placeholder="name@example.com">
-                <label for="floatingInput">Supplier GSTIN</label>
+                <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier GSTIN</label>
             </div>
             <div class="form-floating mb-3">
               <input type="text" class="form-control" name="cin"  placeholder="name@example.com">
-              <label for="floatingInput">CIN</label>
+              <label  class="bmd-label-floating text-dark" for="floatingInput">CIN</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="arn"  placeholder="name@example.com">
-            <label for="floatingInput">ARN</label>
+            <label  class="bmd-label-floating text-dark" for="floatingInput">ARN</label>
         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-dark">Save</button>
+                            <button type="button" class="btn btn-secondary" style="border-radius: 20px;" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-dark bg-dark" style="border-radius: 20px;">Save</button>
                         </div>
                     </form>
                     </div>
@@ -168,23 +189,24 @@
             </div>
           </div>
         
-          <table class="table table-hover">
+          <table class="table table-hover table-bordered table-sm">
             <thead>
-              <tr id="heading">
-                <th scope="col">Bank Name</th>
-                <th scope="col">Account No</th>
-                <th scope="col">IFSC Code</th>
-                <th scope="col">Bank Branch</th>
-                <th scope="col">Swift Code</th>
-                <th scope="col">Cin</th>
-                <th scope="col">Supplier Pan</th>
-                <th scope="col">Supplier GSTIN</th>
-                <th scope="col">ARN</th>
-                <th scope="col">Edit</th>
+              <tr class="text-center"
+              id="heading">
+                <th scope="col" style="font-weight:800;font-size: large;">Bank Name</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Account No</th>
+                <th scope="col" style="font-weight:800;font-size: large;">IFSC Code</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Bank Branch</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Swift Code</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Cin</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Supplier Pan</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Supplier GSTIN</th>
+                <th scope="col" style="font-weight:800;font-size: large;">ARN</th>
+                <th scope="col" style="font-weight:800;font-size: large;">Edit</th>
                 
               </tr>
             </thead>
-            <tbody id="tbody">
+            <tbody id="tbody" class="text-center">
                     {% for bank in bankdetails %}
                     <tr>
                       <td id="name{{bank.id}}">{{ bank.bank_name }}</td>
@@ -196,7 +218,7 @@
                       <td id="pan{{bank.id}}">{{bank.supplier_pan }}</td>
                       <td id="gstin{{bank.id}}">{{bank.supplier_gstin }}</td>
                       <td id="arn{{bank.id}}">{{bank.arn }}</td>
-                      <td><input type="button" data-sid="{{bank.id}}" id="e{{bank.id}}" class="btn btn-warning btn-edit" value="Edit"></td>
+                      <td><input type="button" data-sid="{{bank.id}}" id="e{{bank.id}}" class="button btn btn-warning btn-edit" style="border-radius: 20px;" value="Edit"></td>
                       <!-- <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td> -->
                       
                     </tr>
@@ -208,8 +230,27 @@
                 </table>
                 
               </div>
-            </div>
-            </div>
+              
+              
+              <nav aria-label="Page navigation example" class="mt-4" style="margin: auto;width: 25%;">
+                <ul class="pagination" style="justify-content: center;">
+                  {% if bankdetails.has_previous %}
+                  <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.previous_page_number}}">Previous</a></li>
+                  {% endif %}
+                  {% for i in totalpages %}
+                  <li class="page-item 
+                  {% if bankdetails.number == i %}
+                  bg-dark
+                  {% else %}
+                  {% endif %}" style="border-radius: 100%;"><a class="page-link " style="color:{% if bankdetails.number == i %}white;{% else %}black;{% endif %}" href="/bank?page={{i}}">{{i}}</a></li>
+                    {% endfor %}
+                    {% if bankdetails.has_next %}
+                    <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.next_page_number}}">Next</a></li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                
+              </div>
             <script>
     //           $("tbody").on("click",".btn-del",function(){
     //             console.log('delete butto clicked');
@@ -267,27 +308,28 @@
         let id=$(this).attr("data-sid");
         
         console.log(id)
-        $('#name'+id).html('<input type="text" value="'+$('#name'+id).html()+'">')
-        $('#account_no'+id).html('<input type="text" value="'+$('#account_no'+id).html()+'">')
-        $('#ifsc'+id).html('<input type="text" value="'+$('#ifsc'+id).html()+'">')
-        $('#bank_branch'+id).html('<input type="text" value="'+$('#bank_branch'+id).html()+'">')
-        $('#swift_code'+id).html('<input type="text" value="'+$('#swift_code'+id).html()+'">')
-        $('#cin'+id).html('<input type="text" value="'+$('#cin'+id).html()+'">')
-        $('#pan'+id).html('<input type="text" value="'+$('#pan'+id).html()+'">')
-        $('#gstin'+id).html('<input type="text" value="'+$('#gstin'+id).html()+'">')
-        $('#arn'+id).html('<input type="text" value="'+$('#arn'+id).html()+'">')
+        $('#name'+id).html('<input type="text" value="'+$('#name'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#account_no'+id).html('<input type="text" value="'+$('#account_no'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#ifsc'+id).html('<input type="text" value="'+$('#ifsc'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#bank_branch'+id).html('<input type="text" value="'+$('#bank_branch'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#swift_code'+id).html('<input type="text" value="'+$('#swift_code'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#cin'+id).html('<input type="text" value="'+$('#cin'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#pan'+id).html('<input type="text" value="'+$('#pan'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#gstin'+id).html('<input type="text" value="'+$('#gstin'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
+        $('#arn'+id).html('<input type="text" value="'+$('#arn'+id).html()+' " style="background-color:#eee;border-radius: 10px;">')
         $(this).val("Submit")
         // $('#d'+id).val("cancel")
         
         $(this).attr('id', $(this).attr('id').replace('e', 's'));
         $(this).attr('class', $(this).attr('class').replace('btn-edit', 'sub'));
-        $('<td><input type="button"  id="c'+id+'" class="button btn btn-danger cancel"  value="Cancel"></td>').insertAfter($(this).parent());
+        $('<td><input type="button"  id="c'+id+'" class="button btn btn-danger cancel" style="border-radius: 20px;"  value="Cancel"></td>').insertAfter($(this).parent());
         // $('#d'+id).addClass('cancel');
         // $('#d'+id).attr('class', $('#d'+id).attr('class').replace('btn-del', ' dd'));
         // $('#d'+id).attr('id', $('#d'+id).attr('id').replace('d', 'c'));
         // console.log($('#name'+id).children()[0].value)
-        $("#heading").append('<th scope="col">Cancel</th>')
-        
+        if ($('#heading th').length==10) {
+        $("#heading").append('<th scope="col" style="font-weight:800;font-size: large;">Cancel</th>')
+        }        
     });
 
     $("tbody").on("click",".sub",function(){
