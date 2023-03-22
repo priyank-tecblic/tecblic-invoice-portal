@@ -142,7 +142,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-dark text-right my-2" id="btn">Add Service</button>
+          <button class="btn btn-dark text-right my-3" style="height:45px;" id="btn">Add Service</button>
             
 
           <div class="row">
@@ -183,20 +183,20 @@
 
           </div>
             <h2 style="font-weight:bold;">Terms and Conditions:</h2>
-          <div class="row">
-            <div class="col-25" >
+      
+            <div class="row" >
               <label>{{invoices.t_2}}</label>
             </div>
-            <div class="col-25" >
+  
+            <div  class="row" >
               <label>{{invoices.t_3}}</label>
             </div>
-            <div class="col-25" >
+            <div  class="row" >
               <label>{{invoices.t_4}}</label>
             </div>
-            <div class="col-25" >
+            <div  class="row" >
               <label>{{invoices.t_5}}</label>
             </div>
-          </div>
             <input type="submit" value="Generate PDF" class="btn btn-primary my-4"/>
         </form>
     </div>
@@ -239,5 +239,9 @@ function del(id)
     document.getElementById("element"+id+"").remove()
     k=k-1
   }
+  id_t_2.rows = 2;
+  id_t_3.rows = 2;
+  id_t_4.rows = 2;
+  id_t_5.rows = 2;
 </script>
 </html>

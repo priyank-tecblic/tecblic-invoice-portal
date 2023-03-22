@@ -1,0 +1,80 @@
+<link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-material">
+
+  <title>
+    Django Material Dashboard -  Login  | AppSeed
+  </title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  {% comment %} <link href="/static/assets/demo/demo.css" rel="stylesheet" /> {% endcomment %}
+
+<form role="form" method="post" action="">
+                
+    <input type="hidden" name="csrfmiddlewaretoken" value="FdhzKYXvcJmQVf1iyyJb7KNuZnBzic02978T8ZSczZ1lMuQHpmRceZr4kT0SaPkN"> 
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="bmd-label-floating">Username</label>
+          <input type="text" name="username" placeholder="Username" class="form-control" autofocus required id="id_username">
+        </div>
+      </div>
+    </div>
+    <span class="text-danger"></span>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="bmd-label-floating">Email</label>
+          <input type="email" name="email" placeholder="Email" class="form-control" required id="id_email">
+        </div>
+      </div>
+    </div>
+    <span class="text-danger"></span>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="bmd-label-floating">Password</label>
+          <input type="password" name="password1" placeholder="Password" class="form-control" required id="id_password1">
+        </div>
+      </div>
+    </div>
+    <span class="text-danger"></span>
+
+    <br />
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="bmd-label-floating">Password Check</label>
+          <input type="password" name="password2" placeholder="Password check" class="form-control" required id="id_password2">
+        </div>
+      </div>
+    </div>
+    <span class="text-danger"></span>
+
+    <br />
+
+    <button type="submit" name="register" class="btn btn-primary pull-left">Register</button>
+
+    &nbsp; &nbsp; 
+    <span class="pull-right">
+      Have an account? <a href="/login/" class="text-primary">Login</a>
+    </span>
+
+    <div class="clearfix"></div>
+
+  </form>
