@@ -690,3 +690,6 @@ def search(request):
     totalpage = ServiceDatafinal.paginator.num_pages
     params = {'inv':ServiceDatafinal,'totalpages':[n+1 for n in range(totalpage)]}
     return render(request,'tecblicapp/search.html',params)
+
+def test(request):
+    return render(request,'tecblicapp/test.html')
