@@ -9,6 +9,7 @@ class clientDetail(models.Model):
     clientPAN=models.CharField(max_length=10,null=True,blank=True)
     kindAttn=models.CharField(max_length=40,null=True,blank=True)
     placeofSupply=models.CharField(max_length=40,null=True,blank=True)
+    activeClient = models.BooleanField(("Active Client"),default=True)
 
     def __str__(self):
         return self.clientName

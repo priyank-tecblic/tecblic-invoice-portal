@@ -210,6 +210,7 @@
                   <th scope="col"  style="font-weight:800;font-size: medium;">Client PAN</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">KindAttn</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">Place of Supply</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;">Active</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">Action</th>
                     
                   <!-- <th scope="col">Delete</th> -->
@@ -227,6 +228,11 @@
                     <td id="pan{{ cl.id }}">{{ cl.clientPAN }}</td>
                     <td id="kind{{ cl.id }}">{{ cl.kindAttn }}</td>
                     <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
+                    <td><input type="checkbox" 
+                        {% if cl.activeClient %}
+                        checked 
+                        {% endif %}
+                        readonly onclick="return false;" name="" id="" value="true"></td>
                     <td><a  href="" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
                     <!-- <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del"  value="Delete"></td> -->
                 </tr>
