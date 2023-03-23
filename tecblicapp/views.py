@@ -508,7 +508,7 @@ def filter_invoice(request):
 @login_required(login_url='login')
 def check_invoice(request):
     inv_obj=Invoice.objects.all()
-    paginator = Paginator(inv_obj,3)
+    paginator = Paginator(inv_obj,5)
     page_number = request.GET.get('page')
     finaldata =  paginator.get_page(page_number)
     totalpage = finaldata.paginator.num_pages

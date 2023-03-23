@@ -50,7 +50,7 @@
           cursor: pointer;
           float: right;
         }
-        
+
         input[type=submit]:hover {
           background-color: #45a049;
         }
@@ -79,7 +79,10 @@
           display: table;
           clear: both;
         }
-        
+        #addform
+        {
+            visibility: hidden;
+        }
         /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
         @media screen and (max-width: 600px) {
           .col-25, .col-75, input[type=submit] {
@@ -87,22 +90,24 @@
             margin-top: 0;
           }
         }
+        .table
+        {
+            visibility: visible;
+        }
         #s4
             {
                 color: aliceblue;
             font-weight: bold;
             }
-            i{
-                opacity: 0.5;
-            }
-        i:hover{
-            opacity: 1;
-            text-shadow: 0 0 2px black;
-        }
+
         .form-control, .is-focused .form-control {
     background-image: linear-gradient(to top, #000000 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
 }
-        </style>
+*
+        {
+            font-family: Arial, Helvetica, sans-serif;         
+        }
+   </style>
    
     
     <title>Document</title>
@@ -112,15 +117,14 @@
 {% block content %}
 
 {% endblock %}
-<div class="container" style="  box-shadow:
+<div class="" style="margin-left: 2%;margin-right: 2%;background-color: white;height: 500px; box-shadow:
 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
 12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-100px 100px 80px rgba(0, 0, 0, 0.07)
-;background-color: white;border-radius: 40px;">
-
+100px 100px 80px rgba(0, 0, 0, 0.07)">
+<br>
     <!-- <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
             <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">Add/Update Client Details</h4>
@@ -133,122 +137,167 @@
         </div> -->
         {% csrf_token %}
         <div class="text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            <h4 class="text-center text-dark" style="font-size: 35px;font-weight: 800">Client Details</h4>
+            <h4 class="text-center text-dark table-detail" style="font-size: 35px;font-weight: 800">Client Details</h4>
 <!-- Button trigger modal -->
 
 <!-- <button type="button" class="btn bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
       <!-- </button> -->
-      <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 44%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i>
-  <!-- Modal -->
+      <!-- <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 44%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i> -->
+<button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: 55px;left: 42%;">Details</button>
+<button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: 55px;left: 42.5%;">Add</button>
+      <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 20px;">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-bold " style="margin-left:33%;font-size: 35px;"     id="exampleModalLabel">Add Client</h5>
+          <h5 class="modal-title font-weight-bold " style="margin-left:33%;font-size: 35px;" id="exampleModalLabel">Add Client</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{% url 'save' %}" role="form" method="post">
-                {% csrf_token %}
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name"  placeholder="name@example.com">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Client Name</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Client Email</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="address" placeholder="name@example.com">
-                    <label class="bmd-label-floating  text-dark" for="floatingInput">Client Address</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="gstin" placeholder="name@example.com">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Client GSTIN</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="pan" placeholder="name@example.com">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Client PAN</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="kind" placeholder="name@example.com">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Kind Attn</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="place" id="floatingInput" placeholder="Ahmedabad ">
-                    <label class="bmd-label-floating text-dark" for="floatingInput">Place of Supply</label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" style="border-radius: 20px;" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn bg-dark" style="border-radius: 20px;">Save</button>
-                </div>
-            </form>
+            
             </div>
         </div>
     </div>
   </div>
-            <table class="table table-hover table-bordered table-sm">
-                <thead>
-                    <tr id="heading">
-                    
-
-                            <th scope="col" style="font-weight:800;font-size: large;">Client Name</th>
-                            <th scope="col"  style="font-weight:800;font-size: large;">Client Email</th>
-                            <th scope="col" style="font-weight:800;font-size: large;" >Client Address</th>
-                            <th scope="col"  style="font-weight:800;font-size: large;">Client GSTIN</th>
-                        <th scope="col"  style="font-weight:800;font-size: large;">Client PAN</th>
-                        <th scope="col" style="font-weight:800;font-size: large;">KindAttn</th>
-                        <th scope="col" style="font-weight:800;font-size: large;">Place of Supply</th>
-                        <th scope="col" style="font-weight:800;font-size: large;">Edit</th>
-                    
-                        <!-- <th scope="col">Delete</th> -->
-                        
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                    {% for cl in clientdetails %}
-                    <tr>
-                        <!-- <td>{{ cl.id }}</td> -->
-                        <td id="name{{ cl.id }}">{{ cl.clientName }}</td>
-                        <td id="email{{ cl.id }}">{{ cl.clientEmail }}</td>
-                        <td id="address{{ cl.id }}">{{ cl.clientAddress }}</td>
-                        <td id="gst{{ cl.id }}">{{ cl.clientGSTIN }}</td>
-                        <td id="pan{{ cl.id }}">{{ cl.clientPAN }}</td>
-                        <td id="kind{{ cl.id }}">{{ cl.kindAttn }}</td>
-                        <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
-                        <td><input type="button" data-sid="{{cl.id}}" id="e{{cl.id}}" class="button btn btn-warning btn-edit" style="border-radius: 20px;" value="Edit"></td>
-                        <!-- <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del"  value="Delete"></td> -->
-                    </tr>
-                    
-                    
-                    {% endfor %}
-                </tbody>
-                
-            </table>
-            
+  <div id="addform" style="position: absolute;width: 100%;" >
+    <h5 class="modal-title font-weight-bold text-dark" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Client</h5>
+      <form action="{% url 'save' %}" role="form" method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3" style="width:40%;position: relative;left: 8%;">
+            <input type="text" class="form-control" name="name"  placeholder="name@example.com">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Client Name</label>
         </div>
+        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 50%;">
+            <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Client Email</label>
+        </div>
+        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 8%;">
+            <input type="text" class="form-control" name="address" placeholder="name@example.com">
+            <label class="bmd-label-floating  text-dark" for="floatingInput">Client Address</label>
+        </div>
+        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 151px;left: 50%;">
+            <input type="text" class="form-control" name="place" id="floatingInput" placeholder="Ahmedabad ">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Place of Supply</label>
+        </div>
+        <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 151px;left: 8%;">
+            <input type="text" class="form-control" name="gstin" placeholder="name@example.com">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Client GSTIN</label>
+        </div>
+        <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 225px;left: 36%;">
+            <input type="text" class="form-control" name="pan" placeholder="name@example.com">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Client PAN</label>
+        </div>
+        <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 301px;left: 65%;">
+            <input type="text" class="form-control" name="kind" placeholder="name@example.com">
+            <label class="bmd-label-floating text-dark" for="floatingInput">Kind Attn</label>
+        </div>
+<div   style="position: relative;bottom: 301px;">
+    <button type="submit" class="btn bg-dark" style="">Save</button>
+</div>
+    </form>
+  </div>
+  <div id="table" style="position: absolute;top: 30%;left:5%;width: 90%;">
+
+      <table class="table table-bordered table-sm table-detail">
+          <thead>
+              <tr id="heading">
+                  
+                  
+                  <th scope="col" style="font-weight:800;font-size: medium;">Client Name</th>
+                  <th scope="col"  style="font-weight:800;font-size: medium;">Client Email</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;" >Client Address</th>
+                  <th scope="col"  style="font-weight:800;font-size: medium;">Client GSTIN</th>
+                  <th scope="col"  style="font-weight:800;font-size: medium;">Client PAN</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;">KindAttn</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;">Place of Supply</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;">Action</th>
+                    
+                  <!-- <th scope="col">Delete</th> -->
+                  
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                {% for cl in clientdetails %}
+                <tr>
+                    <!-- <td>{{ cl.id }}</td> -->
+                    <td id="name{{ cl.id }}">{{ cl.clientName }}</td>
+                    <td id="email{{ cl.id }}">{{ cl.clientEmail }}</td>
+                    <td id="address{{ cl.id }}">{{ cl.clientAddress }}</td>
+                    <td id="gst{{ cl.id }}">{{ cl.clientGSTIN }}</td>
+                    <td id="pan{{ cl.id }}">{{ cl.clientPAN }}</td>
+                    <td id="kind{{ cl.id }}">{{ cl.kindAttn }}</td>
+                    <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
+                    <td><a  href="" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
+                    <!-- <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del"  value="Delete"></td> -->
+                </tr>
+                
+                
+                {% endfor %}
+            </tbody>
+            
+        </table>
+        
         <!-- </div> -->
-        <nav aria-label="Page navigation" class="mt-4" style="margin: auto;width: 25%;">
+        <nav aria-label="Page navigation" class="mt-4 table-detail" style="margin: auto;width: 25%;">
             <ul class="pagination pagination-primary" style="justify-content: center;">
                 {% if clientdetails.has_previous %}
-        <li class="page-item"><a class="page-link text-dark" href="/add?page={{clientdetails.previous_page_number}}">Previous</a></li>
-        {% endif %}
-        {% for i in totalpages %}
-        <li class="page-item 
-        {% if clientdetails.number == i %}
-        bg-dark
-        {% else %}
-        
-        {% endif %}
-        " style="border-radius: 100%;"><a class="page-link" style="color:{% if clientdetails.number == i %}white;{% else %}black;{% endif %}" href="/add?page={{i}}">{{i}}</a></li>
-        {% endfor %}
-        {% if clientdetails.has_next %}
-        <li class="page-item"><a class="page-link text-dark "  href="/add?page={{clientdetails.next_page_number}}">Next</a></li>
-        {% endif %}
-    </ul>
-</nav>
-</div>
+                <li class="page-item"><a class="page-link text-dark" href="/add?page={{clientdetails.previous_page_number}}"><i class="fa fa-chevron-left"  style="font-weight: bold;" aria-hidden="true"></i></a></li>
+                {% endif %}
+                {% for i in totalpages %}
+                <li class="page-item 
+                {% if clientdetails.number == i %}
+                bg-dark
+                {% else %}
+                
+                {% endif %}
+                " style=""><a class="page-link" style="color:{% if clientdetails.number == i %}white;{% else %}black;{% endif %}" href="/add?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+                {% if clientdetails.has_next %}
+                <li class="page-item"><a class="page-link text-dark "  href="/add?page={{clientdetails.next_page_number}}"><i class="fa fa-chevron-right"  style="font-weight: bold;" aria-hidden="true"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <br>
+    </div>
+    </div>
+    </div>
 <script>
+$('#addclient').click(function(){
+    console.log("clicked")
+$('#addform').css('visibility','visible');
+$('#addform').css('z-index','1');
+$('#details').removeClass('bg-light')
+$('#details').removeClass('text-dark')
+$('#details').addClass('bg-dark')
+$('#details').addClass('text-light')
+$('#addclient').removeClass('bg-dark')
+$('#addclient').removeClass('text-light')
+$('#addclient').addClass('bg-light')
+$('#addclient').addClass('text-dark')
+$('#addclient').attr('disabled','true')
+$('#details').removeAttr('disabled')
+$('.table-detail').css('visibility','hidden');
+});
+$('#details').click(function(){
+    console.log("clicked")
+$('#addform').css('visibility','hidden');
+$('#addform').css('z-index','-1');
+$('#addclient').removeClass('bg-light')
+$('#addclient').removeClass('text-dark')
+$('#addclient').addClass('bg-dark')
+$('#addclient').addClass('text-light')
+$('#details').removeClass('bg-dark')
+$('#details').removeClass('text-light')
+$('#details').addClass('bg-light')
+$('#details').addClass('text-dark')
+$('#details').attr('disabled','true')
+$('#addclient').removeAttr('disabled')
+// $('#details').addClass('bg-light')
+// $('#details').addClass('text-dark')
+$('.table-detail').css('visibility','visible');
+});
+</script>
+<!-- <script>
     $('#btnsave').click(function(){
         
             let client_id=$("#client_id").val();
@@ -436,7 +485,7 @@
         //     }
         // })
     );
-</script>
+</script> -->
 
 </body>
 </html>
