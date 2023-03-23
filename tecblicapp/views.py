@@ -166,7 +166,8 @@ def edit_data(request):
 def invoice_detail(request):
     invoices=invoiceForm()
     bank_details=bankDetailForm
-    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details})
+    clientActive = clientDetail.objects.filter(activeClient=True)
+    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'client_details':clientActive})
 
 #Html to pdf 
 # def html_to_pdf(template_src, context_dict={}):

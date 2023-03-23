@@ -195,7 +195,16 @@ body::-webkit-scrollbar-thumb {
           <h4 >Client Details</h4>
           <div class="row">
             <div >
-                <label style="width: 25%;">{{invoices.client}}</label>
+                <label style="width: 25%;">
+                  <select name="client" id="id_client">
+                {% for i in client_details %}
+                
+                  <option value="{{i.id}}" name="client"> {{i.clientName}}</option>
+
+                
+                  {% endfor %}
+                </select>
+                </label>
             </div>
 
           </div>
