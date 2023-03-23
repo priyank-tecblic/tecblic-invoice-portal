@@ -86,15 +86,13 @@
             margin-top: 0;
           }
         }
-        i{
-                opacity: 0.5;
-            }
-        i:hover{
-            opacity: 1;
-            text-shadow: 0 0 2px black;
-        }
+       
         .form-control, .is-focused .form-control {
     background-image: linear-gradient(to top, #000000 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+}
+#addform
+{
+  visibility: hidden;
 }
 </style>
    
@@ -107,14 +105,13 @@
 
 {% endblock %}
 
-    <div class="container" style="  box-shadow:
+    <div class="" style=" margin-left: 2%;margin-right: 2%;background-color: white;height: 500px; box-shadow:
     2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
     6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
     12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
     22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
     41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    100px 100px 80px rgba(0, 0, 0, 0.07)
-    ;background-color: white;border-radius: 40px;" >
+    100px 100px 80px rgba(0, 0, 0, 0.07)" >
 
       <!-- <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
@@ -126,10 +123,13 @@
             <input type="submit" class="btn btn-success" id="bankbtnsave" value="Save">
           </form>
         </div> -->
+        <button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: -20px;left: 85.5%;">Details</button>
+        <button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: -20px;left: 86%;">Add</button>
         <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
           {% csrf_token %}
-          <h4 class="text-center text-dark" style="font-size: 35px;font-weight: 800">Bank Details</h4>
-          <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 93%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i>
+          <h4 class="text-center text-dark table-detail" style="font-size: 35px;font-weight: 800">Bank Details</h4>
+          
+          <!-- <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 93%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i> -->
           
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,56 +140,61 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="bank_form" method="post">
-                        {% csrf_token %}
+  
+                    </div>
+                </div>
+            </div>
+          </div>
+  <div id="table" style="position: absolute;top: 180%;left:5%;width: 90%;">
+    <div id="addform" style="position: absolute;width: 100%;" >
+      <h5 class="modal-title font-weight-bold text-dark text-center" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Bank</h5>
 
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="bank_name"  placeholder="name@example.com">
-                            <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                          <input type="text" class="form-control" name="account_no"  placeholder="name@example.com">
-                          <label  class="bmd-label-floating text-dark" for="floatingInput">Account No</label>
-                      </div>
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="ifsc_code"  placeholder="name@example.com">
-                        <label  class="bmd-label-floating text-dark" for="floatingInput">IFSC CODE</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="bank_branch"  placeholder="name@example.com">
-                      <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Branch</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="swift_code"  placeholder="name@example.com">
-                    <label  class="bmd-label-floating text-dark" for="floatingInput">Swift Code</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" name="supplier_pan"  placeholder="name@example.com">
-                  <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier Pan</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="supplier_gstin"  placeholder="name@example.com">
-                <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier GSTIN</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" name="cin"  placeholder="name@example.com">
-              <label  class="bmd-label-floating text-dark" for="floatingInput">CIN</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="arn"  placeholder="name@example.com">
-            <label  class="bmd-label-floating text-dark" for="floatingInput">ARN</label>
-        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" style="border-radius: 20px;" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-dark bg-dark" style="border-radius: 20px;">Save</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
-          </div>
-        
-          <table class="table table-hover table-bordered table-sm">
+    <form action="bank_form" method="post">
+      {% csrf_token %}
+
+      <div class="form-floating mb-3" style="width:25%;position: relative;left: 8%;bottom: 60px;">
+          <input type="text" class="form-control" name="bank_name"  placeholder="name@example.com">
+          <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Name</label>
+      </div>
+      <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 134px;left: 36.8%;">
+        <input type="text" class="form-control" name="account_no"  placeholder="name@example.com">
+        <label  class="bmd-label-floating text-dark" for="floatingInput">Account No</label>
+    </div>
+    <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 207px;left: 65%;">
+      <input type="text" class="form-control" name="ifsc_code"  placeholder="name@example.com">
+      <label  class="bmd-label-floating text-dark" for="floatingInput">IFSC CODE</label>
+  </div>
+  <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 198px;left: 8%;">
+  <input type="text" class="form-control" name="supplier_pan"  placeholder="name@example.com">
+  <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier Pan</label>
+  </div>
+  <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 272px;left: 36.8%;">
+    <input type="text" class="form-control" name="bank_branch"  placeholder="name@example.com">
+    <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Branch</label>
+</div>
+<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 346px;left: 65%;">
+  <input type="text" class="form-control" name="swift_code"  placeholder="name@example.com">
+  <label  class="bmd-label-floating text-dark" for="floatingInput">Swift Code</label>
+</div>
+<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 331px;left: 8%;">
+<input type="text" class="form-control" name="supplier_gstin"  placeholder="name@example.com">
+<label  class="bmd-label-floating text-dark" for="floatingInput">Supplier GSTIN</label>
+</div>
+<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 406px;left: 36.8%;">
+<input type="text" class="form-control" name="cin"  placeholder="name@example.com">
+<label  class="bmd-label-floating text-dark" for="floatingInput">CIN</label>
+</div>
+<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 480px;left: 65%;">
+<input type="text" class="form-control" name="arn"  placeholder="name@example.com">
+<label  class="bmd-label-floating text-dark" for="floatingInput">ARN</label>
+</div>
+<div style="position: relative;bottom: 441px;left: 45%;">
+  <button type="submit" class="btn bg-dark" style="">Save</button>
+</div>
+
+</form>
+</div>
+          <table class="table  table-bordered table-sm table-detail">
             <thead>
               <tr class="text-center"
               id="heading">
@@ -218,7 +223,7 @@
                       <td id="pan{{bank.id}}">{{bank.supplier_pan }}</td>
                       <td id="gstin{{bank.id}}">{{bank.supplier_gstin }}</td>
                       <td id="arn{{bank.id}}">{{bank.arn }}</td>
-                      <td><input type="button" data-sid="{{bank.id}}" id="e{{bank.id}}" class="button btn btn-warning btn-edit" style="border-radius: 20px;" value="Edit"></td>
+                      <td><a  href="" style="border-radius: 20px;color: black;" class=" "></a><i class="fa fa-edit"></i></a></td>
                       <!-- <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td> -->
                       
                     </tr>
@@ -229,29 +234,30 @@
                   
                 </table>
                 
-              </div>
+
               
               
-              <nav aria-label="Page navigation example" class="mt-4" style="margin: auto;width: 25%;">
+              <nav aria-label="Page navigation example " class="mt-4 table-detail" style="margin: auto;width: 25%;">
                 <ul class="pagination" style="justify-content: center;">
                   {% if bankdetails.has_previous %}
-                  <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.previous_page_number}}">Previous</a></li>
+                  <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.previous_page_number}}"><i class="fa fa-chevron-left"  style="font-weight: bold;" aria-hidden="true"></i></a></li>
                   {% endif %}
                   {% for i in totalpages %}
                   <li class="page-item 
                   {% if bankdetails.number == i %}
                   bg-dark
                   {% else %}
-                  {% endif %}" style="border-radius: 100%;"><a class="page-link " style="color:{% if bankdetails.number == i %}white;{% else %}black;{% endif %}" href="/bank?page={{i}}">{{i}}</a></li>
+                  {% endif %}" style=""><a class="page-link " style="color:{% if bankdetails.number == i %}white;{% else %}black;{% endif %}" href="/bank?page={{i}}">{{i}}</a></li>
                     {% endfor %}
                     {% if bankdetails.has_next %}
-                    <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.next_page_number}}">Next</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="/bank?page={{bankdetails.next_page_number}}"><i class="fa fa-chevron-right"  style="font-weight: bold;" aria-hidden="true"></i></a></li>
                     {% endif %}
                   </ul>
                 </nav>
-                
+                </div>
               </div>
-            <script>
+            </div>
+            <!-- <script>
     //           $("tbody").on("click",".btn-del",function(){
     //             console.log('delete butto clicked');
     //     let id=$(this).attr("data-sid");
@@ -391,10 +397,45 @@ console.log(mydata)
         location.reload()
     });
 </script>
+ -->
 
 
-
-
+<script>
+  $('#addclient').click(function(){
+      console.log("clicked")
+  $('#addform').css('visibility','visible');
+  $('#addform').css('z-index','1');
+  $('#details').removeClass('bg-light')
+  $('#details').removeClass('text-dark')
+  $('#details').addClass('bg-dark')
+  $('#details').addClass('text-light')
+  $('#addclient').removeClass('bg-dark')
+  $('#addclient').removeClass('text-light')
+  $('#addclient').addClass('bg-light')
+  $('#addclient').addClass('text-dark')
+  $('#addclient').attr('disabled','true')
+  $('#details').removeAttr('disabled')
+  $('.table-detail').css('visibility','hidden');
+  });
+  $('#details').click(function(){
+      console.log("clicked")
+  $('#addform').css('visibility','hidden');
+  $('#addform').css('z-index','-1');
+  $('#addclient').removeClass('bg-light')
+  $('#addclient').removeClass('text-dark')
+  $('#addclient').addClass('bg-dark')
+  $('#addclient').addClass('text-light')
+  $('#details').removeClass('bg-dark')
+  $('#details').removeClass('text-light')
+  $('#details').addClass('bg-light')
+  $('#details').addClass('text-dark')
+  $('#details').attr('disabled','true')
+  $('#addclient').removeAttr('disabled')
+  // $('#details').addClass('bg-light')
+  // $('#details').addClass('text-dark')
+  $('.table-detail').css('visibility','visible');
+  });
+  </script>
    
 </body>
 </html>

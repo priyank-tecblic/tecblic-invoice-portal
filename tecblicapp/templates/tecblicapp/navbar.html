@@ -13,11 +13,11 @@
       <img src="" alt="">
       <a class="nav-item nav-link  " id="s2" href=" {% url 'home_page' %}">Dashboard</a>
       <a class="nav-item nav-link " id="s3" href="{% url 'invoice_details' %}">Generate Invoice</a>
-      <a class="nav-item nav-link" id="s4" href="{% url 'client-detail' %}">Add Client</a>
+      <a class="nav-item nav-link" id="s4" href="{% url 'client-detail' %}">Client Details</a>
       <a class="nav-item nav-link {% block BankDetail %}{% endblock  %}" id="s5" href="{% url 'bank-detail' %}">Bank Details</a>
       <a class="nav-item nav-link {% block CheckInvoice %}{% endblock  %}" id="s6" href="{% url 'check_invoices' %}">Check Invoice</a>
       <a class="nav-item nav-link {% block gst %}{% endblock  %} mr-4"  id="s7" href="{% url 'gst' %}">GST</a>
-      <form method="GET" action="/search" style="position:absolute;right:12%;" ><input class="mt-1 form-control mr-sm-2" style="background-image: linear-gradient(to top, wheat 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(255, 255, 255, 0) 1px);color: aliceblue;font-weight: bolder;" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search"></form>
+
       
       <span class="nav-item nav-link" style="font-weight: bolder;position:absolute;right:5%;color: aliceblue;" id="s1"> {{request.user}} </span>
       <a class="nav-item nav-link btn btn-outline-danger" style="border-radius: 10px;position:absolute;right:5px;" href="{% url 'logout' %}">Logout</a>

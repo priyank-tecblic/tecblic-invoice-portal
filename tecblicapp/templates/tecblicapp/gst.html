@@ -10,11 +10,23 @@
     <script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="icon" type="image/x-icon" href="/static/tecblic.png">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  
+    <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
 <style>
                 #s7
             {
-                color: white;
-            }
+                color: aliceblue;
+            font-weight: bold;
+}
+table {
+  border-collapse: collapse;
+  border-radius: 2em;
+  overflow: hidden;
+}
+
 </style>
 </head>
 <body>
@@ -22,20 +34,30 @@
 {% block content %}
 
 {% endblock %}
-<hr>
+
 <form action="" method="post">
 <div style="font-family: Georgia, 'Times New Roman', Times, serif; ">
 
     <br>
-    <h4 class="text-center alert alert-info" style="background-color: #e6f7ff;">GST DETAILS</h4>
-    <div class="container">
-
-        <table class="table table-striped table-hover table-bordered table-sm text-center">
+    <div class="container" style="  box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07)
+    ;background-color: white;border-radius: 40px;" >
+<br>
+    
+    <h4 class="text-center text-dark" style="font-size: 35px;font-weight: 800">GST DETAILS</h4>
+<br>
+        
+        <table class="table table-striped table-hover table-bordered table-sm text-center" >
             <thead>
                 <tr>
-                    <th scope="col">SGST</th>
-                    <th scope="col">CGST</th>
-                    <th scope="col">IGST</th>
+                    <th scope="col" style="font-weight:800;font-size: large;">SGST</th>
+                    <th scope="col" style="font-weight:800;font-size: large;">CGST</th>
+                    <th scope="col" style="font-weight:800;font-size: large;">IGST</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -49,8 +71,10 @@
                 </tr>
             </tbody>
         </table>
+    <br>
     </div>
     </div>
+
 </form>
 </body>
 </html>
