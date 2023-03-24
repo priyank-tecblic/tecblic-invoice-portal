@@ -663,9 +663,8 @@ def edit_invoice(request, pk):
 @login_required(login_url='login')
 def delete_invoice(request,pk):
     invoice=Invoice.objects.get(invoice_no=pk)
-    if request.method =='POST':
-        invoice.soft_delete()
-        return redirect('/')
+    invoice.soft_delete()
+    return redirect('/check')
     context = {'item':invoice}
     return render(request, 'tecblicapp/delete_invoice.html', context)
 
@@ -744,4 +743,5 @@ def activeClient(request):
         print("im in false")
         client.activeClient = False
     client.save()
-    return redirect("/add")
+    page=request.GET.get('page')
+    return redirect(f"/add?page={page}")
