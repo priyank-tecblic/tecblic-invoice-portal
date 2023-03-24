@@ -18,6 +18,9 @@
     <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
     <style>
+        body{
+            background-color: white;
+        }
         table {
   border-collapse: collapse;
   border-radius: 2em;
@@ -122,13 +125,6 @@
     <i style="position: relative;top: -28px;right: -284px;z-index: 1;" class="fa fa-search" aria-hidden="true"></i>
   </form>
 
-<div class="" style="margin-left: 2%;margin-right: 2%;background-color: white;height: 500px; box-shadow:
-2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
-22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
-41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-100px 100px 80px rgba(0, 0, 0, 0.07)">
 <br>
     <!-- <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; ">
         <div class="col-sm-4">
@@ -170,10 +166,10 @@
         {% csrf_token %}
         <div class="form-floating mb-3" style="width:40%;position: relative;left: 8%;">
             <input type="text" class="form-control" required name="name"  placeholder="name@example.com">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Client Name</label>
+            <label class="text-dark" for="floatingInput">Client Name</label>
         </div>
         <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 50%;">
-            <input type="email" class="form-control"  required  id="email" name="email" placeholder="name@example.com">
+            <input type="text" class="form-control"  required  id="email" name="email" placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Client Email</label>
         </div>
         <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 8%;">
@@ -235,7 +231,9 @@
                     <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
                     <form id="form" action="active_client">
                         <input type="hidden" name="idd" value="{{cl.id}}">
-                        <td><input type="checkbox" 
+                        <input type="hidden" name="page" value="{{clientdetails.number}}">
+                        <td>
+                            <input type="checkbox" 
                             {% if cl.activeClient %}
                             checked 
                             {% endif %}
@@ -274,7 +272,7 @@
         <br>
     </div>
     </div>
-    </div>
+
 <script>
 $('#addclient').click(function(){
     console.log("clicked")

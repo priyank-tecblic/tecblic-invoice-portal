@@ -21,6 +21,9 @@
     <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
     <style>
+        body{
+            background-color: white;
+        }
         #s6 {
             color: aliceblue;
             font-weight: bold;
@@ -42,13 +45,7 @@
     {% block content %}
 
     {% endblock %}
-    <div class="" style="margin-left: 2%;margin-right: 2%;background-color: white;box-shadow:
-    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
-    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
-    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    100px 100px 80px rgba(0, 0, 0, 0.07)"><br>
+  <br>
         <form method="GET" class="flex-container" action="/search" style="position:absolute;right:2%;" >
             <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
             <i style="position: relative;top:16px;right: 25px;z-index: 1;" class="fa fa-search" aria-hidden="true"></i>
@@ -59,14 +56,19 @@
             <div class="col-7"></div>
             <form action="/filter/" class="col-5" method="post">
                 {% csrf_token %}
-                <div class="row my-1">
+                <div class="row my-1" style="position: relative;left: 10%;">
                     <label for="" style="text-align:left;" class="col-3 "><b style="text-align:left;">Start
                             Date</b></label>
                     <label for="" class="col-5" style="text-align:center;"><b>End Date</b></label>
                 </div>
-                <div class="row">
+                <div class="row" style="position: relative;left: 10%;">
                     <input type="date" name="startdate" class="col-4 mx-1" required><input name="enddate" type="date"
-                        class="col-4 mx-3" required><input style="border-radius: 20px;" class="btn-sm btn-dark bg-dark col-2" type="submit" value="Search">
+                        class="col-4 mx-3" required>
+                        <div style="col-2">
+                            <input  class="btn-dark bg-dark " style= "    position: relative;
+                            bottom: 30px;
+                            right: 90px;" type="submit" value="Search">
+                        </div>
                 </div>
             </form>
         </div>
@@ -119,8 +121,11 @@
                             </td>
                                 
                             <td><a  href="{% url 'edit_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
-                            <td><a href="{% url 'delete_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=""><i class='fa fa-archive'></i>
-                            </i></a></td>
+                            <form action="/delete_invoice/{{i.invoice_no}}" method="get">
+
+                                <td><i type="button" onclick="this.form.submit()" class='fa fa-archive'></i>
+                                </i></td>
+                            </form>
                             {% endfor %}
                         </tr>
                     </tbody>
@@ -158,7 +163,7 @@
         </nav>
         <br>
 
-    </div>
+
 </body>
 
 </html>
