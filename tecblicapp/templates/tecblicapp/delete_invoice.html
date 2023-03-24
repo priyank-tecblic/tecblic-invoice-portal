@@ -12,9 +12,9 @@
 {% include 'tecblicapp/navbar.html' %}
 {% block content %}
 {% endblock %}
-<h4 class="text-center alert alert-info">Delete Invoice</h4>
+<h4 class="text-center alert alert-info">Shelf Invoice</h4>
 
-<p>Are you sure want to delete {{item}}?</p>
+<p>Are you sure want to shelf {{item.invoice_no}}?</p>
 <form action="{% url 'delete_invoice' item.invoice_no %}" method="post">
 
     {% csrf_token %}

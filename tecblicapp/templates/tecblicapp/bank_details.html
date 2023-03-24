@@ -104,6 +104,10 @@
 {% block content %}
 
 {% endblock %}
+<form method="GET" class="flex-container" action="/banksearch" style="z-index:2;position:absolute;right:2%;top: 144px" >
+  <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative;; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
+  <i style="position: relative;top: -28px;right: -284px;z-index: 1;" class="fa fa-search" aria-hidden="true"></i>
+</form>
 
     <div class="" style=" margin-left: 2%;margin-right: 2%;background-color: white;height: 500px; box-shadow:
     2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
@@ -123,8 +127,8 @@
             <input type="submit" class="btn btn-success" id="bankbtnsave" value="Save">
           </form>
         </div> -->
-        <button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: -20px;left: 85.5%;">Details</button>
-        <button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: -20px;left: 86%;">Add</button>
+        <button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;">Details</button>
+        <button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: -20px;left: 1%;">Add</button>
         <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
           {% csrf_token %}
           <h4 class="text-center text-dark table-detail" style="font-size: 35px;font-weight: 800">Bank Details</h4>
@@ -149,43 +153,43 @@
     <div id="addform" style="position: absolute;width: 100%;" >
       <h5 class="modal-title font-weight-bold text-dark text-center" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Bank</h5>
 
-    <form action="bank_form" method="post">
+    <form action="bank_form" id="form_submit" method="post">
       {% csrf_token %}
 
       <div class="form-floating mb-3" style="width:25%;position: relative;left: 8%;bottom: 60px;">
-          <input type="text" class="form-control" name="bank_name"  placeholder="name@example.com">
+          <input type="text" class="form-control" required name="bank_name"  placeholder="name@example.com">
           <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Name</label>
       </div>
       <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 134px;left: 36.8%;">
-        <input type="text" class="form-control" name="account_no"  placeholder="name@example.com">
+        <input type="text" class="form-control" required name="account_no"  placeholder="name@example.com">
         <label  class="bmd-label-floating text-dark" for="floatingInput">Account No</label>
     </div>
     <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 207px;left: 65%;">
-      <input type="text" class="form-control" name="ifsc_code"  placeholder="name@example.com">
+      <input type="text" class="form-control" required name="ifsc_code"  placeholder="name@example.com">
       <label  class="bmd-label-floating text-dark" for="floatingInput">IFSC CODE</label>
   </div>
   <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 198px;left: 8%;">
-  <input type="text" class="form-control" name="supplier_pan"  placeholder="name@example.com">
+  <input type="text" class="form-control" required id="pan" name="supplier_pan"  placeholder="name@example.com">
   <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier Pan</label>
   </div>
   <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 272px;left: 36.8%;">
-    <input type="text" class="form-control" name="bank_branch"  placeholder="name@example.com">
+    <input type="text" class="form-control" required name="bank_branch"  placeholder="name@example.com">
     <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Branch</label>
 </div>
 <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 346px;left: 65%;">
-  <input type="text" class="form-control" name="swift_code"  placeholder="name@example.com">
+  <input type="text" class="form-control"  required name="swift_code"  placeholder="name@example.com">
   <label  class="bmd-label-floating text-dark" for="floatingInput">Swift Code</label>
 </div>
 <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 331px;left: 8%;">
-<input type="text" class="form-control" name="supplier_gstin"  placeholder="name@example.com">
+<input type="text" class="form-control"  required id="gst" name="supplier_gstin"  placeholder="name@example.com">
 <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier GSTIN</label>
 </div>
 <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 406px;left: 36.8%;">
-<input type="text" class="form-control" name="cin"  placeholder="name@example.com">
+<input type="text" class="form-control" required name="cin"  placeholder="name@example.com">
 <label  class="bmd-label-floating text-dark" for="floatingInput">CIN</label>
 </div>
 <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 480px;left: 65%;">
-<input type="text" class="form-control" name="arn"  placeholder="name@example.com">
+<input type="text" class="form-control" required name="arn"  placeholder="name@example.com">
 <label  class="bmd-label-floating text-dark" for="floatingInput">ARN</label>
 </div>
 <div style="position: relative;bottom: 441px;left: 45%;">
@@ -223,7 +227,7 @@
                       <td id="pan{{bank.id}}">{{bank.supplier_pan }}</td>
                       <td id="gstin{{bank.id}}">{{bank.supplier_gstin }}</td>
                       <td id="arn{{bank.id}}">{{bank.arn }}</td>
-                      <td><a  href="" style="border-radius: 20px;color: black;" class=" "></a><i class="fa fa-edit"></i></a></td>
+                      <td><a  href="edit_b?pk={{bank.id}}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></i></a></td>
                       <!-- <td><input type="button" data-sid="{{bank.id}}" class="btn btn-danger btn-del" value="Delete"></td> -->
                       
                     </tr>
@@ -435,6 +439,23 @@ console.log(mydata)
   // $('#details').addClass('text-dark')
   $('.table-detail').css('visibility','visible');
   });
+  $('#form_submit').on('submit', function() {
+    // do validation here
+    var regex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/; 
+    var inputvalues = $(pan).val();
+    if (!regex.test($('#gst').val())) {
+        alert("invalid GST no");
+                    return false;    
+                } 
+        console.log("in form submit")
+        regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/; 
+        if(!regex.test(inputvalues)){ 
+        alert("invalid PAN no");
+        return false;
+        }
+    return true;
+
+});
   </script>
    
 </body>

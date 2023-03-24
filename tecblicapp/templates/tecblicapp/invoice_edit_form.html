@@ -34,6 +34,19 @@ body::-webkit-scrollbar-thumb {
   /* border-radius: 10px;       roundness of the scroll thumb */
   /* creates padding around scroll thumb */
 }
+*
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+body
+{
+    overflow-x: hidden;
+
+}
+textarea
+{
+    width: 200%;
+}
 </style>
 </head>
 <body>
@@ -41,50 +54,50 @@ body::-webkit-scrollbar-thumb {
 {% block content %}
 
 {% endblock %}
-<div class="container" style="  box-shadow:
+<div class="" style="  box-shadow:
 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
 12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
 100px 100px 80px rgba(0, 0, 0, 0.07)
-;background-color: white;border-radius: 40px;" >
+;background-color: white;margin:2%;" >
 
     <form action="" method="post">
         <br>
         <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Edit Invoice</h4>
+        <hr>
         {% csrf_token %}
         {% for field in form %}
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">{{field.label}}</label>
-            <div class="col-auto">
+        <div class="form-group row" style="position: relative;left: 5%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-size: large;font-weight:bold; {% if forloop.counter == 1 %}visibility:hidden;{% endif %}">{{field.label}}</label>
+            <div class="col-auto" style="{% if forloop.counter == 1 %}visibility:hidden;{% endif %}">
                 {{field}}
             </div>
         </div>
         
         {% endfor %}
         {% for i in invoice_detail %}
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Description{{forloop.counter}}</label>
+        <div class="form-group row" style="position: relative;left: 5%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Description{{forloop.counter}}</label>
             <div class="col-auto">
-                <label><input type="text" class="form-control",id="desription{{forloop.counter}}" name = "description{{forloop.counter}}" value="{{i.description}}" placeholder="Description" required></label>
+                <label><input type="text" class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "description{{forloop.counter}}" value="{{i.description}}" placeholder="Description" required></label>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Quantity{{forloop.counter}}</label>
+        <div class="form-group row" style="position: relative;left: 5%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Quantity{{forloop.counter}}</label>
             <div class="col-auto">
-                <input type="number" value="{{i.quantity}}" name="quantity{{forloop.counter}}" class="form-control",id="quantity{{forloop.counter}}" placeholder="quantity" required>
+                <input type="number" value="{{i.quantity}}" name="quantity{{forloop.counter}}" class="form-control",id="quantity{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" placeholder="quantity" required>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Cost of Unit{{forloop.counter}}</label>
+        <div class="form-group row" style="position: relative;left: 5%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Cost of Unit{{forloop.counter}}</label>
         <div class="col-auto">
-            <input type="number" name="cost{{forloop.counter}}" value="{{i.cost_per_unit}}" class="form-control",id="cost{{forloop.counter}}" placeholder="Cost Per Unit" required>
-            
+            <input type="number" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name="cost{{forloop.counter}}" value="{{i.cost_per_unit}}" class="form-control",id="cost{{forloop.counter}}" placeholder="Cost Per Unit" required>
         </div>
     </div>
     {% endfor %}<br>
-    <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="border-radius:40px;">
+    <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="position: relative;left: 5%;border-radius:40px;">
     <br><br>
 </form>
 </div>
