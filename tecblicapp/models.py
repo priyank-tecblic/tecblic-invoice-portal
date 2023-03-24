@@ -1,6 +1,6 @@
 from django.db import models
 # Create your models here.
-
+from tecblicapp.querysets import SoftDeletionQuerySet
 class clientDetail(models.Model):
     clientName=models.CharField(max_length=50,null=True,blank=True)
     clientEmail=models.EmailField(null=True,blank=True)
@@ -10,7 +10,6 @@ class clientDetail(models.Model):
     kindAttn=models.CharField(max_length=40,null=True,blank=True)
     placeofSupply=models.CharField(max_length=40,null=True,blank=True)
     activeClient = models.BooleanField(("Active Client"),default=True)
-
     def __str__(self):
         return self.clientName
 
@@ -38,9 +37,22 @@ class BankDetails(models.Model):
 
     def __str__(self):
         return self.bank_name
-  
 
-class Invoice(models.Model):
+class SoftDeleteModel(models.Model):
+
+    is_deleted = models.BooleanField(default=False)
+
+    def soft_delete(self):
+        self.is_deleted = True
+        self.save()
+
+    def restore(self):
+        self.is_deleted = False
+        self.save()
+
+    class Meta:
+        abstract = True
+class Invoice(SoftDeleteModel):
     Method = [
     ('----','----'),
     ('Cash', 'Cash'),

@@ -155,11 +155,10 @@ def delete_data(request):
 #Edit Client data
 @login_required(login_url='login')
 def edit_data(request):
-    if request.method=="POST":
-        id=request.POST.get('cid')
-        client=clientDetail.objects.get(pk=id)
-        client_data={"id":client.id,"name":client.clientName,"address":client.clientAddress,"gstin":client.clientGSTIN,"pan":client.clientPAN,"email":client.clientEmail,"kind":client.kindAttn,"place":client.placeofSupply}
-        return JsonResponse(client_data)
+    id=request.GET.get('cid')
+    client=clientDetail.objects.filter(pk=id)
+    # client_data={"id":client.id,"name":client.clientName,"address":client.clientAddress,"gstin":client.clientGSTIN,"pan":client.clientPAN,"email":client.clientEmail,"kind":client.kindAttn,"place":client.placeofSupply}
+    return render(request,'tecblicapp/edit_client.html',{"client_data":client})
 
 #Invoice Form
 @login_required(login_url='login')
@@ -167,7 +166,8 @@ def invoice_detail(request):
     invoices=invoiceForm()
     bank_details=bankDetailForm
     clientActive = clientDetail.objects.filter(activeClient=True)
-    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'client_details':clientActive})
+    bank = BankDetails.objects.all()
+    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'client_details':clientActive,'bank':bank})
 
 #Html to pdf 
 # def html_to_pdf(template_src, context_dict={}):
@@ -477,11 +477,12 @@ def delete_bank_details(request):
 #Edit bank details
 @login_required(login_url='login')
 def edit_bank_detail(request):
-    if request.method=="POST":
-        id=request.POST.get('cid')
-        bank_obj=BankDetails.objects.get(pk=id)
-        bank_data={"id":bank_obj.id,"bank_name":bank_obj.bank_name,"account_no":bank_obj.account_no,"ifsc":bank_obj.ifsc_code,"bank_branch":bank_obj.bank_branch,'swift_code':bank_obj.swift_code,'cin':bank_obj.cin,'supplier_pan':bank_obj.supplier_pan,"supplier_gstin":bank_obj.supplier_gstin,'arn':bank_obj.arn}
-        return JsonResponse(bank_data)
+    print("-------------------------------")
+    id=request.GET.get('pk')
+    bank_obj=BankDetails.objects.filter(id=id)
+    print(bank_obj)
+    # bank_data={"id":bank_obj.id,"bank_name":bank_obj.bank_name,"account_no":bank_obj.account_no,"ifsc":bank_obj.ifsc_code,"bank_branch":bank_obj.bank_branch,'swift_code':bank_obj.swift_code,'cin':bank_obj.cin,'supplier_pan':bank_obj.supplier_pan,"supplier_gstin":bank_obj.supplier_gstin,'arn':bank_obj.arn}
+    return render(request,'tecblicapp/edit_bank.html',{"bank":bank_obj})
 
 @login_required(login_url='login')
 def generate_invoice_and_send_mail_form(request):
@@ -508,7 +509,7 @@ def filter_invoice(request):
 
 @login_required(login_url='login')
 def check_invoice(request):
-    inv_obj=Invoice.objects.all()
+    inv_obj=Invoice.objects.filter(is_deleted=False)
     paginator = Paginator(inv_obj,5)
     page_number = request.GET.get('page')
     finaldata =  paginator.get_page(page_number)
@@ -663,7 +664,7 @@ def edit_invoice(request, pk):
 def delete_invoice(request,pk):
     invoice=Invoice.objects.get(invoice_no=pk)
     if request.method =='POST':
-        invoice.delete()
+        invoice.soft_delete()
         return redirect('/')
     context = {'item':invoice}
     return render(request, 'tecblicapp/delete_invoice.html', context)
@@ -672,6 +673,42 @@ def delete_invoice(request,pk):
 def gst(request):
     gst = gstValue.objects.all()
     return render(request,'tecblicapp/gst.html',{'gst':gst})
+
+@login_required(login_url='login')
+def banksearch(request):
+    global inv
+    query = request.GET.get('query','')
+    if query=='':
+        pass
+    else:
+        if query.isnumeric():
+            inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=int(query))|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
+        else:            
+            inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=query)|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
+
+    paginator = Paginator(inv,3)
+    page_number = request.GET.get('page')
+    ServiceDatafinal = paginator.get_page(page_number)
+    totalpage = ServiceDatafinal.paginator.num_pages
+    params = {'inv':ServiceDatafinal,'totalpages':[n+1 for n in range(totalpage)]}
+    return render(request,'tecblicapp/search_bank.html',params)
+
+@login_required(login_url='login')
+def clientsearch(request):
+    global inv
+    query = request.GET.get('query','')
+    if query=='':
+        pass
+    else:
+        inv =clientDetail.objects.filter(Q(clientName__contains=query)|Q(clientEmail__contains=query)|Q(clientAddress__contains=query)|Q(clientGSTIN__contains=query)|Q(clientPAN__contains = query)|Q(kindAttn__contains = query)|Q(placeofSupply__contains = query))
+    
+    paginator = Paginator(inv,3)
+    page_number = request.GET.get('page')
+    ServiceDatafinal = paginator.get_page(page_number)
+    totalpage = ServiceDatafinal.paginator.num_pages
+    params = {'inv':ServiceDatafinal,'totalpages':[n+1 for n in range(totalpage)]}
+    print("im here ---------------",inv)
+    return render(request,'tecblicapp/search_client.html',params)
 
 @login_required(login_url='login')
 def search(request):
@@ -692,5 +729,19 @@ def search(request):
     params = {'inv':ServiceDatafinal,'totalpages':[n+1 for n in range(totalpage)]}
     return render(request,'tecblicapp/search.html',params)
 
+
 def test(request):
     return render(request,'tecblicapp/test.html')
+
+def activeClient(request):
+    
+    client = clientDetail.objects.get(id=request.GET.get('idd'))
+    
+    if request.GET.get('radio') == 'true':
+        print("im in true",client)
+        client.activeClient = True
+    else:
+        print("im in false")
+        client.activeClient = False
+    client.save()
+    return redirect("/add")

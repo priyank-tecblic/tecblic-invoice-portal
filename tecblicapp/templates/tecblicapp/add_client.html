@@ -117,6 +117,11 @@
 {% block content %}
 
 {% endblock %}
+<form method="GET" class="flex-container" action="/clientsearch" style="z-index:2;position:absolute;right:2%;top: 144px" >
+    <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative;; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
+    <i style="position: relative;top: -28px;right: -284px;z-index: 1;" class="fa fa-search" aria-hidden="true"></i>
+  </form>
+
 <div class="" style="margin-left: 2%;margin-right: 2%;background-color: white;height: 500px; box-shadow:
 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
@@ -143,8 +148,8 @@
 <!-- <button type="button" class="btn bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
       <!-- </button> -->
       <!-- <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 44%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i> -->
-<button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: 55px;left: 42%;">Details</button>
-<button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: 55px;left: 42.5%;">Add</button>
+<button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: 55px;left: -44%;">Details</button>
+<button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: 55px;left: -44%;">Add</button>
       <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -161,38 +166,38 @@
   </div>
   <div id="addform" style="position: absolute;width: 100%;" >
     <h5 class="modal-title font-weight-bold text-dark" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Client</h5>
-      <form action="{% url 'save' %}" role="form" method="post">
+      <form action="{% url 'save' %}" role="form" method="post" id="form_submit">
         {% csrf_token %}
         <div class="form-floating mb-3" style="width:40%;position: relative;left: 8%;">
-            <input type="text" class="form-control" name="name"  placeholder="name@example.com">
+            <input type="text" class="form-control" required name="name"  placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Client Name</label>
         </div>
         <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 50%;">
-            <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            <input type="email" class="form-control"  required  id="email" name="email" placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Client Email</label>
         </div>
         <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 8%;">
-            <input type="text" class="form-control" name="address" placeholder="name@example.com">
+            <input type="text" class="form-control"  required name="address" placeholder="name@example.com">
             <label class="bmd-label-floating  text-dark" for="floatingInput">Client Address</label>
         </div>
         <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 151px;left: 50%;">
-            <input type="text" class="form-control" name="place" id="floatingInput" placeholder="Ahmedabad ">
+            <input type="text" class="form-control"  required name="place" id="floatingInput" placeholder="Ahmedabad ">
             <label class="bmd-label-floating text-dark" for="floatingInput">Place of Supply</label>
         </div>
         <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 151px;left: 8%;">
-            <input type="text" class="form-control" name="gstin" placeholder="name@example.com">
+            <input type="text" class="form-control"  required id="gst" name="gstin" placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Client GSTIN</label>
         </div>
         <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 225px;left: 36%;">
-            <input type="text" class="form-control" name="pan" placeholder="name@example.com">
+            <input type="text" id="pan" class="form-control"  required name="pan" placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Client PAN</label>
         </div>
         <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 301px;left: 65%;">
-            <input type="text" class="form-control" name="kind" placeholder="name@example.com">
+            <input type="text" class="form-control"  required name="kind" placeholder="name@example.com">
             <label class="bmd-label-floating text-dark" for="floatingInput">Kind Attn</label>
         </div>
 <div   style="position: relative;bottom: 301px;">
-    <button type="submit" class="btn bg-dark" style="">Save</button>
+    <button type="submit" class="btn bg-dark" >Save</button>
 </div>
     </form>
   </div>
@@ -228,12 +233,15 @@
                     <td id="pan{{ cl.id }}">{{ cl.clientPAN }}</td>
                     <td id="kind{{ cl.id }}">{{ cl.kindAttn }}</td>
                     <td id="place{{ cl.id }}">{{ cl.placeofSupply }}</td>
-                    <td><input type="checkbox" 
-                        {% if cl.activeClient %}
-                        checked 
-                        {% endif %}
-                        readonly onclick="return false;" name="" id="" value="true"></td>
-                    <td><a  href="" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
+                    <form id="form" action="active_client">
+                        <input type="hidden" name="idd" value="{{cl.id}}">
+                        <td><input type="checkbox" 
+                            {% if cl.activeClient %}
+                            checked 
+                            {% endif %}
+                            onchange="this.form.submit()" name="radio" id="" value="true"></td>
+                    </form>
+                    <td><a  href="edit?cid={{cl.id}}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
                     <!-- <td><input type="button" data-sid="{{cl.id}}" id="d{{cl.id}}" class="button btn btn-danger btn-del"  value="Delete"></td> -->
                 </tr>
                 
@@ -302,6 +310,24 @@ $('#addclient').removeAttr('disabled')
 // $('#details').addClass('text-dark')
 $('.table-detail').css('visibility','visible');
 });
+$('#form_submit').on('submit', function() {
+    // do validation here
+    var regex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/; 
+    var inputvalues = $(pan).val();
+    if (!regex.test($('#gst').val())) {
+        alert("invalid GST no");
+                    return false;    
+                } 
+        console.log("in form submit")
+        regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/; 
+        if(!regex.test(inputvalues)){ 
+        alert("invalid PAN no");
+        return false;
+        }
+    return true;
+
+});
+
 </script>
 <!-- <script>
     $('#btnsave').click(function(){

@@ -23,8 +23,11 @@ urlpatterns =[
     path('delete_invoice/<int:pk>/', views.delete_invoice, name='delete_invoice'),
     path('gst', views.gst, name="gst"),
     path('search',views.search,name ='search'),
+    path('clientsearch',views.clientsearch,name ='search'),
+    path('banksearch',views.banksearch,name ='search'),
     path('filter/',views.filter_invoice,name="filter"),
-    path('test/',views.test,name="testing")
+    path('test/',views.test,name="testing"),
+    path('active_client/',views.activeClient,name="testing"),
     
 
     #path('inv_send_mail',views.generate_invoice_send mail,name='invoice_send_mail'),

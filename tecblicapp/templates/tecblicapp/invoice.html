@@ -47,7 +47,7 @@ body::-webkit-scrollbar-thumb {
                 font-weight: bold;
             }
         input[type=text], select, textarea {
-          width: 100%;
+          width: 97%;
           padding: 12px;
           border: 1px solid #ccc;
           border-radius: 4px;
@@ -107,6 +107,10 @@ body::-webkit-scrollbar-thumb {
             margin-top: 0;
           }
         }
+        #sacid
+        {
+          cursor:default;
+        }
         </style>
 </head>
 <body>
@@ -115,50 +119,68 @@ body::-webkit-scrollbar-thumb {
 
 {% endblock %}
  
-    <div class="container" style="box-shadow:
+    <div class="" style="box-shadow:
     2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
     6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
     12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
     22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
     41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
     100px 100px 80px rgba(0, 0, 0, 0.07)
-    ;background-color: white;border-radius: 40px;font-family: Georgia, 'Times New Roman', Times, serif;">
+    ;background-color: white;margin:2%;font-family: Georgia, 'Times New Roman', Times, serif;">
         <form action="{% url 'generate_invoice' %}" method="POST">
           <input type="hidden" name="payment_method" value="----">
-
+<br>
           {% csrf_token %}
             <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Invoice Details </h4>
-            
-          <div class="row">
+            <br>
+          <div class="row" style="margin-left: 2%;">
             <div class="col-25" >
+              <h4 style="position: relative; bottom: 4px;border-color: black;"><b>Choose Date :-</b></h4>
                 <label>{{invoices.invoice_date}}</label></span>
             </div>
             <div class="col-25">
-              <label>{{invoices.payment_status}}</label>
+              <h4 style="position: relative; bottom: 4px;"><b>Payment-status :-</b></h4>
+
+              <label class="text-dark">
+              <input type="radio" name="payment_status" value="PENDING"> PENDING
+              <input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
+                
+                <!-- {{invoices.payment_status}} -->
+              </label>
             </div>
 
               <div class="col-25">
+              <h4 style="position: relative; bottom: 4px;"><b>Payment-method :-</b></h4>
               <label>{{invoices.payment_method}}</label>
             </div>
                <div class="col-25">
+              <h4 style="position: relative; bottom: 4px;"><b>Invoice Number:-</b></h4>
               <label>{{invoices.sac_code}}</label>
                 <br/>
             </div>
             <div class="col-25">
-              <label>{{invoices.qty_type}}</label>
+              <h4 style="position: relative; bottom: 4px;"><b>working Hours:-</b></h4>
+              <label class="text-dark">
+                <input type="radio" name="qty_type" value="HRS"> Hours
+                <input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> Days
+                <!-- {{invoices.qty_type}} -->
+              </label>
                 <br/>
             </div>
 
             <div class="col-25">
+              <h4 style="position: relative; bottom: 4px;"><b>Currency Type:-</b></h4>
+
               <label>{{invoices.currency_type}}</label>
             </div>
 
               <div class="col-25" >
+              <h4 style="position: relative; bottom: 4px;"><b>GST Type:-</b></h4>
                 <label>{{invoices.gst_type}}</label>
             </div>
 
           </div>
-          <div id="service_element">
+          <div id="service_element" style="margin-left: 2%;">
             
             <b>Service1 :: </b><div class="row">
               <div class="col-25">
@@ -173,10 +195,10 @@ body::-webkit-scrollbar-thumb {
               </div>
             </div>
           </div>
-          <button class="btn btn-dark text-right my-3" style="height:45px;" id="btn">Add Service</button>
+          <button class="btn btn-dark text-right my-3 bg-dark" style="margin-left: 2%;height:45px;" id="btn">Add Service</button>
             
 
-          <div class="row">
+          <div class="row" style="margin-left: 2%;">
             <div class="col-25">
               <label hidden="hidden">{{invoices.invoice_no}}</label>
             </div>
@@ -192,8 +214,8 @@ body::-webkit-scrollbar-thumb {
               </div> -->
           </div>
 
-          <h4 >Client Details</h4>
-          <div class="row">
+          <h4 style="margin-left: 2%;">Client Details</h4>
+          <div class="row" style="margin-left: 2%;">
             <div >
                 <label style="width: 25%;">
                   <select name="client" id="id_client">
@@ -209,35 +231,45 @@ body::-webkit-scrollbar-thumb {
 
           </div>
 
-          <h4 >Supplier Details</h4>
-          <div class="row">
+          <h4 style="margin-left: 2%;">Supplier Details</h4>
+          <div class="row" style="margin-left: 2%;">
             <div >
-                <label style="width: 25%;">{{bank_details.bank_info}}</label>
+                <label style="width: 25%;">
+                   <select name="bank_info" >
+                {% for i in bank %}
+                <option value="{{i.id}}" > {{i.bank_name}}</option>
+                {% endfor %}
+                  </select>  
+                   <!-- {{bank_details.bank_info}}   -->
+                </label>
             </div>
 
           </div>
-          <div class="row">
+          <div class="row" style="margin-left: 2%;">
             <div class="col-25">
                 <label>{{invoices.send_email}}</label>
             </div>
 
           </div>
-            <h3 style="font-weight:bold;">Terms and Conditions:</h3>
+            <h3 style="font-weight:bold;margin-left: 2%;">Terms and Conditions:</h3>
       
-            <div class="row" >
+            <div class="row" style="margin-left: 2%;" >
               <label>{{invoices.t_2}}</label>
             </div>
   
-            <div  class="row" >
+            <div  class="row" style="margin-left: 2%;">
               <label>{{invoices.t_3}}</label>
             </div>
-            <div  class="row" >
+            <div  class="row" style="margin-left: 2%;">
               <label>{{invoices.t_4}}</label>
             </div>
-            <div  class="row" >
+            <div  class="row" style="margin-left: 2%;">
               <label>{{invoices.t_5}}</label>
             </div>
-            <input type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="border-radius:40px;"/>
+            <input type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="    position: relative;
+            bottom: 26px;
+            right: 33px;
+  "/>
             <br>
             <br>
             
@@ -286,5 +318,6 @@ function del(id)
   id_t_3.rows = 2;
   id_t_4.rows = 2;
   id_t_5.rows = 2;
+  $('#sacid').attr('readonly','true')
 </script>
 </html>
