@@ -1,319 +1,362 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link rel="icon" type="image/x-icon" href="/static/tecblic.png">
-     <link rel="stylesheet" type="text/css"
-     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
- <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
- <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
-  <title>Invoice</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="icon" type="image/x-icon" href="/static/tecblic.png">
+<link rel="stylesheet" type="text/css"
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+<link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
+<title>Invoice</title>
 
 <style>
 
-body::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
-}
 body{
 background-color: white;
+overflow-x: hidden;
 }
 
-*:hover::-webkit-scrollbar {
-    width: 2px;
+* {
+box-sizing: border-box;
 }
-body::-webkit-scrollbar-track {
-  background: #cee;        /* color of the tracking area */
+#s3
+{
+color: aliceblue;
+font-weight: bold;
+}
+input[type=text], select, textarea {
+width: 117%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 4px;
+resize: vertical;
+}
+textarea{ 
+  width: 90%;
+  margin-left:4% ;
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: #212121;    /* color of the scroll thumb */
-  /* border-radius: 10px;       roundness of the scroll thumb */
-  /* creates padding around scroll thumb */
+label {
+padding: 12px 12px 12px 0;
+display: inline-block;
 }
-        * {
-          box-sizing: border-box;
-        }
-        #s3
-            {
-                color: aliceblue;
-                font-weight: bold;
-            }
-        input[type=text], select, textarea {
-          width: 97%;
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          resize: vertical;
-        }
-        
-        label {
-          padding: 12px 12px 12px 0;
-          display: inline-block;
-        }
-        
-        input[type=submit] {
-          background-color: #04AA6D;
-          color: white;
-          padding: 12px 20px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          float: right;
-        }
-        
-        input[type=submit]:hover {
-          background-color: #45a049;
-        }
-        
-        .container {
-          border-radius: 5px;
-          background-color: rgb(167, 157, 145);
-          padding: 20px;
-          margin-top: 10px;
-        }
-        
-        .col-25 {
-          float: left;
-          width: 25%;
-          margin-top: 2px;
-        }
-       
-        
-        .col-75 {
-          float: left;
-          width: 75%;
-          margin-top: 2px;
-        }
-        
-        /* Clear floats after the columns */
-        .row:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-        
-        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-          .col-25, .col-75, input[type=submit] {
-            width: 100%;
-            margin-top: 0;
-          }
-        }
-        #sacid
-        {
-          cursor:default;
-        }
-        </style>
+
+input[type=submit] {
+background-color: #04AA6D;
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+float: right;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+.container {
+border-radius: 5px;
+background-color: rgb(167, 157, 145);
+padding: 20px;
+margin-top: 10px;
+}
+
+.col-25 {
+float: left;
+width: 25%;
+margin-top: 2px;
+}
+
+
+.col-75 {
+float: left;
+width: 75%;
+margin-top: 2px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+.col-25, .col-75, input[type=submit] {
+width: 100%;
+margin-top: 0;
+}
+}
+#sacid
+{
+cursor:default;
+}
+#id_gst_type
+{
+  width: 105%;
+}
+#id_payment_method
+{
+  width: 70%;
+}
+#id_client
+{
+  width: 70%;
+
+}
+#id_send_email
+{
+  width: 123%;
+}
+</style>
 </head>
 <body>
 {% include 'tecblicapp/navbar.html' %}
 {% block content %}
 
 {% endblock %}
- 
-   
-        <form action="{% url 'generate_invoice' %}" method="POST">
-          <input type="hidden" name="payment_method" value="----">
+
+
+<form action="{% url 'generate_invoice' %}" method="POST">
+<input type="hidden" name="payment_method" value="----">
 <br>
-          {% csrf_token %}
-            <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Invoice Details </h4>
-            <br>
-          <div class="row" style="margin-left: 2%;">
-            <div class="col-25" >
-              <h4 style="position: relative; bottom: 4px;border-color: black;"><b>Choose Date :-</b></h4>
-                <label>{{invoices.invoice_date}}</label></span>
-            </div>
-            <div class="col-25">
-              <h4 style="position: relative; bottom: 4px;"><b>Payment-status :-</b></h4>
+{% csrf_token %}
+<h4 class="text-center text-dark " style="font-weight:bold;margin-bottom:2%;font-size: 35px;font-weight: 800">Invoice Details </h4>
+<br>
+<div class="row" style="margin-left: 7%;">
+<div class="col-25" >
+<h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 56px;"><b style="position: relative; right: 82px;">Choose Date </b></h4>
+<label style="position: relative; left: 164px; bottom: 47px" >{{invoices.invoice_date}}</label></span>
+</div>
+<div class="col-25">
+<h4 style="font-weight:bold;position: relative; top: 69px; right: 300px;"><b style="position: relative; right: 61px;">Payment-status </b></h4>
 
-              <label class="text-dark">
-              <input type="radio" name="payment_status" value="PENDING"> PENDING
-              <input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
-                
-                <!-- {{invoices.payment_status}} -->
-              </label>
-            </div>
+<label class="text-dark" style="position: relative; top: 28px; right: 169px;">
+<input type="radio" name="payment_status" value="PENDING"> PENDING
+<input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
 
-              <div class="col-25">
-              <h4 style="position: relative; bottom: 4px;"><b>Payment-method :-</b></h4>
-              <label>{{invoices.payment_method}}</label>
-            </div>
-               <div class="col-25">
-              <h4 style="position: relative; bottom: 4px;"><b>Invoice Number:-</b></h4>
-              <label>{{invoices.sac_code}}</label>
-                <br/>
-            </div>
-            <div class="col-25">
-              <h4 style="position: relative; bottom: 4px;"><b>working Hours:-</b></h4>
-              <label class="text-dark">
-                <input type="radio" name="qty_type" value="HRS"> Hours
-                <input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> Days
-                <!-- {{invoices.qty_type}} -->
-              </label>
-                <br/>
-            </div>
+<!-- {{invoices.payment_status}} -->
+</label>
+</div>
 
-            <div class="col-25">
-              <h4 style="position: relative; bottom: 4px;"><b>Currency Type:-</b></h4>
+<div class="col-25" style="position: relative; top: 207px; right: 441px;">
+<h4 style="font-weight:bold;position: relative; bottom: -11px; left: 53px;"><b style="position: relative; top: 44px; right: 304px;">Payment-method </b></h4>
+<label style="position: relative; right: 63px;">{{invoices.payment_method}}<i style="    font-size: 21px;
+  color: black;
+  position: relative;
+  bottom: -3px;
+  left: -22px;" class="fa fa-solid fa-angle-down"></i></label>
+</div>
+<div class="col-25">
+<h4 style="font-weight:bold;position: relative; bottom: 4px; right: 154%;"><b>Invoice Number</b></h4>
+<label style="position: relative; bottom: 52px;right: 300px;">{{invoices.sac_code}}<h4 style="    position: relative;
+  bottom: 33px;font-weight:400;" id="sacid2" class="text-dark"></h4></label>
+<br/>
+</div>
+<div class="col-25">
+<h4 style="font-weight:bold;position: relative; bottom: -11px; left: 52px;"><b style="position: relative; right: 77px;">Working Hours </b></h4>
+<label class="text-dark" style="position: relative; bottom: 30px; left: 166px;">
+<input type="radio" name="qty_type" value="HRS"> Hours
+<input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> Days
+<!-- {{invoices.qty_type}} -->
+</label>
+<br/>
+</div>
 
-              <label>{{invoices.currency_type}}</label>
-            </div>
+<div class="col-25" >
+<h4 style="font-weight:bold;position: relative; bottom: 4px;" ><b style="position: relative; top: 74px; right: 360px;">Currency Type</b></h4>
 
-              <div class="col-25" >
-              <h4 style="position: relative; bottom: 4px;"><b>GST Type:-</b></h4>
-                <label>{{invoices.gst_type}}</label>
-            </div>
+<label style="position: relative; top:16px; right: 167px;">{{invoices.currency_type}}<i style="font-size: 21px;
+  color: black;
+  position: relative;
+  bottom: 34px;
+  left: 58px;" class="fa fa-solid fa-angle-down"></i></label>
+</div>
 
-          </div>
-          <div id="service_element" style="margin-left: 2%;">
-            
-            <b>Service1 :: </b><div class="row">
-              <div class="col-25">
-                <label><input type="text" class="form-control",id="desription1" name = "description1" placeholder="Description" required></label>
-                <br/>
-              </div>
-              <div class="col-25">
-                <label onfocusout="n()" ><input type="number" name="cost1" class="form-control",id="cost1" placeholder="Cost Per Unit" required></label>
-              </div>
-              <div class="col-25">
-                <label><input type="number" name="quantity1" class="form-control",id="quantity1" placeholder="quantity" required></label>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-dark text-right my-3 bg-dark" style="margin-left: 2%;height:45px;" id="btn">Add Service</button>
-            
 
-          <div class="row" style="margin-left: 2%;">
-            <div class="col-25">
-              <label hidden="hidden">{{invoices.invoice_no}}</label>
-            </div>
+<div class="col-25" >
+<h4  style="font-weight:bold;position: relative; top: 71px; right: 138px;"><b>GST Type</b></h4>
+<label style="position: relative; top: 14px;left: 40px;">{{invoices.gst_type}}<i style="    font-size: 21px;
+  color: black;
+  position: relative;
+  bottom: 34px;
+  left: 93px;" class="fa fa-solid fa-angle-down"></i></label>
+</div>
 
-            <!-- <div class="col-25">
-                <label>{{invoices.cgst}}</label>
-            </div>
-            <div class="col-25">
-                <label>{{invoices.sgst}}</label>
-            </div>
-              <div class="col-25">
-                  <label>{{invoices.gross_amount}}</label>
-              </div> -->
-          </div>
+</div>
+<div id="service_element" style="margin-left: 2%;">
+<div style="height: 100px;"></div>
+<div class="row" style="margin-left:53px ;">
+  <b style="font-weight:bold;">Service1  </b>
+  <div class="col-25">
+<label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription1" name = "description1" placeholder="Description" required></label>
+<br/>
+</div>
+<div class="col-25">
+<label onfocusout="n()" ><input type="number" name="cost1" class="form-control",id="cost1" placeholder="Cost Per Unit" required></label>
+</div>
+<div class="col-25">
+<label><input type="number" name="quantity1" class="form-control",id="quantity1" placeholder="quantity" required></label>
+</div>
+</div>
+<br>
+</div>
+<button class="btn btn-dark text-right my-2 bg-dark" style="margin-left: 6%;height:45px;" id="btn">Add Service</button>
 
-          <h4 style="margin-left: 2%;">Client Details</h4>
-          <div class="row" style="margin-left: 2%;">
-            <div >
-                <label style="width: 25%;">
-                  <select name="client" id="id_client">
-                {% for i in client_details %}
-                
-                  <option value="{{i.id}}" name="client"> {{i.clientName}}</option>
 
-                
-                  {% endfor %}
-                </select>
-                </label>
-            </div>
+<div class="row" style="margin-left: 2%;">
+<div class="col-25">
+<label hidden="hidden">{{invoices.invoice_no}}</label>
+</div>
 
-          </div>
+<!-- <div class="col-25">
+<label>{{invoices.cgst}}</label>
+</div>
+<div class="col-25">
+<label>{{invoices.sgst}}</label>
+</div>
+<div class="col-25">
+<label>{{invoices.gross_amount}}</label>
+</div> -->
+</div>
+<div class="test" style="top: 20px;">
+<h4 style="margin-left: 2%; position: relative; left: 4%; font-weight: bold; top: 55px;">Client Details</h4>
+<div class="row" style="margin-left: 2%;">
+<div >
+<label style="width: 25%;">
+<select name="client" id="id_client" style="position: relative;left: 71%;">
+{% for i in client_details %}
 
-          <h4 style="margin-left: 2%;">Supplier Details</h4>
-          <div class="row" style="margin-left: 2%;">
-            <div >
-                <label style="width: 25%;">
-                   <select name="bank_info" >
-                {% for i in bank %}
-                <option value="{{i.id}}" > {{i.bank_name}}</option>
-                {% endfor %}
-                  </select>  
-                   <!-- {{bank_details.bank_info}}   -->
-                </label>
-            </div>
+<option value="{{i.id}}" name="client"> {{i.clientName}}</option>
 
-          </div>
-          <div class="row" style="margin-left: 2%;">
-            <div class="col-25">
-                <label>{{invoices.send_email}}</label>
-            </div>
 
-          </div>
-            <h3 style="font-weight:bold;margin-left: 2%;">Terms and Conditions:</h3>
-      
-            <div class="row" style="margin-left: 2%;" >
-              <label>{{invoices.t_2}}</label>
-            </div>
-  
-            <div  class="row" style="margin-left: 2%;">
-              <label>{{invoices.t_3}}</label>
-            </div>
-            <div  class="row" style="margin-left: 2%;">
-              <label>{{invoices.t_4}}</label>
-            </div>
-            <div  class="row" style="margin-left: 2%;">
-              <label>{{invoices.t_5}}</label>
-            </div>
-            <input type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="    position: relative;
-            bottom: 26px;
-            right: 33px;
-  "/>
-            <br>
-            <br>
-            
-        </form>
-    
+{% endfor %}
+</select>
+<i style="   font-size: 21px;
+color: black;
+position: relative;
+bottom: -2px;
+left: 209px;" class="fa fa-solid fa-angle-down"></i>
+</label>
+</div>
+
+</div>
+
+<h4 style="margin-left: 6%; font-weight: bold;position: relative;top: 57px;">Supplier Details</h4>
+<div class="row" style="margin-left: 2%;">
+<div >
+<label style="width: 25%;">
+<select name="bank_info" style="position: relative; left: 71%;width: 70%;" >
+{% for i in bank %}
+<option value="{{i.id}}" > {{i.bank_name}}</option>
+{% endfor %}
+</select>
+<!-- {{bank_details.bank_info}} -->
+<i style="   font-size: 21px;
+color: black;
+position: relative;
+bottom: -2px;
+left: 209px;" class="fa fa-solid fa-angle-down"></i>
+</label>
+</div>
+
+</div>
+<div class="row" style="margin-left: 2%;">
+<div class="col-25">
+<label style="position: relative; left: 73%;">{{invoices.send_email}}<i style="  
+  font-size: 21px;
+  color: black;
+  position: relative;
+  bottom: 35px;
+  left: 208px;
+;" class="fa fa-solid fa-angle-down"></i></label>
+</div>
+
+</div>
+<h3 style="font-weight:bold;margin-left: 6%;">Terms and Conditions:</h3>
+
+<div class="row" style="margin-left: 2%;" >
+<label>{{invoices.t_2}}</label>
+</div>
+
+<div class="row" style="margin-left: 2%;">
+<label>{{invoices.t_3}}</label>
+</div>
+<div class="row" style="margin-left: 2%;">
+<label>{{invoices.t_4}}</label>
+</div>
+<div class="row" style="margin-left: 2%;">
+<label>{{invoices.t_5}}</label>
+</div>
+</div>
+<input type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="position: relative;
+bottom: 26px;
+right: 48%;"/>
+<br>
+<br>
+
+</form>
+
+
 </body>
 <script>
-  function changestatus()
-  {
-    var paymentmode = document.getElementById('payment_status').value
-    var paymentmethod = document.getElementById('id_payment_method')
-    if(paymentmode=="PENDING")
-    { 
-      paymentmethod.value = "----";
-      paymentmethod.disabled = true;
-    }
-    else
-    { 
-      paymentmethod.disabled = false;
-    }
-    
-  }
-  service = document.getElementById("service_element")
-  var k=1
-  function addElement(event)
-  {
+function changestatus()
+{
+var paymentmode = document.getElementById('payment_status').value
+var paymentmethod = document.getElementById('id_payment_method')
+if(paymentmode=="PENDING")
+{
+paymentmethod.value = "----";
+paymentmethod.disabled = true;
+}
+else
+{
+paymentmethod.disabled = false;
+}
 
-    k=k+1
-    // service.innerHTML = service.innerHTML + '<b>Service'+k+' :: </b><div class="row"><div class="col-25"><label><input type="text" class="form-control",id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div></div>';
-  }
-  $(document).ready(function(){
-  $("#btn").click(function(){
-    k=k+1
-    $("#service_element").append('<div class="row" id="element'+k+'"><b>Service'+k+' :: </b><div class="col-25"><label><input type="text" class="form-control",id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
-  });
+}
+service = document.getElementById("service_element")
+var k=1
+function addElement(event)
+{
+
+k=k+1
+// service.innerHTML = service.innerHTML + '<b>Service'+k+' :: </b><div class="row"><div class="col-25"><label><input type="text" class="form-control",id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div></div>';
+}
+$(document).ready(function(){
+$("#btn").click(function(){
+k=k+1
+$("#service_element").append('<div class="row" style="margin-left:4% ;" id="element'+k+'"><b ">Service'+k+'  </b><div class="col-25" ><label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
+});
 
 });
 function del(id)
-  {
-    var id= String(id)
-    id = id.slice(4)
-    document.getElementById("element"+id+"").remove()
-    k=k-1
-  }
-  id_t_2.rows = 2;
-  id_t_3.rows = 2;
-  id_t_4.rows = 2;
-  id_t_5.rows = 2;
-  $('#sacid').attr('readonly','true')
+{
+var id= String(id)
+id = id.slice(4)
+document.getElementById("element"+id+"").remove()
+k=k-1
+}
+id_t_2.rows = 2;
+id_t_3.rows = 2;
+id_t_4.rows = 2;
+id_t_5.rows = 2;
+$('#sacid').css('visibility','hidden')
+  $("#sacid2").html($('#sacid').val())
 </script>
 </html>

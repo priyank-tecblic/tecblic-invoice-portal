@@ -106,7 +106,7 @@ def homePage(request):
 def client_detail(request):
     form=clientDetailForm()
     clientdetails1=clientDetail.objects.all()
-    paginator = Paginator(clientdetails1,2)
+    paginator = Paginator(clientdetails1,5)
     page_number = request.GET.get('page',paginator)
     finaldata =  paginator.get_page(page_number)
     totalpage = finaldata.paginator.num_pages
@@ -431,7 +431,7 @@ def generate_invoice(request):
 def bank_detail_view(request):
     form=bankForm()
     data=BankDetails.objects.all()
-    paginator = Paginator(data,2)
+    paginator = Paginator(data,5)
     page_number = request.GET.get('page',paginator)
     finaldata =  paginator.get_page(page_number)
     totalpage = finaldata.paginator.num_pages
@@ -495,13 +495,13 @@ def filter_invoice(request):
     global filter_data
     if request.method == "POST":
         filter_data = Invoice.objects.filter(Q(invoice_date__gte = request.POST['startdate'])& Q(invoice_date__lte = request.POST['enddate']))
-        paginator = Paginator(filter_data,3)
+        paginator = Paginator(filter_data,5)
         page_number = request.GET.get('page')
         finaldata =  paginator.get_page(page_number)
         totalpage = finaldata.paginator.num_pages
         return render(request,'tecblicapp/filter.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
     else:
-        paginator = Paginator(filter_data,3)
+        paginator = Paginator(filter_data,5)
         page_number = request.GET.get('page')
         finaldata =  paginator.get_page(page_number)
         totalpage = finaldata.paginator.num_pages
@@ -663,8 +663,9 @@ def edit_invoice(request, pk):
 @login_required(login_url='login')
 def delete_invoice(request,pk):
     invoice=Invoice.objects.get(invoice_no=pk)
+    page = request.GET.get('page')
     invoice.soft_delete()
-    return redirect('/check')
+    return redirect(f'/check?page={page}')
     context = {'item':invoice}
     return render(request, 'tecblicapp/delete_invoice.html', context)
 
@@ -685,7 +686,7 @@ def banksearch(request):
         else:            
             inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=query)|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
 
-    paginator = Paginator(inv,3)
+    paginator = Paginator(inv,5)
     page_number = request.GET.get('page')
     ServiceDatafinal = paginator.get_page(page_number)
     totalpage = ServiceDatafinal.paginator.num_pages
@@ -701,7 +702,7 @@ def clientsearch(request):
     else:
         inv =clientDetail.objects.filter(Q(clientName__contains=query)|Q(clientEmail__contains=query)|Q(clientAddress__contains=query)|Q(clientGSTIN__contains=query)|Q(clientPAN__contains = query)|Q(kindAttn__contains = query)|Q(placeofSupply__contains = query))
     
-    paginator = Paginator(inv,3)
+    paginator = Paginator(inv,5)
     page_number = request.GET.get('page')
     ServiceDatafinal = paginator.get_page(page_number)
     totalpage = ServiceDatafinal.paginator.num_pages
@@ -717,11 +718,11 @@ def search(request):
         pass
     else:
         if query.isnumeric():
-            inv =Invoice.objects.filter(Q(invoice_no = int(query))| Q(gross_amount = int(query))|Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
+            inv =Invoice.objects.filter(Q(invoice_no__contains = int(query)))
         else:            
-            inv =Invoice.objects.filter(Q(payment_method__contains=query)|Q(payment_status__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(client__clientAddress__contains = query)|Q(gst_type__contains = query)|Q(bank__bank_name__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
+            inv =Invoice.objects.filter(Q(payment_method__contains=query)|Q(sac_code__contains=query)|Q(invoice_date__contains=query)|Q(client__clientName__contains = query)|Q(gst_type__contains = query)|Q(currency_type__contains = query)|Q(send_email__contains = query))
 
-    paginator = Paginator(inv,3)
+    paginator = Paginator(inv,5)
     page_number = request.GET.get('page')
     ServiceDatafinal = paginator.get_page(page_number)
     totalpage = ServiceDatafinal.paginator.num_pages
@@ -745,3 +746,17 @@ def activeClient(request):
     client.save()
     page=request.GET.get('page')
     return redirect(f"/add?page={page}")
+
+def shelveInvoice(request):
+    inv_obj=Invoice.objects.filter(is_deleted=True)
+    paginator = Paginator(inv_obj,5)
+    page_number = request.GET.get('page')
+    finaldata =  paginator.get_page(page_number)
+    totalpage = finaldata.paginator.num_pages
+    return render(request,'tecblicapp/shelve_invoice.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+
+def unshelveInvoice(request,pk):
+    invoice=Invoice.objects.get(invoice_no=pk)
+    page = request.GET.get('page')
+    invoice.restore()
+    return redirect(f'/shelve?page={page}')

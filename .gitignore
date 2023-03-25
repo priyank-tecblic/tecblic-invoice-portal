@@ -1,1 +1,5 @@
-
+tecblicapp/__pycache__/
+Tecblic_dashboard/__pycache__/
+log/debug.log
+tecblicapp/migrations/
+db.sqlite3

@@ -28,6 +28,8 @@ urlpatterns =[
     path('filter/',views.filter_invoice,name="filter"),
     path('test/',views.test,name="testing"),
     path('active_client/',views.activeClient,name="testing"),
+    path('shelve',views.shelveInvoice,name="shelve"),
+    path('unshelve_invoice/<int:pk>/',views.unshelveInvoice,name="unshelve"),
     
 
     #path('inv_send_mail',views.generate_invoice_send mail,name='invoice_send_mail'),
