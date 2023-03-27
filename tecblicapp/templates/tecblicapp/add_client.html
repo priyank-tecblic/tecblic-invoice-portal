@@ -24,6 +24,7 @@
     <style>
         body{
             background-color: white;
+            overflow-x:hidden;
         }
 
         * {
@@ -174,42 +175,42 @@ input[type=email]
       <form action="{% url 'save' %}" role="form" method="post" id="form_submit">
         {% csrf_token %}
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Name</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Name&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text"  value="{{i.clientName}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "name" placeholder="Name" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Email</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Email&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;   </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="{{i.clientEmail}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "email"  placeholder="Email" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Address</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Address&nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.clientAddress}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "address"  placeholder="Address" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client GST</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client GST&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.clientGSTIN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="gst" name = "gstin" placeholder="Gst" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">PAN</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">PAN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.clientPAN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="pan" name = "pan"  placeholder="pan" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Kind Attn</label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Kind Attn&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.kindAttn}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "kind"  placeholder="Description" required></label>
