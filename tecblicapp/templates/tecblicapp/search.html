@@ -46,10 +46,10 @@
 
     {% endblock %}
  <br>
-        <form method="GET" class="flex-container" action="/search" style="position:absolute;right:2%;" >
-            <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
-            <i style="position: relative;top:16px;right: 25px;z-index: 1;" class="fa fa-search" aria-hidden="true"></i>
-        </form>
+ <form method="GET" id="searchform" class="flex-container" action="/search" style="position:absolute;right:2%;" >
+    <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
+    <i style="position: relative;top:16px;right: 25px;z-index: 1;" type="button" onclick="document.getElementById('searchform').submit();" class="fa fa-search" aria-hidden="true"></i>
+</form>
         <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Check Invoice</h4>
        
         <div style="text-align: right;margin-right: -2%;" class="row">
@@ -72,7 +72,7 @@
         <form action="" method="post" class="text-center" style="height:250px">
             <div style="font-family: Georgia, 'Times New Roman', Times, serif; ">
 
-                <table class="table table-striped table-hover table-bordered table-sm" style="margin-left: 12px;width: 98%;margin-top: 12px;">
+                <table class="table table-striped table-hover table-bordered table-sm" style="width: 100%;margin-top: 12px;">
                     <thead>
                         <tr>
                             <th scope="col" style="font-weight:800;font-size: large;">Invoice No</th>
@@ -90,7 +90,7 @@
                             <th scope="col" style="font-weight:800;font-size: large;">Currency Type</th>
                             <th scope="col" style="font-weight:800;font-size: large;">Generate Type</th>
 
-                            <th scope="col" colspan="2" style="font-weight:800;font-size: large;">Action</th>
+                            <th scope="col" colspan="3" style="font-weight:800;font-size: large;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -117,6 +117,7 @@
                                 
                             <td><a  href="{% url 'edit_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
                             <td><a href="{% url 'delete_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=""><i class="fa fa-trash"></i></a></td>
+                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;  " class=" ">Download</a></td>
                             {% endfor %}
                         </tr>
                     </tbody>

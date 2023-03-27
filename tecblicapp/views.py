@@ -659,7 +659,9 @@ def edit_invoice(request, pk):
         return redirect('/check')
     # append_to_csv()
     print("invoice_detail = >",invoice_det)
-    context = {'form': form,'invoice_detail':invoice_det}
+    client = clientDetail.objects.all()
+    bank = BankDetails.objects.all()
+    context = {'invoice': invoice,'invoice_detail':invoice_det,"client":client,"bank":bank}
     return render(request, 'tecblicapp/invoice_edit_form.html', context)
 
 @login_required(login_url='login')
@@ -680,13 +682,10 @@ def gst(request):
 def banksearch(request):
     global inv
     query = request.GET.get('query','')
-    if query=='':
-        pass
-    else:
-        if query.isnumeric():
-            inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=int(query))|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
-        else:            
-            inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=query)|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
+    if query.isnumeric():
+        inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=int(query))|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
+    else:            
+        inv =BankDetails.objects.filter(Q(bank_name__contains=query)|Q(account_no__contains=query)|Q(ifsc_code__contains=query)|Q(bank_branch__contains=query)|Q(swift_code__contains = query)|Q(cin__contains = query)|Q(supplier_pan__contains = query)|Q(supplier_gstin__contains = query)|Q(arn__contains = query))
 
     paginator = Paginator(inv,5)
     page_number = request.GET.get('page')
@@ -699,10 +698,7 @@ def banksearch(request):
 def clientsearch(request):
     global inv
     query = request.GET.get('query','')
-    if query=='':
-        pass
-    else:
-        inv =clientDetail.objects.filter(Q(clientName__contains=query)|Q(clientEmail__contains=query)|Q(clientAddress__contains=query)|Q(clientGSTIN__contains=query)|Q(clientPAN__contains = query)|Q(kindAttn__contains = query)|Q(placeofSupply__contains = query))
+    inv =clientDetail.objects.filter(Q(clientName__contains=query)|Q(clientEmail__contains=query)|Q(clientAddress__contains=query)|Q(clientGSTIN__contains=query)|Q(clientPAN__contains = query)|Q(kindAttn__contains = query)|Q(placeofSupply__contains = query))
     
     paginator = Paginator(inv,5)
     page_number = request.GET.get('page')

@@ -17,7 +17,7 @@
   }
 </style>
   <link rel="icon" type="image/x-icon" href="/static/tecblic.png">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:40px;opacity:1;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;width: 100%;z-index:4;margin-bottom:40px;opacity:1;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -30,6 +30,7 @@
       <a class="nav-item nav-link  " id="s2" href=" {% url 'home_page' %}">Dashboard</a>
       <a class="nav-item nav-link " id="s3" href="{% url 'invoice_details' %}">Generate Invoice</a>
       <a class="nav-item nav-link" id="s4" href="{% url 'client-detail' %}">Client Details</a>
+      <a  id="s6" class="nav-item nav-link" href="{% url 'check_invoices' %}">Check Invoice</a>
       
       <ul class='nav'>
         <li>
@@ -37,9 +38,7 @@
 
             <a class="dropdown-toggle text-light"  style="margin-left: 10px;user-select: none;" data-toggle="dropdown">Settings</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">            
-              <li>
-                <a  id="s6" href="{% url 'check_invoices' %}">Check Invoice</a>
-              </li>
+
               <li>
                 <a  id="s5" href="{% url 'bank-detail' %}">Bank Details</a>
               </li>
@@ -56,3 +55,4 @@
     </div>
   </div>
 </nav>
+<br><br><br><br>

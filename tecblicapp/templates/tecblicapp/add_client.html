@@ -192,7 +192,7 @@ input[type=email]
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Address&nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
-                <label><input type="text" value="{{i.clientAddress}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "address"  placeholder="Address" required></label>
+                <label><textarea   class="" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "address"  rows="4" cols="31" placeholder="Address" required></textarea></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
@@ -225,14 +225,17 @@ input[type=email]
         </div>
 
      
-<div  class="form-group row" style="width:7%;position: relative;left: 46%;">
+        <div  class="form-group flex-container" style="width:7%;position: relative;left: 42%;display: flex;">
+            <a href="/add" style="color:black;margin-right: 20px;margin-top: 9px;">
+                <i class="fa fa-arrow-circle-left" type="button"  style="font-size:30px;"></i>
+            </a>
     <button type="submit" class="btn bg-dark" >Save</button>
 </div>
     </form>
   </div>
-  <div id="table" style="position: absolute;top: 30%;left:5%;width: 90%;">
+  <div id="table" style="position: absolute;top: 30%;width:100%;">
 
-      <table class="table table-striped table-hover table-bordered  table-detail">
+      <table class="table table-striped table-hover table-bordered  table-detail"  style="width: 100%;">
           <thead>
               <tr id="heading">
                   
@@ -242,7 +245,7 @@ input[type=email]
                   <th scope="col" style="font-weight:800;font-size: medium;" >Client Address</th>
                   <th scope="col"  style="font-weight:800;font-size: medium;">Client GSTIN</th>
                   <th scope="col"  style="font-weight:800;font-size: medium;">Client PAN</th>
-                  <th scope="col" style="font-weight:800;font-size: medium;">KindAttn</th>
+                  <th scope="col" style="font-weight:800;font-size: medium;">Kind Attn</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">Place of Supply</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">Active</th>
                   <th scope="col" style="font-weight:800;font-size: medium;">Action</th>

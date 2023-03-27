@@ -134,7 +134,7 @@ input[type=email]
         </div> -->
         <button id="details" disabled class="btn bg-light text-dark btn-sm"  style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;">Details</button>
         <button  id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: -20px;left: 1%;">Add</button>
-        <div class="col" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <div class="" style="font-family: Georgia, 'Times New Roman', Times, serif;">
           {% csrf_token %}
           <h4 class="text-center text-dark table-detail" style="font-size: 35px;font-weight: 800">Bank Details</h4>
           
@@ -154,7 +154,7 @@ input[type=email]
                 </div>
             </div>
           </div>
-  <div id="table" style="position: absolute;top: 160%;left:5%;width: 90%;">
+  <div id="table" style="position: absolute;top: 30%;width: 100%;">
     <div id="addform" style="position: absolute;width: 100%;top: -24%;" >
       <h5 class="modal-title font-weight-bold text-dark text-center" style="font-size: 35px;position:relative;bottom: 50px;right: 20px;" id="exampleModalLabel">Add Bank</h5>
 
@@ -215,13 +215,16 @@ input[type=email]
         </div>
     </div>
 
-<div  style="width:7%;position: relative;left: 44%;">
-  <button type="submit" class="btn bg-dark" style="">Save</button>
+    <div  class="form-group flex-container" style="width:7%;position: relative;left: 42%;display: flex;">
+      <a href="/bank" style="color:black;margin-right: 20px;margin-top: 9px;">
+          <i class="fa fa-arrow-circle-left" type="button"  style="font-size:30px;"></i>
+      </a>
+<button type="submit" class="btn bg-dark" >Save</button>
 </div>
 
 </form>
 </div>
-          <table class="table table-striped table-hover table-bordered  table-detail">
+          <table class="table table-striped table-hover table-bordered  table-detail"  style="width: 100%;">
             <thead>
               <tr class="text-center"
               id="heading">
@@ -281,8 +284,7 @@ input[type=email]
                     {% endif %}
                   </ul>
                 </nav>
-                </div>
-              </div>
+              
            
             <!-- <script>
     //           $("tbody").on("click",".btn-del",function(){

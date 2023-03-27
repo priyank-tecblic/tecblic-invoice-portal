@@ -52,7 +52,7 @@ class invoiceForm(forms.ModelForm):
         
         model=Invoice
         #fields=['invoice_no','invoice_date']
-        exclude=('cgst','sgst','igst','slug','uniqueId','gross_amount',)
+        exclude=('cgst','sgst','igst','slug','uniqueId','gross_amount')
         widgets={
             'invoice_no':forms.TextInput(attrs= {'class':'form-control','id':'invoiceid','placeholder':'Invoice No','readonly':True}),
             'invoice_date':forms.DateInput(attrs= {'class':'form-control','id':'dateid','placeholder':'Enter date','type': 'date', 'class': 'form_input','required':'required',}),

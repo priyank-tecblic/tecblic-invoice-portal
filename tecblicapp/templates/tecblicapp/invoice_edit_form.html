@@ -61,15 +61,169 @@ textarea
         <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Edit Invoice</h4>
         <hr>
         {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group row" style="position: relative;left: 5%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-size: large;font-weight:bold; {% if forloop.counter == 1 %}visibility:hidden;{% endif %}">{{field.label}}</label>
-            <div class="col-auto" style="{% if forloop.counter == 1 %}visibility:hidden;{% endif %}">
-                {{field}}
+        <input type="hidden" name="invoice_no" value="{{invoice.invoice_no}}" class="form-control" id="invoiceid" placeholder="Invoice No">
+        <input type="hidden" name="sac_code" value="{{invoice.sac_code}}" class="form-control" id="invoiceid" placeholder="Invoice No">
+
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Invoice Number</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><h4 style="color: black;">{{invoice.invoice_no}}</h4></label>
             </div>
         </div>
-        
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Invoice date</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="date" value="2023-03-15" class="form-control",id="dateid" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "invoice_date"  placeholder="Email" required></label>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Payment method</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+
+                    <select name="payment_method" id="id_payment_method" style="height: 100%;">
+                        <option value="Cash" {% if invoice.payment_method == "Cash" %} selected{% endif %}>Cash</option>
+
+                        <option value="Online" {% if invoice.payment_method == "Online" %} selected{% endif %}>Online</option>
+                      
+                        <option value="Cheque" {% if invoice.payment_method == "Cheque" %} selected{% endif %}>Cheque</option>
+                      
+                        <option value="Swift Transfer" {% if invoice.payment_method == "Swift Transfer" %} selected{% endif %}>Swift Transfer</option>
+                    </select>
+                  
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Payment status</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+
+                    <select name="payment_status" id="payment_status" onchange="changestatus()"  style="height: 100%;">
+                        <option value="PENDING" {% if invoice.payment_status == "PENDING" %} selected{% endif %}>PENDING</option>
+                        <option value="PAID" {% if invoice.payment_status == "PAID" %} selected{% endif %}>PAID</option>
+                      
+                      
+                      </select>
+
+            </div>
+        </div>
+
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Currency type</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+             <select name="currency_type" id="id_currency_type">
+                <option value="INR" {% if invoice.payment_status == "INR" %} selected{% endif %}>INR</option>
+              
+                <option value="USD" {% if invoice.payment_status == "USD" %} selected{% endif %}>USD</option>
+              
+                <option value="EUR" {% if invoice.payment_status == "EUR" %} selected{% endif %}>EUR</option>
+              
+              </select>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Qty type</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <select name="qty_type" id="id_qty_type">
+                    <option value="No&#x27;s" {% if invoice.payment_status == "No&#x27;s" %} selected{% endif %}>No&#x27;s</option>
+                
+                    <option value="HRS" {% if invoice.payment_status == "HRS" %} selected{% endif %}>HRS</option>
+                
+                    <option value="DAY" {% if invoice.payment_status == "DAY" %} selected{% endif %}>DAY</option>
+                
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Gst type</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+             <select name="gst_type" id="id_gst_type">
+                <option value="DOMESTIC"  {% if invoice.payment_status == "DOMESTIC" %} selected{% endif %}>DOMESTIC</option>
+              
+                <option value="EXPORT"  {% if invoice.payment_status == "EXPORT" %} selected{% endif %}>EXPORT</option>
+              
+                <option value="Inter State" {% if invoice.payment_status == "Inter State" %} selected{% endif %}>Inter State</option>
+              
+              </select>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">T 2</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+<textarea name="t_2" cols="40" rows="10" required id="id_t_2">
+   {{invoice.t_2}}</textarea>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">T 3</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+<textarea name="t_3" cols="40" rows="10" required id="id_t_3">
+   {{invoice.t_3}}</textarea>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">T 4</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+<textarea name="t_4" cols="40" rows="10" required id="id_t_4">
+   {{invoice.t_4}}</textarea>
+            </div>
+        </div>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">T 5</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+<textarea name="t_5" cols="40" rows="10" required id="id_t_5">
+   {{invoice.t_5}}</textarea>
+            </div>
+        </div>
+        <br>
+        <div>
+            <div class="form-group row" style="position: relative;left: 30%;">
+                <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Client</label>
+                <div class="col-auto" style="    position: relative;
+        right: 5%;">
+     <select name="client" id="id_client">
+         {% for i in client %}
+         <option value="{{i.clientName}}"  {% if invoice.client.id == i.id %} selected{% endif %}>{{i.clientName}}</option>
         {% endfor %}
+      
+      </select>
+
+</div>
+            </div>
+            <div class="form-group row" style="position: relative;left: 30%;">
+                <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Send email</label>
+                <div class="col-auto" style="    position: relative;
+        right: 5%;">
+                 <select name="send_email" id="id_send_email">
+                     <option value="generate_and_send"  {% if invoice.send_email == "generate_and_send" %} selected{% endif %}>Generate And Send Mail</option>                  
+                    <option value="only_generate"  {% if invoice.send_email == "only_generate" %} selected{% endif %}> Only Generate</option>
+
+                  </select>
+                </div>
+            </div>
+            <div class="form-group row" style="position: relative;left: 30%;">
+                <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Bank</label>
+                <div class="col-auto" style="    position: relative;
+        right: 5%;">
+<select name="bank" id="id_bank">
+    {% for i in bank %}
+    <option value="{{invoice.bank.id}}" {% if invoice.bank.id == i.id %} selected{% endif %}>{{i.bank_name}}</option>
+    {% endfor %}
+  
+  </select>
+                </div>
+            </div>
+       
+        
         {% for i in invoice_detail %}
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Description{{forloop.counter}}</label>
@@ -92,6 +246,7 @@ textarea
     {% endfor %}<br>
     <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="position: relative;left: 5%;border-radius:40px;">
     <br><br>
+</div>
 </form>
 
 </body>
