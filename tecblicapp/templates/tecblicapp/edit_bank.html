@@ -42,6 +42,7 @@ body::-webkit-scrollbar-thumb {
   /* border-radius: 10px;       roundness of the scroll thumb */
   /* creates padding around scroll thumb */
 }
+
 *
 {
     font-family: Arial, Helvetica, sans-serif;
@@ -58,6 +59,17 @@ textarea
 body{
     background-color: white;
 }
+input[type=text]
+{
+    width: 140%;
+}
+input[type=text], select, textarea {
+          width: 140%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: vertical;
+        }
 </style>
 </head>
 <body>
@@ -75,56 +87,56 @@ body{
         <input type="hidden" name="bank_id" value="{{i.id}}">
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Bank Name</label>
-            <div class="col-auto">
-                <label><input type="text"  value="{{i.bank_name}}"  required  class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_name" placeholder="Description" required></label>
+            <div class="col-auto"  style="position: relative;right: 5%;">
+                <label><input type="text"  value="{{i.bank_name}}"  required  class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_name" placeholder="Bank Name" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Account no</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.account_no}}"  required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "account_no"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.account_no}}"  required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "account_no"  placeholder="Account Number" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">IFSC Code</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.ifsc_code}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "ifsc_code"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.ifsc_code}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "ifsc_code"  placeholder="IFSC" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Bank Branch</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.bank_branch}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_branch" placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.bank_branch}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_branch" placeholder="Branch" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">SWIFT Code</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.swift_code}}" class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "swift_code"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.swift_code}}" class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "swift_code"  placeholder="SWIFT" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">CIN</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.cin}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "cin"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.cin}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "cin"  placeholder="CIN" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Supplier PAN</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.supplier_pan}}" id="pan" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_pan" placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.supplier_pan}}" id="pan" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_pan" placeholder="PAN" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Supplier GSTIN</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.supplier_gstin}}" id="gst" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_gstin"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.supplier_gstin}}" id="gst" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_gstin"  placeholder="GST" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 5%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">ARN</label>
-            <div class="col-auto">
-                <label><input type="text" value="{{i.arn}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "arn"  placeholder="Description" required></label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="text" value="{{i.arn}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "arn"  placeholder="ARN" required></label>
             </div>
         </div>
 

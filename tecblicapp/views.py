@@ -640,7 +640,9 @@ def edit_invoice(request, pk):
                     response = HttpResponse(pdf, content_type='application/pdf')
                     content = f"attachment; filename={filename}"
                     response['Content-Disposition'] = content
-                    return response 
+                    # return response 
+                    return redirect('/check')
+
             else:
                 filename = f'{client_name}.pdf'
                 pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj, 'igst':igst,
@@ -651,10 +653,10 @@ def edit_invoice(request, pk):
                 email = EmailMessage(subject, "hello", from_email=settings.EMAIL_HOST_USER, to=to_emails)
                 email.attach(filename, pdf.getvalue(), "application/pdf")
                 email.send(fail_silently=False)
-                return redirect('/')
+                return redirect('/check')
             return HttpResponse("NOT FOUND..!!")
 
-        return redirect('/')
+        return redirect('/check')
     # append_to_csv()
     print("invoice_detail = >",invoice_det)
     context = {'form': form,'invoice_detail':invoice_det}
@@ -760,3 +762,128 @@ def unshelveInvoice(request,pk):
     page = request.GET.get('page')
     invoice.restore()
     return redirect(f'/shelve?page={page}')
+
+def downloadInvoice(request,pk):
+    invoice = Invoice.objects.get(invoice_no=pk)
+    invoice_det = InvoiceDesription.objects.filter(invoice=invoice)
+
+    invoice_detail=Invoice.objects.all()
+    # InvoiceDesription.objects.filter(invoice = )
+    inv_obj=invoice_detail.filter(invoice_no=pk)
+    invoice_det = InvoiceDesription.objects.filter(invoice=inv_obj[0])
+    quantity = []
+    desc = []
+    c_per_unit = []
+    k = 1
+    a = "hello"
+    # while True:
+    #     a=request.POST.get(f"description{k}","")
+    #     if a=="":
+    #         break
+    #     desc.append(request.POST.get(f"description{k}",""))
+    #     quantity.append(float(request.POST.get(f"quantity{k}",0)))
+    #     c_per_unit.append(float(request.POST.get(f"cost{k}",0)))
+    for i in invoice_det:
+        desc.append(i.description)
+        quantity.append(i.quantity)
+        c_per_unit.append(i.cost_per_unit)
+        k=k+1
+        
+    def fiscal_year():
+        retrieved_date = i.invoice_date
+        convert_to_date = datetime.datetime.strptime(str(retrieved_date), '%Y-%m-%d')
+        year = convert_to_date.year
+        month = convert_to_date.month
+        day = convert_to_date.day
+        if month >= 4 and day >= 1:
+            year_a = str(year)
+            year_b = str(year + 1)
+            fiscal_year = year_a + '-' + year_b
+            return fiscal_year
+
+        elif month <= 3 and day <= 31:
+            year_a = str(year)
+            year_b = str(year - 1)
+            fiscal_year = year_b + '-' + year_a
+            return fiscal_year
+    g1=[]
+    g= 0
+    qty = 0
+    for (a, b) in zip(quantity,c_per_unit):
+        qty = a+qty
+        g1.append(float(a)*float(b))
+        g = g+(float(a)*float(b))
+
+    for i in inv_obj:
+        selcid = inv_obj[0].gst_type
+        print("SELECTTTTTTTTTTT", selcid)
+
+        # first = i.cost_per_unit1 * i.quantity1
+        # second = i.cost_per_unit2 * i.quantity2
+        # third = i.cost_per_unit3 * i.quantity3
+
+        total = g
+
+        fiscal_year_new = fiscal_year()
+        a = datetime.datetime.now()
+        client_name=i.client.clientName+'_' + str(i.invoice_date) + '_' + str(a.second) + '_' + str(fiscal_year_new)
+
+        if selcid=="DOMESTIC":
+            cgst = round(total * 9 / 100,2)
+            sgst = round(total * 9 / 100,2)
+            igst=0
+            total_amt = total
+            amt_after_gst = total_amt + cgst + sgst
+            a = round(amt_after_gst,2)
+            final_amt = float(a)
+            generate_or_mail=i.send_email
+            client_email=i.client.clientEmail
+            inv_obj.update(cgst=cgst,
+                    sgst=sgst,igst=0,gross_amount=final_amt)
+
+        elif selcid=="Inter State":
+            cgst=0
+            sgst=0
+            igst = round(total * 18 / 100,2)
+            total_amt = total
+            amt_after_gst = total_amt + igst
+            a = round(amt_after_gst,2)
+            final_amt = float(a)
+            generate_or_mail=i.send_email
+            client_email=i.client.clientEmail
+            inv_obj.update(cgst=cgst,
+                    sgst=sgst,igst=igst, gross_amount=final_amt)
+
+        else:
+            cgst = 0
+            sgst = 0
+            igst=0
+            total_amt = total
+            a = round(total_amt,2)
+            final_amt = float(a)
+            generate_or_mail = i.send_email
+            client_email = i.client.clientEmail
+            inv_obj.update(cgst=cgst,
+                    sgst=sgst,igst=igst,gross_amount=final_amt)
+
+    a = num2words(final_amt, to='cardinal', lang='en_IN')
+    convert_word_num = a.replace(",", "")
+    for a,b,c,d in zip(desc,quantity,c_per_unit,invoice_det):
+        d.description = a
+        d.quantity = b
+        d.cost_per_unit = c
+        d.save()
+        print("d = ",d.description)
+
+
+    filename = f'{client_name}'
+    pdf = render_to_pdf('tecblicapp/inv_edit.html', filename,{'invoice':inv_obj, 'igst':igst,
+            'inv_date':str(invoice.invoice_date),'sgst':sgst,'cgst':cgst,'final_amt':final_amt,
+            'gross_amount_words': convert_word_num.title(),'zip':zip(desc,quantity,c_per_unit,g1)})
+    if pdf:
+        filename = f"{client_name}.pdf"
+        response = HttpResponse(pdf, content_type='application/pdf')
+        content = f"attachment; filename={filename}"
+        response['Content-Disposition'] = content
+        return response 
+        return redirect('/check')

@@ -114,7 +114,7 @@
                             <th scope="col" style="font-weight:800;font-size: large;">Currency Type</th>
                             <!-- <th scope="col" style="font-weight:800;font-size: large;">Generate Type</th> -->
 
-                            <th scope="col" colspan="2" style="font-weight:800;font-size: large;">Action</th>
+                            <th scope="col" colspan="3" style="font-weight:800;font-size: large;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -148,6 +148,7 @@
                                     </button>
                                 </i></td>
                             </form>
+                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;  " class=" ">Download</a></td>
                             {% endfor %}
                         </tr>
                     </tbody>

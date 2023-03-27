@@ -110,6 +110,15 @@
         {
             font-family: Arial, Helvetica, sans-serif;         
         }
+        input[type=text]
+{
+    width: 140%;
+    
+}
+input[type=email]
+{
+    width: 140%;
+}
    </style>
    
     
@@ -160,39 +169,62 @@
         </div>
     </div>
   </div>
-  <div id="addform" style="position: absolute;width: 100%;" >
-    <h5 class="modal-title font-weight-bold text-dark" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Client</h5>
+  <div id="addform" style="position: absolute;width: 100%;top:25%;" >
+    <h5 class="modal-title font-weight-bold text-dark" style="font-size: 35px;position:relative;bottom: 50px;right: 20px;" id="exampleModalLabel">Add Client</h5>
       <form action="{% url 'save' %}" role="form" method="post" id="form_submit">
         {% csrf_token %}
-        <div class="form-floating mb-3" style="width:40%;position: relative;left: 8%;">
-            <input type="text" class="form-control" required name="name"  placeholder="name@example.com">
-            <label class="text-dark" for="floatingInput">Client Name</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Name</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text"  value="{{i.clientName}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "name" placeholder="Name" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 50%;">
-            <input type="text" class="form-control"  required  id="email" name="email" placeholder="name@example.com">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Client Email</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Email</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="{{i.clientEmail}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "email"  placeholder="Email" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 77px;left: 8%;">
-            <input type="text" class="form-control"  required name="address" placeholder="name@example.com">
-            <label class="bmd-label-floating  text-dark" for="floatingInput">Client Address</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client Address</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" value="{{i.clientAddress}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "address"  placeholder="Address" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3" style="width:40%;position: relative;bottom: 151px;left: 50%;">
-            <input type="text" class="form-control"  required name="place" id="floatingInput" placeholder="Ahmedabad ">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Place of Supply</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client GST</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" value="{{i.clientGSTIN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="gst" name = "gstin" placeholder="Gst" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 151px;left: 8%;">
-            <input type="text" class="form-control"  required id="gst" name="gstin" placeholder="name@example.com">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Client GSTIN</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">PAN</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" value="{{i.clientPAN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="pan" name = "pan"  placeholder="pan" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 225px;left: 36%;">
-            <input type="text" id="pan" class="form-control"  required name="pan" placeholder="name@example.com">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Client PAN</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Kind Attn</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" value="{{i.kindAttn}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "kind"  placeholder="Description" required></label>
+            </div>
         </div>
-        <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 301px;left: 65%;">
-            <input type="text" class="form-control"  required name="kind" placeholder="name@example.com">
-            <label class="bmd-label-floating text-dark" for="floatingInput">Kind Attn</label>
+        <div class="form-group row" style="position: relative;left: 30%;">
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Place of Supply</label>
+            <div class="col-auto" style="    position: relative;
+    right: 5%;">
+                <label><input type="text" value="{{i.placeofSupply}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "place" placeholder="Description" required></label>
+            </div>
         </div>
-<div   style="position: relative;bottom: 301px;">
+
+     
+<div  class="form-group row" style="width:7%;position: relative;left: 46%;">
     <button type="submit" class="btn bg-dark" >Save</button>
 </div>
     </form>

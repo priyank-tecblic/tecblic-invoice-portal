@@ -25,6 +25,7 @@
 <style>
   body{
     background-color: white;
+    overflow-x: hidden;
   }
         * {
           box-sizing: border-box;
@@ -96,6 +97,15 @@
 {
   visibility: hidden;
 }
+input[type=text]
+{
+    width: 140%;
+    
+}
+input[type=email]
+{
+    width: 190%;
+}
 </style>
    
     
@@ -144,50 +154,68 @@
                 </div>
             </div>
           </div>
-  <div id="table" style="position: absolute;top: 180%;left:5%;width: 90%;">
-    <div id="addform" style="position: absolute;width: 100%;" >
-      <h5 class="modal-title font-weight-bold text-dark text-center" style="font-size: 35px;position:relative;bottom: 103px;right: 20px;" id="exampleModalLabel">Add Bank</h5>
+  <div id="table" style="position: absolute;top: 160%;left:5%;width: 90%;">
+    <div id="addform" style="position: absolute;width: 100%;top: -24%;" >
+      <h5 class="modal-title font-weight-bold text-dark text-center" style="font-size: 35px;position:relative;bottom: 50px;right: 20px;" id="exampleModalLabel">Add Bank</h5>
 
     <form action="bank_form" id="form_submit" method="post">
       {% csrf_token %}
-
-      <div class="form-floating mb-3" style="width:25%;position: relative;left: 8%;bottom: 60px;">
-          <input type="text" class="form-control" required name="bank_name"  placeholder="name@example.com">
-          <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Name</label>
-      </div>
-      <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 134px;left: 36.8%;">
-        <input type="text" class="form-control" required name="account_no"  placeholder="name@example.com">
-        <label  class="bmd-label-floating text-dark" for="floatingInput">Account No</label>
+      <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">Bank Name</label>
+        <div class="col-auto"  style="position: relative;right: 5%;">
+            <label><input type="text"  value="{{i.bank_name}}"  required  class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_name" placeholder="Bank Name" required></label>
+        </div>
     </div>
-    <div class="form-floating mb-3"  style="width:25%;position: relative;bottom: 207px;left: 65%;">
-      <input type="text" class="form-control" required name="ifsc_code"  placeholder="name@example.com">
-      <label  class="bmd-label-floating text-dark" for="floatingInput">IFSC CODE</label>
-  </div>
-  <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 198px;left: 8%;">
-  <input type="text" class="form-control" required id="pan" name="supplier_pan"  placeholder="name@example.com">
-  <label  class="bmd-label-floating text-dark" for="floatingInput">Supplier Pan</label>
-  </div>
-  <div class="form-floating mb-3" style="width:25%;position: relative;bottom: 272px;left: 36.8%;">
-    <input type="text" class="form-control" required name="bank_branch"  placeholder="name@example.com">
-    <label  class="bmd-label-floating text-dark" for="floatingInput">Bank Branch</label>
-</div>
-<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 346px;left: 65%;">
-  <input type="text" class="form-control"  required name="swift_code"  placeholder="name@example.com">
-  <label  class="bmd-label-floating text-dark" for="floatingInput">Swift Code</label>
-</div>
-<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 331px;left: 8%;">
-<input type="text" class="form-control"  required id="gst" name="supplier_gstin"  placeholder="name@example.com">
-<label  class="bmd-label-floating text-dark" for="floatingInput">Supplier GSTIN</label>
-</div>
-<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 406px;left: 36.8%;">
-<input type="text" class="form-control" required name="cin"  placeholder="name@example.com">
-<label  class="bmd-label-floating text-dark" for="floatingInput">CIN</label>
-</div>
-<div class="form-floating mb-3" style="width:25%;position: relative;bottom: 480px;left: 65%;">
-<input type="text" class="form-control" required name="arn"  placeholder="name@example.com">
-<label  class="bmd-label-floating text-dark" for="floatingInput">ARN</label>
-</div>  
-<div style="position: relative;bottom: 441px;left: 45%;">
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">Account no</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.account_no}}"  required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "account_no"  placeholder="Account Number" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">IFSC Code</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.ifsc_code}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "ifsc_code"  placeholder="IFSC" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">Bank Branch</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.bank_branch}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "bank_branch" placeholder="Branch" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">SWIFT Code</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.swift_code}}" class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "swift_code"  placeholder="SWIFT" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">CIN</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.cin}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "cin"  placeholder="CIN" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">Supplier PAN</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.supplier_pan}}" id="pan" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_pan" placeholder="PAN" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">Supplier GSTIN</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.supplier_gstin}}" id="gst" required class="form-control" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "supplier_gstin"  placeholder="GST" required></label>
+        </div>
+    </div>
+    <div class="form-group row" style="position: relative;left: 30%;">
+        <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:20px;">ARN</label>
+        <div class="col-auto" style="position: relative;right: 5%;">
+            <label><input type="text" value="{{i.arn}}" required class="form-control",id="desription{{forloop.counter}}" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "arn"  placeholder="ARN" required></label>
+        </div>
+    </div>
+
+<div  style="width:7%;position: relative;left: 44%;">
   <button type="submit" class="btn bg-dark" style="">Save</button>
 </div>
 

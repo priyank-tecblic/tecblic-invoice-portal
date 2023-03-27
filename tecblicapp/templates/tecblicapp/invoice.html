@@ -123,6 +123,16 @@ cursor:default;
 {
   width: 123%;
 }
+#id_payment_method
+{
+  position: relative;
+
+    right: 60px;
+}
+#id_payment_method
+{
+    top: 1px;
+}
 </style>
 </head>
 <body>
@@ -136,7 +146,7 @@ cursor:default;
 <input type="hidden" name="payment_method" value="----">
 <br>
 {% csrf_token %}
-<h4 class="text-center text-dark " style="font-weight:bold;margin-bottom:2%;font-size: 35px;font-weight: 800">Invoice Details </h4>
+<h4 class="text-center text-dark " style="font-weight:bold;margin-bottom:5%;font-size: 35px;font-weight: 800">Invoice Details </h4>
 <br>
 <div class="row" style="margin-left: 7%;">
 <div class="col-25" >
@@ -144,9 +154,9 @@ cursor:default;
 <label style="position: relative; left: 164px; bottom: 47px" >{{invoices.invoice_date}}</label></span>
 </div>
 <div class="col-25">
-<h4 style="font-weight:bold;position: relative; top: 69px; right: 300px;"><b style="position: relative; right: 61px;">Payment-status </b></h4>
+<h4 style="font-weight:bold;position: relative; top: 46px; right: 300px;"><b style="position: relative; right: 61px;">Payment-status </b></h4>
 
-<label class="text-dark" style="position: relative; top: 28px; right: 169px;">
+<label class="text-dark" style="position: relative; top: 7px; right: 169px;">
 <input type="radio" name="payment_status" value="PENDING"> PENDING
 <input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
 
@@ -155,22 +165,36 @@ cursor:default;
 </div>
 
 <div class="col-25" style="position: relative; top: 207px; right: 441px;">
-<h4 style="font-weight:bold;position: relative; bottom: -11px; left: 53px;"><b style="position: relative; top: 44px; right: 304px;">Payment-method </b></h4>
-<label style="position: relative; right: 63px;">{{invoices.payment_method}}<i style="    font-size: 21px;
-  color: black;
-  position: relative;
-  bottom: -3px;
-  left: -22px;" class="fa fa-solid fa-angle-down"></i></label>
+<h4 style="font-weight:bold;position: relative; bottom: -15px; left: 53px;"><b style="position: relative; top: 68px; right: 304px;">Payment-method </b></h4>
+<label style="   position: relative;
+top: 21px;
+right: 3px;
+">{{invoices.payment_method}}<i style="font-size: 21px;
+    color: black;
+    position: relative;
+    bottom: -3px;
+    left: -83px;
+" class="fa fa-solid fa-angle-down"></i></label>
 </div>
 <div class="col-25">
-<h4 style="font-weight:bold;position: relative; bottom: 4px; right: 154%;"><b>Invoice Number</b></h4>
-<label style="position: relative; bottom: 52px;right: 300px;">{{invoices.sac_code}}<h4 style="    position: relative;
-  bottom: 33px;font-weight:400;" id="sacid2" class="text-dark"></h4></label>
+<h4 style="    font-weight: bold;
+position: relative;
+bottom: 52px;
+right: 331%;"><b>Invoice Number</b></h4>
+<label style="position: relative; bottom: 52px;right: 300px;">{{invoices.sac_code}}<h4 style="position: relative;
+  bottom: 80px;
+  font-weight: 400;
+  right: 265%;" id="sacid2" class="text-dark"></h4></label>
 <br/>
 </div>
 <div class="col-25">
-<h4 style="font-weight:bold;position: relative; bottom: -11px; left: 52px;"><b style="position: relative; right: 77px;">Working Hours </b></h4>
-<label class="text-dark" style="position: relative; bottom: 30px; left: 166px;">
+<h4 style="    font-weight: bold;
+position: relative;
+bottom: 31px;
+left: 52px;"><b style="position: relative; right: 77px;">Working Hours </b></h4>
+<label class="text-dark" style="    position: relative;
+bottom: 70px;
+left: 166px;">
 <input type="radio" name="qty_type" value="HRS"> Hours
 <input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> Days
 <!-- {{invoices.qty_type}} -->
@@ -179,9 +203,11 @@ cursor:default;
 </div>
 
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; bottom: 4px;" ><b style="position: relative; top: 74px; right: 360px;">Currency Type</b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: 4px;" ><b style="position: relative; top: 90px; right: 360px;">Currency Type</b></h4>
 
-<label style="position: relative; top:16px; right: 167px;">{{invoices.currency_type}}<i style="font-size: 21px;
+<label style="    position: relative;
+top: 30px;
+right: 167px;">{{invoices.currency_type}}<i style="font-size: 21px;
   color: black;
   position: relative;
   bottom: 34px;
@@ -190,8 +216,15 @@ cursor:default;
 
 
 <div class="col-25" >
-<h4  style="font-weight:bold;position: relative; top: 71px; right: 138px;"><b>GST Type</b></h4>
-<label style="position: relative; top: 14px;left: 40px;">{{invoices.gst_type}}<i style="    font-size: 21px;
+<h4  style="    font-weight: bold;
+position: relative;
+top: 15px;
+right: 223%;
+"><b>GST Type</b></h4>
+<label style="position: relative;
+top: -39px;
+left: -163%;
+}">{{invoices.gst_type}}<i style="font-size: 21px;
   color: black;
   position: relative;
   bottom: 34px;
