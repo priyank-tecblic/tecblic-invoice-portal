@@ -25,7 +25,7 @@ href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab
 <style>
 
 body{
-background-color: white;
+background-color: #e3d7ff;
 overflow-x: hidden;
 }
 
@@ -95,7 +95,7 @@ display: table;
 clear: both;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 600px) {
 .col-25, .col-75, input[type=submit] {
 width: 100%;
@@ -109,6 +109,7 @@ cursor:default;
 #id_gst_type
 {
   width: 105%;
+  margin-left: 15px;
 }
 #id_payment_method
 {
@@ -133,6 +134,46 @@ cursor:default;
 {
     top: 1px;
 }
+
+@media only screen and (min-device-width : 768px)  and (max-device-width : 1024px) {
+.col-25, .col-75, input[type=submit]{
+width: 100%;
+margin-top: 0;
+}
+}
+#sacid
+{
+cursor:default;
+}
+#id_gst_type
+{
+  width: 105%;
+  margin-left: 15px;
+}
+#id_payment_method
+{
+  width: 70%;
+}
+#id_client
+{
+  width: 70%;
+
+}
+#id_send_email
+{
+  width: 123%;
+}
+#id_payment_method
+{
+  position: relative;
+
+    right: 60px;
+}
+#id_payment_method
+{
+    top: 1px;
+}
+
 </style>
 </head>
 <body>
@@ -151,13 +192,13 @@ cursor:default;
 <br>
 <div class="row" style="margin-left: 7%;">
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 56px;"><b style="position: relative; right: 82px;">Choose Date </b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 56px;"><b style="position: relative; right: 61px;">Choose Date </b></h4>
 <label style="position: relative; left: 164px; bottom: 47px" >{{invoices.invoice_date}}</label></span>
 </div>
 <div class="col-25">
-<h4 style="font-weight:bold;position: relative; top: 46px; right: 300px;"><b style="position: relative; right: 61px;">Payment Status </b></h4>
+<h4 style="font-weight:bold;position: relative; top: 46px; right: 300px;"><b style="position: relative; right: 11px;">Payment Status </b></h4>
 
-<label class="text-dark" style="position: relative; top: 7px; right: 169px;">
+<label class="text-dark" style="position: relative; top: 7px; right: 135px;">
 <input type="radio" name="payment_status" value="PENDING"> PENDING
 <input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
 
@@ -166,10 +207,10 @@ cursor:default;
 </div>
 
 <div class="col-25" style="position: relative; top: 207px; right: 441px;">
-<h4 style="font-weight:bold;position: relative; bottom: -28px; left: 53px;"><b style="position: relative; top: 68px; right: 304px;">Payment Method </b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: -28px; left: 53px;"><b style="position: relative; top: 68px; right: 230px;">Payment Method </b></h4>
 <label style="   position: relative;
 top: 39px;
-right: 3px;
+right: -61px;
 ">{{invoices.payment_method}}<i style="font-size: 21px;
     color: black;
     position: relative;
@@ -181,18 +222,18 @@ right: 3px;
 <h4 style="    font-weight: bold;
 position: relative;
 bottom: 52px;
-right: 331%;"><b>Invoice Number</b></h4>
+right: 327%;"><b>Invoice Number</b></h4>
 <label style="position: relative; bottom: 52px;right: 300px;">{{invoices.sac_code}}<h4 style="position: relative;
   bottom: 80px;
   font-weight: 400;
-  right: 265%;" id="sacid2" class="text-dark"></h4></label>
+  right: 214%;" id="sacid2" class="text-dark"></h4></label>
 <br/>
 </div>
 <div class="col-25">
 <h4 style="    font-weight: bold;
 position: relative;
 bottom: 46px;
-left: 52px;"><b style="position: relative; right: 77px;">Working Hours </b></h4>
+left: 52px;"><b style="position: relative; right: 61px;">Working Hours </b></h4>
 <label class="text-dark" style="    position: relative;
 bottom: 86px;
 left: 166px;">
@@ -204,11 +245,11 @@ left: 166px;">
 </div>
 
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; bottom: -6px;" ><b style="position: relative; top: 90px; right: 360px;">Currency Type</b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: -6px;" ><b style="position: relative; top: 90px; right: 315px;">Currency Type</b></h4>
 
 <label style="    position: relative;
 top: 38px;
-right: 167px;">{{invoices.currency_type}}
+right: 137px;">{{invoices.currency_type}}
 <i style="font-size: 21px;
   color: black;
   position: relative;
@@ -222,7 +263,7 @@ right: 167px;">{{invoices.currency_type}}
 <h4  style="    font-weight: bold;
 position: relative;
 top: 15px;
-right: 223%;
+right: 220%;
 "><b>GST Type</b></h4>
 <label style="position: relative;
 top: -39px;
@@ -231,7 +272,7 @@ left: -163%;
   color: black;
   position: relative;
   bottom: 34px;
-  left: 93px;" class="fa fa-solid fa-angle-down"></i></label>
+  left: 120px;" class="fa fa-solid fa-angle-down"></i></label>
 </div>
 
 </div>
@@ -251,7 +292,7 @@ left: -163%;
 </div>
 </div>
 </div>
-<button class="btn btn-dark text-right my-2 bg-dark" style="margin-left: 6%;height:45px;" id="btn">Add Service</button>
+<button class="btn btn-dark text-right my-2 bg-dark" style="margin-left: 7%;height:45px;" id="btn">Add Service</button>
 
 
 <div class="row" style="margin-left: 2%;">
@@ -286,7 +327,7 @@ left: -163%;
 color: black;
 position: relative;
 bottom: -2px;
-left: 209px;" class="fa fa-solid fa-angle-down"></i>
+left: 188px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
 
@@ -302,11 +343,11 @@ left: 209px;" class="fa fa-solid fa-angle-down"></i>
 {% endfor %}
 </select>
 <!-- {{bank_details.bank_info}} -->
-<i style="   font-size: 21px;
+<i style="font-size: 21px;
 color: black;
 position: relative;
 bottom: -2px;
-left: 209px;" class="fa fa-solid fa-angle-down"></i>
+left: 188px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
 
