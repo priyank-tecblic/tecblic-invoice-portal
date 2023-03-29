@@ -25,7 +25,7 @@ href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab
 <style>
 
 body{
-background-color: #e3d7ff;
+background-color: #ffffff;
 overflow-x: hidden;
 }
 
@@ -109,7 +109,7 @@ cursor:default;
 #id_gst_type
 {
   width: 105%;
-  margin-left: 15px;
+  margin-left: 12px;
 }
 #id_payment_method
 {
@@ -147,7 +147,7 @@ cursor:default;
 }
 #id_gst_type
 {
-  width: 105%;
+  width: 10.9rem;
   margin-left: 15px;
 }
 #id_payment_method
@@ -174,6 +174,36 @@ cursor:default;
     top: 1px;
 }
 
+label {
+  display: flex;
+  align-items: center;
+  margin: 15px 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  opacity: 0;
+}
+
+.design {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  outline-offset: 3px;
+  outline: 3px solid #888888;
+  margin-right: 20px;
+}
+
+input[type="radio"]:checked~.design {
+  outline-color: black;
+  background: #a90a9c;
+}
+
+input[type="radio"]:checked~.value {
+  color: #10c95a;
+}
+
 </style>
 </head>
 <body>
@@ -182,35 +212,46 @@ cursor:default;
 
 {% endblock %}
 
-
 <form action="{% url 'generate_invoice' %}" method="POST">
 <input type="hidden" name="payment_method" value="----">
 <br>
 {% csrf_token %}
-<h4 class="text-center text-dark " style="font-weight:bold;margin-bottom:5%;font-size: 35px;font-weight: 800">Invoice Details </h4>
+<h4 class="text-sm-left text-orange " style="font-weight:bold;margin-bottom:5%;font-size: 35px;font-weight: 800; margin-left: 8rem; color: orange;">INVOICE DETAILS </h4>
 
 <br>
-<div class="row" style="margin-left: 7%;">
+<div class="row" style="margin-left: 5rem; margin-right: 5rem;">
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 56px;"><b style="position: relative; right: 61px;">Choose Date </b></h4>
-<label style="position: relative; left: 164px; bottom: 47px" >{{invoices.invoice_date}}</label></span>
+<h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 247px;"><b style="position: relative; right: 13rem;bottom: 2rem;"> Choose Date : </b></h4>
+<label style="position: relative; left: 15rem; bottom: 5.6rem;" >{{invoices.invoice_date}}</label></span>
 </div>
-<div class="col-25">
-<h4 style="font-weight:bold;position: relative; top: 46px; right: 300px;"><b style="position: relative; right: 11px;">Payment Status </b></h4>
 
-<label class="text-dark" style="position: relative; top: 7px; right: 135px;">
-<input type="radio" name="payment_status" value="PENDING"> PENDING
-<input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID
+<div class="col-25">
+<h4 style="font-weight:bold;position: relative; top: 46px; right: 20rem;"><b style="position: relative; left: 3rem;">Payment Status </b></h4>
+
+<label class="text-dark" style="position: relative; top: 7px; right: 18rem;"> <br>
+  <label style="color: black;">
+    <input type="radio" name="payment_status" value="PENDING">
+    <span class="design"></span>
+    <span class="value">PENDING</span>
+  </label>
+  <label style="color: black;">
+    <input type="radio" name="payment_status" value="PAID">
+    <span class="design"></span>
+    <span class="value">PAID</span>
+  </label>
+  
+{% comment %} <input type="radio" name="payment_status" value="PENDING"> PENDING
+<input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID {% endcomment %}
 
 <!-- {{invoices.payment_status}} -->
 </label>
 </div>
 
 <div class="col-25" style="position: relative; top: 207px; right: 441px;">
-<h4 style="font-weight:bold;position: relative; bottom: -28px; left: 53px;"><b style="position: relative; top: 68px; right: 230px;">Payment Method </b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: -28px; left: 53px;"><b style="position: relative; top: 8.5rem; right: 12.7rem;">Payment Method </b></h4>
 <label style="   position: relative;
-top: 39px;
-right: -61px;
+top: 6rem;
+left: 7rem;
 ">{{invoices.payment_method}}<i style="font-size: 21px;
     color: black;
     position: relative;
@@ -219,69 +260,80 @@ right: -61px;
 " class="fa fa-solid fa-angle-down"></i></label>
 </div>
 <div class="col-25">
-<h4 style="    font-weight: bold;
+<h4 class="text-right" style="font-weight: bold;
 position: relative;
-bottom: 52px;
-right: 327%;"><b>Invoice Number</b></h4>
+bottom: 130px;
+right: 100%;
+"><b>Invoice Number  :   </b></h4>
 <label style="position: relative; bottom: 52px;right: 300px;">{{invoices.sac_code}}<h4 style="position: relative;
-  bottom: 80px;
+  bottom: 8.2rem;
   font-weight: 400;
-  right: 214%;" id="sacid2" class="text-dark"></h4></label>
+  margin-left:19rem;" id="sacid2" class="text-right text-dark"></h4></label>
 <br/>
 </div>
 <div class="col-25">
-<h4 style="    font-weight: bold;
+<h4 style="font-weight: bold;
 position: relative;
 bottom: 46px;
-left: 52px;"><b style="position: relative; right: 61px;">Working Hours </b></h4>
+left: 52px;"><b style="position: relative; left:32rem; bottom: 4.6rem;">Working Hours </b></h4>
 <label class="text-dark" style="    position: relative;
-bottom: 86px;
-left: 166px;">
-<input type="radio" name="qty_type" value="HRS"> Hours
-<input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> Days
+bottom: 9.8rem;
+left: 33rem;">
+<label style= "color: black;">
+  <input type="radio" name="qty_type" value="HRS">
+  <span class="design"></span>
+  <span class="value">HRS</span>
+</label>
+<label style="color: black;">
+  <input type="radio" name="qty_type" value="DAYS">
+  <span class="design"></span>
+  <span class="value">DAYS</span>
+</label>
+{% comment %} <input type="radio" name="qty_type" value="HRS"> HOURS
+<input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> DAYS {% endcomment %}
 <!-- {{invoices.qty_type}} -->
 </label>
 <br/>
 </div>
 
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; bottom: -6px;" ><b style="position: relative; top: 90px; right: 315px;">Currency Type</b></h4>
+<h4 style="font-weight:bold;position: relative; bottom: -6px;" ><b style="position: relative; top: 7.4rem; right: 17.4rem;">Currency Type</b></h4>
 
 <label style="    position: relative;
-top: 38px;
-right: 137px;">{{invoices.currency_type}}
+top: 50px;
+right: 4.8rem;width: 12.6rem;">{{invoices.currency_type}}
 <i style="font-size: 21px;
   color: black;
   position: relative;
-  bottom: 34px;
-  left: 58px;" class="fa fa-solid fa-angle-down"></i>
+  bottom: 0rem;
+  right: 2rem;" class="fa fa-solid fa-angle-down"></i>
   </label>
 </div>
 
 
 <div class="col-25" >
-<h4  style="    font-weight: bold;
+<h4  style="font-weight: bold;
 position: relative;
-top: 15px;
-right: 220%;
+top: 26px;
+right: 36.9rem;
 "><b>GST Type</b></h4>
 <label style="position: relative;
 top: -39px;
-left: -163%;
+right: 25.5rem;
 }">{{invoices.gst_type}}<i style="font-size: 21px;
   color: black;
   position: relative;
-  bottom: 34px;
-  left: 120px;" class="fa fa-solid fa-angle-down"></i></label>
+  bottom: 0rem;
+  right: 2rem;" class="fa fa-solid fa-angle-down"></i></label>
 </div>
 
 </div>
 <div id="service_element" style="margin-left: 2%;">
 <div style="height: 100px;"></div>
-<div class="row" style="margin-left:53px ;">
+<div class="row" style="margin-left:5.7rem ;">
   <b style="font-weight:bold;">Service1  </b>
   <div class="col-25">
-<label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription1" name = "description1" placeholder="Description" required></label>
+<label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription" name = "description" placeholder="Description" aria-describedby="basic-addon2" required></label>
 <br/>
 </div>
 <div class="col-25">
@@ -292,7 +344,7 @@ left: -163%;
 </div>
 </div>
 </div>
-<button class="btn btn-dark text-right my-2 bg-dark" style="margin-left: 7%;height:45px;" id="btn">Add Service</button>
+<button type="submit" class="btn btn-primary text-right my-2" style="margin-left: 10%;height:45px;" id="btn">Add Service</button>
 
 
 <div class="row" style="margin-left: 2%;">
@@ -311,7 +363,7 @@ left: -163%;
 </div> -->
 </div>
 <div class="test" style="top: 20px;">
-<h4 style="margin-left: 2%; position: relative; left: 4%; font-weight: bold; top: 55px;">Client Details</h4>
+<h4 style="margin-left: 2%; position: relative; left: 7%; font-weight: bold; top: 4.5rem;">Client Details</h4>
 <div class="row" style="margin-left: 2%;">
 <div >
 <label style="width: 25%;">
@@ -327,13 +379,13 @@ left: -163%;
 color: black;
 position: relative;
 bottom: -2px;
-left: 188px;" class="fa fa-solid fa-angle-down"></i>
+left: 200px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
 
 </div>
 
-<h4 style="margin-left: 6%; font-weight: bold;position: relative;top: 57px;">Supplier Details</h4>
+<h4 style="margin-left: 9%; font-weight: bold;position: relative;top: 4.7rem;">Supplier Details</h4>
 <div class="row" style="margin-left: 2%;">
 <div >
 <label style="width: 25%;">
@@ -347,24 +399,24 @@ left: 188px;" class="fa fa-solid fa-angle-down"></i>
 color: black;
 position: relative;
 bottom: -2px;
-left: 188px;" class="fa fa-solid fa-angle-down"></i>
+left: 200px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
 
 </div>
 <div class="row" style="margin-left: 2%;">
 <div class="col-25">
-<label style="position: relative; left: 73%;">{{invoices.send_email}}<i style="  
+<label style="position: relative; left: 73%;width: 15.8rem;">{{invoices.send_email}}<i style="  
   font-size: 21px;
   color: black;
   position: relative;
-  bottom: 35px;
-  left: 208px;
+  bottom: 0rem;
+  right: 2rem;
 ;" class="fa fa-solid fa-angle-down"></i></label>
 </div>
 
 </div>
-<h3 style="font-weight:bold;margin-left: 6%;">Terms and Conditions:</h3>
+<h3 style="font-weight:bold;margin-left: 9%;">Terms and Conditions:</h3>
 
 <div class="row" style="margin-left: 2%;" >
 <label>{{invoices.t_2}}</label>
@@ -380,7 +432,7 @@ left: 188px;" class="fa fa-solid fa-angle-down"></i>
 <label>{{invoices.t_5}}</label>
 </div>
 </div>
-<input type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="position: relative;
+<input type="submit" value="Generate PDF" class="btn btn-bg-success my-4" style="position: relative;
 bottom: 26px;
 right: 48%;"/>
 <br>
@@ -417,7 +469,7 @@ k=k+1
 $(document).ready(function(){
 $("#btn").click(function(){
 k=k+1
-$("#service_element").append('<div class="row" style="margin-left:4% ;" id="element'+k+'"><b ">Service'+k+'  </b><div class="col-25" ><label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
+$("#service_element").append('<div class="row" style="margin-left:5.7rem ;" id="element'+k+'"><b ">Service'+k+'  </b><div class="col-25" ><label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
 });
 
 });
