@@ -154,8 +154,8 @@ input[type=email]
 <!-- <button type="button" class="btn bg-info" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
       <!-- </button> -->
       <!-- <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 50px;position: relative;bottom: 55px;size:30px;left: 44%;cursor: pointer;user-select: none;" type='button' aria-hidden="true"></i> -->
-<button id="details" disabled class="btn btn-success"  style="z-index: 3;position: relative;bottom: 55px;left: -39%;">Details</button>
-<button  id="addclient"  class="btn btn-warning" style="z-index: 3;position: relative;bottom: 55px;left: -37%;">Add</button>
+<button id="details"  class="btn btn-dark bg-dark"  style="z-index: 3;position: relative;bottom: 55px;left: -39%;">Details</button>
+<button  id="addclient"  class="btn btn-dark bg-dark" style="z-index: 3;position: relative;bottom: 55px;left: -37%;">Add</button>
       <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -199,28 +199,28 @@ input[type=email]
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Client GST&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
-                <label><input type="text" value="{{i.clientGSTIN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="gst" name = "gstin" placeholder="Gst" required></label>
+                <label><input type="text" value="{{i.clientGSTIN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="gst" name = "gstin" placeholder="GST Number" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">PAN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
-                <label><input type="text" value="{{i.clientPAN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="pan" name = "pan"  placeholder="pan" required></label>
+                <label><input type="text" value="{{i.clientPAN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="pan" name = "pan"  placeholder="PAN Number" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Kind Attn&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
-                <label><input type="text" value="{{i.kindAttn}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "kind"  placeholder="Description" required></label>
+                <label><input type="text" value="{{i.kindAttn}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "kind"  placeholder="Kind Attn" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;margin-top:11px;margin-right:40px;">Place of Supply</label>
             <div class="col-auto" style="    position: relative;
     right: 5%;">
-                <label><input type="text" value="{{i.placeofSupply}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "place" placeholder="Description" required></label>
+                <label><input type="text" value="{{i.placeofSupply}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "place" placeholder="Place of Supply" required></label>
             </div>
         </div>
 
