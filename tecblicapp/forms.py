@@ -51,7 +51,7 @@ class invoiceForm(forms.ModelForm):
     class Meta:
         
         model=Invoice
-        #fields=['invoice_no','invoice_date']
+        # fields=['invoice_no','invoice_date']
         exclude=('cgst','sgst','igst','slug','uniqueId','gross_amount')
         widgets={
             'invoice_no':forms.TextInput(attrs= {'class':'form-control','id':'invoiceid','placeholder':'Invoice No','readonly':True}),

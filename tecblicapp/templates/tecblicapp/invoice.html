@@ -276,7 +276,7 @@ right: 100%;
 position: relative;
 bottom: 46px;
 left: 52px;"><b style="position: relative; left:32rem; bottom: 4.6rem;">Working Hours </b></h4>
-<label class="text-dark" style="    position: relative;
+<label class="text-dark" style="position: relative;
 bottom: 9.8rem;
 left: 33rem;">
 <label style= "color: black;">
@@ -285,7 +285,7 @@ left: 33rem;">
   <span class="value">HRS</span>
 </label>
 <label style="color: black;">
-  <input type="radio" name="qty_type" value="DAYS">
+  <input type="radio" name="qty_type" value="DAY">
   <span class="design"></span>
   <span class="value">DAYS</span>
 </label>
@@ -333,7 +333,7 @@ right: 25.5rem;
 <div class="row" style="margin-left:5.7rem ;">
   <b style="font-weight:bold;">Service1  </b>
   <div class="col-25">
-<label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription" name = "description" placeholder="Description" aria-describedby="basic-addon2" required></label>
+<label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription" name = "description1" placeholder="Description" aria-describedby="basic-addon2" required></label>
 <br/>
 </div>
 <div class="col-25">
@@ -432,9 +432,24 @@ left: 200px;" class="fa fa-solid fa-angle-down"></i>
 <label>{{invoices.t_5}}</label>
 </div>
 </div>
-<input name="submitt" type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="position: relative;
+{% comment %} <input id="submitt" type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="position: relative;
 bottom: 26px;
-right: 48%;"/>
+right: 48%;"/> {% endcomment %}
+{% comment %} {% if invoices.invoice_date is not None%} {% endcomment %}
+<button id="myButton" class="btn btn-dark bg-dark my-4" style="left: 44%;">Generate PDF</button>
+   {% comment %} <p id="result"></p>
+   <script>
+      var count = 0;
+      var button = document.getElementById("myButton");
+      var result = document.getElementById("result");
+      button.onclick = function() {
+         count++;
+         result.innerHTML = count;
+         result.save()
+      }
+   </script> {% endcomment %}
+{% comment %} {% endif %} {% endcomment %}
+  </div>
 <br>
 <br>
  
@@ -486,5 +501,6 @@ id_t_4.rows = 2;
 id_t_5.rows = 2;
 $('#sacid').css('visibility','hidden')
   $("#sacid2").html($('#sacid').val())
+
 </script>
 </html>

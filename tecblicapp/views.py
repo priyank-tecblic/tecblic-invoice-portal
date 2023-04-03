@@ -20,6 +20,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.conf import settings
 import csv
+import  pandas as pd
 
 # Create your views here.
 SOURCE_DIR=r"/home/tecblic/Downloads"
@@ -97,9 +98,10 @@ def logout_user(request):
 #home Page
 @login_required(login_url='login')
 def homePage(request):
-    invoice = Invoice.objects.all()
-    # append_to_csv()
-    return render(request,'tecblicapp/home_page.html',)
+    invoice = Invoice.objects.last()
+    active_count = clientDetail.objects.filter(activeClient = True).count()
+    bank_count = BankDetails.objects.filter().count()
+    return render(request,'tecblicapp/home_page.html',{"invoice":invoice,"active_count":active_count,"bank_count":bank_count})
 
 #Client Form
 @login_required(login_url='login')
@@ -165,7 +167,7 @@ def edit_data(request):
 def invoice_detail(request):
     invoices=invoiceForm()
     bank_details=bankDetailForm
-    clientActive = clientDetail.objects.filter(activeClient=True)
+    clientActive = clientDetail.objects.filter(activeClient=True)    
     bank = BankDetails.objects.all()
     return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'client_details':clientActive,'bank':bank})
 
@@ -180,7 +182,7 @@ def invoice_detail(request):
 #      return None
 
 # def move():
-#     while True:
+#     while True:F
 #         for fname in os.listdir(SOURCE_DIR):
 #             if fname.lower().endswith('.pdf'):
 #                     shutil.move(os.path.join(SOURCE_DIR, fname), DEST_DIR)
@@ -188,6 +190,7 @@ def invoice_detail(request):
 # Generate Invoice
 @login_required(login_url='login')
 def generate_invoice(request):
+  
 
     if request.method == 'POST':
         form = invoiceForm(request.POST)
@@ -738,10 +741,12 @@ def activeClient(request):
     if request.GET.get('radio') == 'true':
         print("im in true",client)
         client.activeClient = True
+        
     else:
         print("im in false")
         client.activeClient = False
     client.save()
+
     page=request.GET.get('page')
     return redirect(f"/add?page={page}")
 
@@ -883,3 +888,6 @@ def downloadInvoice(request,pk):
         response['Content-Disposition'] = content
         return response 
         return redirect('/check')
+    
+    
+    
