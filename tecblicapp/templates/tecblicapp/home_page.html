@@ -21,6 +21,8 @@
     <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+
         <title>home-page</title>
         <style>
             .btn{
@@ -230,22 +232,71 @@ border: solid 2px #0066cc;
 </style>       
     </head>
     
-    <body style="overflow: hidden;background-color: white; background-repeat: no-repeat;"> 
+    <body style="overflow: hidden;background-color: rgb(187 185 185); background-repeat: no-repeat;"> 
     {% include 'tecblicapp/navbar.html' %}
 
-    <div class="card-body">
+    {% comment %} <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a class="text-decoration-none text-dark">
                     <div class="card my-card shadow text-center p-3">
-                        <h4>Staff <i class="fas fa-users"></i></h4>
-                        <h3>ih</h3>
+                        <h4><b> Invoice Downloaded </b><i class="fas fa-users"></i></h4>
+                        <h3>
+                            {{invoice.invoice_no}}
+                        </h3>
                     </div>
-
-
                 </a>
             </div>
+            <div class="col-md-3">
+                <a class="text-decoration-none text-dark">
+                    <div class="card my-card shadow text-center p-3">
+                        <h4><b> Active Clients </b><i class="fas fa-users"></i></h4>
+                        <h3>
+                            {{active_count}}
+                        </h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="text-decoration-none text-dark">
+                    <div class="card my-card shadow text-center p-3">
+                        <h4><b> Bank accounts</b> <i class="fas fa-users"></i></h4>
+                        <h3>
+                          {{bank_count}}
+                        </h3>
+                    </div>
+                </a>
         </div>
+    </div> {% endcomment %}
+    <div class="col-md-2">
+        <div>
+            <canvas id="myChart" width="200" height="300"></canvas>
+          </div>
+          
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          
+          <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            var myChart=
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: [],
+                datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -258,7 +309,7 @@ border: solid 2px #0066cc;
             
         </body>
         <footer class="bg-dark text-center text-white">
-    <div class="text-center p-3" style="background-color:black; position:absolute;bottom:0px;width:100%;height:-19px;">
+    <div class="text-center p-3" style="background-color:black; position:absolute;bottom:0px;width:100%;height:-19px;right: 0">
     © 2020 Copyright:
     <a class="text-white" href="https://tecblic.com/">Tecblic.com</a>
     </div>

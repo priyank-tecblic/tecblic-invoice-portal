@@ -10,6 +10,7 @@ class clientDetail(models.Model):
     kindAttn=models.CharField(max_length=40,null=True,blank=True)
     placeofSupply=models.CharField(max_length=40,null=True,blank=True)
     activeClient = models.BooleanField(("Active Client"),default=True)
+    
     def __str__(self):
         return self.clientName
 
@@ -144,3 +145,5 @@ class InvoiceDesription(models.Model):
     quantity = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
     cost_per_unit = models.DecimalField(max_digits =9,null=True, blank=True, decimal_places=2)
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+
+
