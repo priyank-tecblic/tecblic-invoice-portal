@@ -116,13 +116,10 @@
                                 
                             <td><a  href="{% url 'edit_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
                             <td><a href="{% url 'delete_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=""><i class="fa fa-trash"></i></a></td>
-                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;  " class=" ">Download</a></td>
+                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;" class=" ">Download</a></td>
                             {% endfor %}
                         </tr>
                     </tbody>
-
-
-                    
                 </table>
             </div>
         </form>

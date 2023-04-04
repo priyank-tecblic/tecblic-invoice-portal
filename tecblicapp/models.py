@@ -147,3 +147,5 @@ class InvoiceDesription(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
 
 
+
+
