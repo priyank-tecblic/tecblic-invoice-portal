@@ -31,6 +31,7 @@ urlpatterns =[
     path('shelve',views.shelveInvoice,name="shelve"),
     path('unshelve_invoice/<int:pk>/',views.unshelveInvoice,name="unshelve"),
     path('download_invoice/<int:pk>/',views.downloadInvoice,name="download"),
+    path('filter/',views.filter_data,name='filter_data'),
 
     #path('inv_send_mail',views.generate_invoice_send mail,name='invoice_send_mail'),
 

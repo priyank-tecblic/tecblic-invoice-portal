@@ -1,6 +1,6 @@
 import os.path
 import time
-
+from django.utils import timezone
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
@@ -21,6 +21,7 @@ from django.core.paginator import Paginator
 from django.conf import settings
 import csv
 import  pandas as pd
+from datetime import date, timedelta
 
 # Create your views here.
 SOURCE_DIR=r"/home/tecblic/Downloads"
@@ -95,13 +96,83 @@ def logout_user(request):
     logout(request)
     return redirect('login')
 
+def Week():
+    #lastweek
+    td2 = timedelta(days=7)
+    d = date.today()
+    res1 = d - td2
+    return res1
+
+def Month():
+    #last month
+    td3 = timedelta(days=30)
+    d = date.today()
+    res2 = d - td3
+    return res2
+
+def Quater():
+    #last 3 month
+    td4 = timedelta(days=90)
+    d = date.today()
+    res3 = d - td4
+    return res3
+
+def half_quater():
+    #last 6 month
+    td5 = timedelta(days=180)
+    d = date.today()
+    res4 = d - td5
+    return res4
+
+def year():
+    # last 1 year
+    td6 = timedelta(days=365)
+    d = date.today()
+    res5 = d - td6
+    return res5
+
+def today():
+    td1= timedelta(days=0)
+    d = date.today()
+    res0 = d - td1
+    return res0
+
 #home Page
 @login_required(login_url='login')
 def homePage(request):
-    invoice = Invoice.objects.last()
+    # startdate = date.today()
+    # enddate = startdate - timedelta(days=3)
+    # Sample.objects.filter(date__range=[startdate, enddate])
+    # date_filter = request.GET.get("date-filter","")
+    # if date_filter == "week":
+    #     date =datetime.datetime.now() - datetime.timedelta(days=7)
+
+    # today 
+    drop_down = request.GET.get("drop-down",today())
+    print("drop------------------",drop_down)
+
+    res=today()
+    if drop_down == "today":
+        res = today()
+    elif drop_down == "last-7-days":
+        res = Week()
+    elif drop_down == "Last-Month":
+        res = Month()
+    elif drop_down == "last-3-Month":
+        res = Quater()
+    elif drop_down == "last-6-Month":
+        res = half_quater()
+    elif drop_down == "last-Year":
+        res = year()
+    else:
+        print("Incorrect")
+    # this_week = timezone.now() - timedelta(days=7)
+    invoice = Invoice.objects.filter(Q(invoice_date__gte=res,invoice_date__lte=date.today())).count()
+    # count_this_week = invoice.count()
+    # print("Generated invoices of number :",invoice,res3,res0, res1, res2)
     active_count = clientDetail.objects.filter(activeClient = True).count()
     bank_count = BankDetails.objects.filter().count()
-    return render(request,'tecblicapp/home_page.html',{"invoice":invoice,"active_count":active_count,"bank_count":bank_count})
+    return render(request,'tecblicapp/home_page.html',{"invoice":invoice,"active_count":active_count,"bank_count":bank_count,"drop_down":drop_down})               
 
 #Client Form
 @login_required(login_url='login')
@@ -888,6 +959,29 @@ def downloadInvoice(request,pk):
         response['Content-Disposition'] = content
         return response 
         return redirect('/check')
-    
-    
-    
+
+def filter_data(request):
+    if request.method == 'POST':
+        year = request.POST.get('year')
+        month = request.POST.get('month')
+        day = request.POST.get('day')
+        week = request.POST.get('week')
+        quarter = request.POST.get('quarter')
+
+        queryset = Invoice.objects.filter('invoice_date')
+
+        if year:
+            queryset = queryset.filter(date_field__year=year)
+        if month:
+            queryset = queryset.filter(date_field__month=month)
+        if day:
+            queryset = queryset.filter(date_field__day=day)
+        if week:
+            queryset = queryset.filter(date_field__week=week)
+        if quarter:
+            queryset = queryset.filter(date_field__quarter=quarter)
+
+        return render(request, 'filter1.html', {'results': queryset})
+    else:
+        return render(request, 'filter1.html')
+
