@@ -62,8 +62,8 @@
 
     {% endblock %}
     <form action="shelve" style="position: absolute;left: 1%;">
-    <button id="details" class="btn btn-dark bg-dark text-light btn-sm"  style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;height: 40px;">unarchive </button>
-        <button type="submit" id="addclient"  class="btn bg-dark btn-sm" style="z-index: 3;position: relative;bottom: -20px;left: 1%; height: 40px;">archive</button>
+    <button id="details" class="btn text-dark bg-light"  disabled style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;height: 40px;">unarchive </button>
+        <button type="submit" id="addclient"  class="btn bg-dark" style="z-index: 3;position: relative;bottom: -20px;left: 1%; height: 40px;">archive</button>
     </form>
 
   <br>
@@ -81,17 +81,16 @@
             <form action="/filter/" class="col-5" method="post">
                 {% csrf_token %}
                 <div class="row my-1" style="position: relative;left: 10%;">
-                    <label for="" style="text-align:left;" class="col-3 "><b style="text-align:left;">Start
-                            Date</b></label>
+                    <label for="" style="text-align:left;" class="col-3 "><b style="text-align:left;">Start Date</b></label>
                     <label for="" class="col-5" style="text-align:center;"><b>End Date</b></label>
                 </div>
                 <div class="row" style="position: relative;left: 10%;">
                     <input type="date" name="startdate" class="col-4 mx-1" required><input name="enddate" type="date"
                         class="col-4 mx-3" required>
                         <div style="col-2">
-                            <input  class="btn-dark bg-dark " style= "position: relative;
-                            bottom: 30px;
-                            right: 90px;border-radius:20px;" type="submit" value="Search">
+                            <input  class="btn-dark btn-dark btn-sm" style= "position: relative;
+                            bottom: 2.1rem;
+                            right: 15%;border-radius:20px;padding: 6px;" type="submit" value="Search">
                         </div>
                 </div>
             </form>

@@ -170,7 +170,9 @@ def homePage(request):
     invoice = Invoice.objects.filter(Q(invoice_date__gte=res,invoice_date__lte=date.today())).count()
     # count_this_week = invoice.count()
     # print("Generated invoices of number :",invoice,res3,res0, res1, res2)
+    
     active_count = clientDetail.objects.filter(activeClient = True).count()
+    print(active_count)
     bank_count = BankDetails.objects.filter().count()
     return render(request,'tecblicapp/home_page.html',{"invoice":invoice,"active_count":active_count,"bank_count":bank_count,"drop_down":drop_down})               
 
@@ -238,9 +240,9 @@ def edit_data(request):
 def invoice_detail(request):
     invoices=invoiceForm()
     bank_details=bankDetailForm
-    clientActive = clientDetail.objects.filter(activeClient=True)    
+    clientActive = clientDetail.objects.filter(activeClient=True)
     bank = BankDetails.objects.all()
-    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'client_details':clientActive,'bank':bank})
+    return render(request,'tecblicapp/invoice.html',{'invoices':invoices,'bank_details':bank_details,'clientdetails':clientActive,'bank':bank})
 
 #Html to pdf 
 # def html_to_pdf(template_src, context_dict={}):
