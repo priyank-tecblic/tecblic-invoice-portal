@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="icon" type="image/x-icon" href="/static/tecblic.png">
+<link rel="stylesheet" type="text/css"
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+<link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
+<title>Invoice</title>
+
+<form action="" method="POST">
+    <input type="hidden" name="payment_method" value="----">
+    <br>
+  
+    <h4 class="text-sm-left text-orange " style="font-weight:bold;margin-bottom:5%;font-size: 35px;font-weight: 800; margin-left: 8rem; color: black;">INVOICE DETAILS </h4>
+    
+    <br>
+    <div class="row" style="margin-left: 5rem; margin-right: 5rem;">
+    <div class="col-25" >
+    <h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 247px;"><b style="position: relative; right: 13rem;bottom: 2rem;"> Choose Date : </b></h4>
+    <label style="position: relative; left: 15rem; bottom: 5.6rem;" ></label></span>
+    </div>
+
+    <div class="row">
+        <div class="col-25" >
+        <h4 style="font-weight:bold;position: relative; bottom: 4px;border-color: black;left: 247px;"><b style="position: relative; right: 13rem;bottom: 2rem;"> Payment status: </b></h4>
+        <label style="position: relative; left: 15rem; bottom: 5.6rem;" ></label></span>
+   
+    <label class="column" style="margin-left: 5rem; margin-right: 5rem; margin-top: -3%; position: relative;"> <br>
+        <label style="color: black; margin-right: '2%';">
+          <input type="radio" name="payment_status" value="PENDING">
+          <span class="design"></span>
+          <span class="value">PENDING</span>
+        </label>
+        <label style="color: black;">
+          <input type="radio" name="payment_status" value="PAID">
+          <span class="design"></span>
+          <span class="value">PAID</span>
+        </label>
+    </div>
+    <div >
+        <h4 style="font-weight: bold;
+        position: relative;"><b style="position: relative; left:32rem; bottom: 100px;">Working Hours </b></h4>
+        <label class="text-dark" style="position: relative;
+        bottom: 108%;
+        left: 33rem;">
+        <label style= "color: black;">
+          <input type="radio" name="qty_type" value="HRS">
+          <span class="design"></span>
+          <span class="value">HRS</span>
+        </label>
+        <label style="color: black;">
+          <input type="radio" name="qty_type" value="DAY">
+          <span class="design"></span>
+          <span class="value">DAYS</span>
+        </label>
+        <input type="radio" name="qty_type" value="HRS"> HOURS
+        <input type="radio" style="margin-left: 10px;" name="qty_type" value="DAY"> DAYS 
+        <!-- {{invoices.qty_type}} -->
+        </label>
+        <br/>
+        </div>
+        <div >
+            <h4  style="margin-left: 40px;"
+            ><b>GST Type</b></h4>
+            <i style="
+            color: black;
+            position: relative;
+            bottom: 36%;
+            right: 158%;" class="fa fa-solid fa-angle-down"></i></label>
+            </div>
+            <div >
+                <h4  style="margin-left: 40px;"
+                ><b>Currency Type</b></h4>
+                <i style="
+                color: black;
+                position: relative;
+                bottom: 36%;
+                right: 158%;" class="fa fa-solid fa-angle-down"></i></label>
+                </div>
+                <div >
+                    <h4  style="margin-left: 40px;"
+                    ><b>Paymnet Method</b></h4>
+                    <i style="
+                    color: black;
+                    position: relative;
+                    bottom: 36%;
+                    right: 158%;" class="fa fa-solid fa-angle-down"></i></label>
+                    </div>
+
+</body>
+</html>
