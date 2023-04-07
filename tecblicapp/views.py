@@ -77,7 +77,7 @@ def login_user(request):
                 # append_to_csv()
                 return redirect('home_page')
             else:
-                messages.info(request,'Wrong User name or Password')
+                messages.info(request,'Enter Valid Username & Password')
         context={}
         return render(request,'tecblicapp/login.html',context)
     # if request.method=='POST':

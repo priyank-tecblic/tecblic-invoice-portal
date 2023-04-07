@@ -60,7 +60,7 @@ input[type=email]
     <form action="/save/" method="post" id="form_submit">
         <br>
         
-        <h4 class=" text-dark text-center" style="position: relative;left: -4%;margin-bottom:2%;font-size: 35px;font-weight: 800">Edit Client</h4>
+        <h4 class="text-dark text-center" style="position: relative;left: -4%;margin-bottom:2%;font-size: 35px;font-weight: 800">Edit Client</h4>
         <hr>
         {% csrf_token %}
         {% for i in client_data %}
@@ -68,21 +68,21 @@ input[type=email]
         <input type="hidden" name="cli_id" id="" value="{{i.id}}">
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Client Name</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text"  value="{{i.clientName}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "name" placeholder="name" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Client Email</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" value="{{i.clientEmail}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "email"  placeholder="Email" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Client Address</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label>
                     <textarea   class="" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "address"  rows="4" cols="13" placeholder="Address" required></textarea>
@@ -91,28 +91,28 @@ input[type=email]
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Client GST</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.clientGSTIN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="gst" name = "gstin" placeholder="" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">PAN</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.clientPAN}}" class="form-control" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" id="pan" name = "pan"  placeholder="pan" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Kind Attn</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.kindAttn}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "kind"  placeholder="Description" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 30%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Place of Supply</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><input type="text" value="{{i.placeofSupply}}" class="form-control",id="desription{{forloop.counter}}" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "place" placeholder="Description" required></label>
             </div>
@@ -120,7 +120,6 @@ input[type=email]
         <br>
         {% endfor %}
         <div>
-
             <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="position: relative;left: 41.5%;">
         </div>
     <br><br>
@@ -144,6 +143,5 @@ input[type=email]
     return true;
 
 });
-
 </script>
 </html>
