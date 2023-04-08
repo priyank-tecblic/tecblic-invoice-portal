@@ -123,7 +123,6 @@ cursor:default;
 #id_payment_method
 {
   position: relative;
-
     right: 60px;
 }
 #id_payment_method
@@ -232,13 +231,13 @@ input[type="radio"]:checked~.value {
 
 
 <div class="col-25">
-  <label for="dropdown" class="text-dark" style="position: relative; right: 101%"><b>Payment Status</b></label>
+  <label for="dropdown" class="text-dark" style="position: relative; right: 101%" ><b>Payment Status</b></label>
   
-{% comment %} <h4 style="font-weight:bold;position: relative; top: 46px; right: 109%;"><b style="position: relative; left: 3rem;">Payment Status </b></h4> {% endcomment %}
+<!-- <h4 style="font-weight:bold;position: relative; top: 46px; right: 109%;"><b style="position: relative; left: 3rem;">Payment Status </b></h4>  -->
 
 <label class="text-dark" style="position: relative; bottom: 16%; right: 105%;"> <br>
   <label style="color: black;">
-    <input type="radio" name="payment_status" value="PENDING">
+    <input type="radio" name="payment_status" value="PENDING" required>
     <span class="design"></span>
     <span class="value">PENDING</span>
   </label>
@@ -248,8 +247,8 @@ input[type="radio"]:checked~.value {
     <span class="value">PAID</span>
   </label>
   
-{% comment %} <input type="radio" name="payment_status" value="PENDING"> PENDING
-<input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID {% endcomment %}
+<!-- <input type="radio" name="payment_status" value="PENDING"> PENDING
+<input type="radio" name="payment_status" style="margin-left: 10px;" value="PAID"> PAID  -->
 
 <!-- {{invoices.payment_status}} -->
 </label>
@@ -258,9 +257,9 @@ input[type="radio"]:checked~.value {
 <div class="col-25" style="margin-top:47px;">
   <h4 style="font-weight:bold;position: relative; top: 40px; " ><b style="position: relative; top: 100px; right: 204%;">Payment Method</b></h4>
   
-  <label style="    position: absolute;
+  <label style="position: absolute;
   margin-top: 80px;
-  left:355px;width: 11.6rem;">{{invoices.currency_type}}
+  left:413px;width: 11.6rem;">{{invoices.payment_method}}
   <i style="font-size: 21px;
     color: black;
     position: absolute;
@@ -289,7 +288,7 @@ left: 52px;"><b style="position: relative; left:32rem; bottom: 140px;">Working H
 bottom: 108%;
 left: 33rem;">
 <label style= "color: black;">
-  <input type="radio" name="qty_type" value="HRS">
+  <input type="radio" name="qty_type" value="HRS" required>
   <span class="design"></span>
   <span class="value">HRS</span>
 </label>
@@ -310,7 +309,7 @@ left: 33rem;">
 
 <label style="    position: absolute;
 margin-top: 42px;
-left:355px;width: 11.6rem;">{{invoices.currency_type}}
+left:355px;width: 16.6rem;">{{invoices.currency_type}}
 <i style="font-size: 21px;
   color: black;
   position: relative;
@@ -339,17 +338,17 @@ left:355px;width: 11.6rem;">{{invoices.currency_type}}
   <b style="font-weight:bold;">Service1  </b>
   <div class="col-25">
     <div class="form-outline">
-      <textarea class="form-control" name="description1" placeholder="Description" id="textAreaExample1" rows="4" style="position: relative;top: 27px;width: 294px; height: 94px;"></textarea>
+      <textarea class="form-control" name="description1" placeholder="Description" id="textAreaExample1" rows="4" style="position: relative;top: 27px;width: 294px; height: 94px;" required></textarea>
       <label class="form-label" for="textAreaExample"></label>
     </div>
 {% comment %} <label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription" name = "description1" placeholder="Description" aria-describedby="basic-addon2" required></label> {% endcomment %}
 
 </div>
 <div class="col-25">
-<label onfocusout="n()" ><input type="number" name="cost1" class="form-control",id="cost1" placeholder="Cost Per Unit" required></label>
+<label onfocusout="n()" ><input type="number" min="0" name="cost1" class="form-control",id="cost1" placeholder="Cost Per Unit" required></label>
 </div>
 <div class="col-25">
-<label><input type="number" name="quantity1" class="form-control",id="quantity1" placeholder="quantity" required></label>
+<label><input type="number" min="0" name="quantity1" class="form-control",id="quantity1" placeholder="quantity" required></label>
 </div>
 </div>
 </div>

@@ -55,7 +55,7 @@ class SoftDeleteModel(models.Model):
         abstract = True
 class Invoice(SoftDeleteModel):
     Method = [
-    ('----','----'),
+    ('Select Payment Method','Select Payment Method'),
     ('Cash', 'Cash'),
     ('Online', 'Online'),
     ('Cheque', 'Cheque'),
@@ -63,13 +63,15 @@ class Invoice(SoftDeleteModel):
     ]
 
     imp=[
+        ('Select GST Type','Select GST Type'),
         ('DOMESTIC','DOMESTIC'),
         ('EXPORT','EXPORT'),
-        ('Inter State', 'Inter State'),
+        ('INTER STATE', 'INTER STATE'),
 
     ]
 
     Currency = [
+    ('Select Currency Type','Select Currency Type'),
     ('INR', 'INR'),
     ('USD', 'USD'),
     ('EUR', 'EUR'),
@@ -82,6 +84,7 @@ class Invoice(SoftDeleteModel):
     ]
 
     emails=[
+        ('Select Mode','Select Mode'),
         ('only_generate','Only Generate'),
         ('generate_and_send','Generate And Send Mail')
     ]
@@ -89,21 +92,20 @@ class Invoice(SoftDeleteModel):
         ("No's", "No's"),
         ('HRS', 'HRS'),
         ('DAY', 'DAY'),
-
     ]
 
     invoice_no = models.IntegerField(primary_key=True, blank=True)
     sac_code = models.CharField(null=True, blank=True, max_length=6)
-    invoice_date = models.DateField(null=True, blank=True)
-    payment_method = models.CharField(choices=Method, default='Cash', max_length=100)
+    invoice_date = models.DateField(null=True, blank=True )
+    payment_method = models.CharField(choices=Method, default='Select Payment Method', max_length=100)
     payment_status = models.CharField(choices=STATUS, default='PAID', max_length=100)
     gross_amount=models.IntegerField(null=True,blank=True)
     cgst = models.CharField(max_length=20, null=True, blank=True,default=0)
     sgst = models.CharField(max_length=20, null=True, blank=True,default=0)
     igst = models.CharField(max_length=20, null=True, blank=True,default=0)
-    currency_type=models.CharField(choices=Currency,max_length=5,default='INR')
+    currency_type=models.CharField(choices=Currency,max_length=100,default='Select Currency Type')
     qty_type = models.CharField(choices=quantity_type, default='HRS', max_length=5)
-    gst_type=models.CharField(choices=imp,default='DOMESTIC',max_length=20)
+    gst_type=models.CharField(choices=imp,default='Select GST Type',max_length=20)
 
     # description1 = models.CharField(max_length=100, null=True, blank=True)
     # description2 = models.CharField(max_length=100, null=True, blank=True, default="")
@@ -126,8 +128,8 @@ class Invoice(SoftDeleteModel):
     #Supplier Bank Details
 
     #RELATED fields
-    client = models.ForeignKey(clientDetail, blank=True, null=True, on_delete=models.SET_NULL)
-    send_email=models.CharField(choices=emails,max_length=20,default='only_generate')
+    client = models.ForeignKey(clientDetail, blank=True, null=True, on_delete=models.SET_NULL,default="Select Client Details")
+    send_email=models.CharField(choices=emails,max_length=20,default='Select Mode')
     bank = models.ForeignKey(BankDetails, blank=True, null=True, on_delete=models.SET_NULL)
 
     #Utility fields
