@@ -130,7 +130,7 @@ input[type=email]
 {% block content %}
 
 {% endblock %}
-<form method="GET" id="searchform" class="flex-container" action="/clientsearch" style="z-index:2;position:absolute;right:2%;top: 144px" >
+<form method="GET" id="searchform" class="flex-container table-detail" action="/clientsearch" style="z-index:2;position:absolute;right:2%;top: 144px" >
     <input class="mt-1 form-control mr-sm-2" style="width:300px;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);font-weight: bold;" type="search" style="position: relative;; left: 100px;" name="query" id="query" placeholder="Search" aria-label="Search">
     <i style="position: relative;top: -28px;right: -284px;z-index: 1;" type="button" onclick="document.getElementById('searchform').submit();" class="fa fa-search" aria-hidden="true"></i>
   </form>

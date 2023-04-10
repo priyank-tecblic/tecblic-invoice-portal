@@ -27,6 +27,8 @@ from datetime import date, timedelta
 SOURCE_DIR=r"/home/tecblic/Downloads"
 DEST_DIR=r"/home/tecblic/finance/receivables/"
 inv = None
+start_date = ""
+end_date = ""
 def append_to_csv():
     invoice = Invoice.objects.all().values()
     isExist = os.path.exists(DEST_DIR)
@@ -137,6 +139,12 @@ def today():
     res0 = d - td1
     return res0
 
+def upcoming():
+    up = timedelta(days=365)
+    d= date.today()
+    up1 = d + up
+    return up1
+
 #home Page
 @login_required(login_url='login')
 def homePage(request):
@@ -164,10 +172,12 @@ def homePage(request):
         res = half_quater()
     elif drop_down == "last-Year":
         res = year()
+    elif drop_down == "upcoming":
+        res = upcoming()
     else:
         print("Incorrect")
     # this_week = timezone.now() - timedelta(days=7)
-    invoice = Invoice.objects.filter(Q(invoice_date__gte=res,invoice_date__lte=date.today())).count()
+    invoice = Invoice.objects.filter(Q(invoice_date__gte=res,invoice_date__lte=date.today())|Q(invoice_date__gte=date.today(),invoice_date__lte=res)).count()
     # count_this_week = invoice.count()
     # print("Generated invoices of number :",invoice,res3,res0, res1, res2)
     
@@ -569,19 +579,23 @@ def generate_invoice_and_send_mail_form(request):
 @login_required(login_url='login')
 def filter_invoice(request):
     global filter_data
+    global start_date
+    global end_date
     if request.method == "POST":
         filter_data = Invoice.objects.filter(Q(invoice_date__gte = request.POST['startdate'])& Q(invoice_date__lte = request.POST['enddate']))
+        start_date = request.POST['startdate']
+        end_date = request.POST['enddate']
         paginator = Paginator(filter_data,5)
         page_number = request.GET.get('page')
         finaldata =  paginator.get_page(page_number)
         totalpage = finaldata.paginator.num_pages
-        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'startdate':start_date,'enddate':end_date,'totalpages':[n+1 for n in range(totalpage)]})
     else:
         paginator = Paginator(filter_data,5)
         page_number = request.GET.get('page')
         finaldata =  paginator.get_page(page_number)
         totalpage = finaldata.paginator.num_pages
-        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'totalpages':[n+1 for n in range(totalpage)]})
+        return render(request,'tecblicapp/filter.html',{'inv':finaldata,'startdate':start_date,'enddate':end_date,'totalpages':[n+1 for n in range(totalpage)]})
 
 @login_required(login_url='login')
 def check_invoice(request):
