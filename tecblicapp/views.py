@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import datetime
-from .forms import bankDetailForm, bankForm, clientDetailForm, invoiceForm
+from .forms import bankDetailForm, bankForm, clientDetailForm, invoiceForm,invoiceEditForm
 from .utils import render_to_pdf
 from .models import BankDetails, clientDetail,Invoice, AutoNumber,gstValue,InvoiceDesription
 from django.core.mail import EmailMessage
@@ -503,7 +503,7 @@ def generate_invoice(request):
                                     )
                 to_emails = [f'{client_detail_obj.clientEmail}']
                 subject = "Tecblic"
-                email = EmailMessage(subject, "hello", from_email=settings.EMAIL_HOST_USER, to=to_emails)
+                email = EmailMessage(subject, "Dear User , as per your request we have created Document file for you .Thank you!!!", from_email=settings.EMAIL_HOST_USER, to=to_emails)
                 email.attach(filename, pdf.getvalue(), "application/pdf")
                 email.send(fail_silently=False)
 
@@ -612,7 +612,7 @@ def edit_invoice(request, pk):
     invoice_det = InvoiceDesription.objects.filter(invoice=invoice)
     form = invoiceForm(instance=invoice)
     if request.method == 'POST':
-        form = invoiceForm(request.POST, instance=invoice)
+        form = invoiceEditForm(request.POST, instance=invoice)
         if form.is_valid():
             #selectid=request.POST['gst_type']
             form.save()
@@ -745,7 +745,6 @@ def edit_invoice(request, pk):
                 email.send(fail_silently=False)
                 return redirect('/check')
             return HttpResponse("NOT FOUND..!!")
-
         return redirect('/check')
     # append_to_csv()
     print("invoice_detail = >",invoice_det)

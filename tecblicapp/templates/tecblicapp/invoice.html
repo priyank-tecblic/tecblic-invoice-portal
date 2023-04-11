@@ -40,7 +40,7 @@ font-weight: bold;
 input[type=text], select, textarea {
 width: 117%;
 padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;
 }
@@ -144,8 +144,8 @@ cursor:default;
 {
   
  position:absolute;
-  width: 255px;
-  margin-left: 261px;
+  width: 16.9rem;
+  margin-left: 322px;
   margin-top:-92px;
 }
 #id_payment_method
@@ -229,7 +229,6 @@ input[type="radio"]:checked~.value {
 </div>
 
 
-
 <div class="col-25">
   <label for="dropdown" class="text-dark" style="position: relative; right: 101%" ><b>Payment Status</b></label>
   
@@ -255,15 +254,15 @@ input[type="radio"]:checked~.value {
 </div>
 
 <div class="col-25" style="margin-top:47px;">
-  <h4 style="font-weight:bold;position: relative; top: 40px; " ><b style="position: relative; top: 100px; right: 204%;">Payment Method</b></h4>
+  <h4 style="font-weight:bold;position: relative; top: 40px; " ><b style="position: relative; top: 100px; right: 202%;">Payment Method</b></h4>
   
   <label style="position: absolute;
   margin-top: 80px;
-  left:413px;width: 23.6rem;" required>{{invoices.payment_method}}
+  left:413px;width: 17.6rem;">{{invoices.payment_method}}
   <i style="font-size: 21px;
     color: black;
     position: absolute;
-    left: 172px;" class="fa fa-solid fa-angle-down"></i>
+    left: 238px;" class="fa fa-solid fa-angle-down"></i>
     </label>
   </div>
   
@@ -305,11 +304,11 @@ left: 33rem;">
 </div>
 
 <div class="col-25" >
-<h4 style="font-weight:bold;position: relative; margin-top:84px;" ><b style="position: relative; top: 100px; right: 98%;">Currency Type</b></h4>
+<h4 style="font-weight:bold;position: relative; margin-top:84px;" ><b style="position: relative; top: 100px; right: 96%;">Currency Type</b></h4>
 
-<label style="position: absolute;
+<label style="    position: absolute;
 margin-top: 42px;
-left:355px;width: 17.6rem;" required>{{invoices.currency_type}}
+left:415px;width: 18.6rem;">{{invoices.currency_type}}
 <i style="font-size: 21px;
   color: black;
   position: relative;
@@ -320,21 +319,21 @@ left:355px;width: 17.6rem;" required>{{invoices.currency_type}}
 
 
 <div  class="col-25" style="margin-left:-50%">
-  <h4  style="margin-left: 34px;margin-top:82px;  "
+  <h4  style="margin-left: 39px;margin-top:82px;  "
   ><b style="font-weight: bold;">GST Type</b></h4>
-  <label required>
+  <label>
    {{invoices.gst_type}}<i style="font-size: 21px;
    color: black;
    position: relative;
    bottom: 46px;
-   left: 487px;" class="fa fa-solid fa-angle-down"></i>
+   left: 557px;" class="fa fa-solid fa-angle-down"></i>
   </label>
   </div>
 
 </div>
 <div id="service_element" style="margin-left: 1%;">
 <div style="height: 100px;"></div>
-<div class="row" style="margin-left:5.7rem ;">
+<div class="row" style="margin-left:6.3rem ;">
   <b style="font-weight:bold;">Service1  </b>
   <div class="col-25">
     <div class="form-outline">
@@ -371,11 +370,11 @@ left:355px;width: 17.6rem;" required>{{invoices.currency_type}}
 </div> -->
 </div>
 <div class="test" style="top: 20px;">
-<h4 style="margin-left: 2%; position: relative; left: 7%; font-weight: bold; top: 4.5rem;" required>Client Details</h4>
+<h4 style="margin-left: 2%; position: relative; left: 7%; font-weight: bold; top: 4.5rem;">Client Details</h4>
 <div class="row" style="margin-left: 2%;">
 <div >
 <label style="width: 25%;">
-<select name="client" id="id_client" style="position: relative;left: 71%;" required>
+<select name="client" id="id_client" style="position: relative;left: 71%;">
 {% for i in clientdetails %}
 
 <option value="{{i.id}}" name="client"> {{i.clientName}}</option>
@@ -417,7 +416,7 @@ left: 60%;" class="fa fa-solid fa-angle-down"></i>
   color: black;
   position: relative;
   bottom: 0rem;
-  right: 3rem;
+  right: 2.4rem;
 ;" class="fa fa-solid fa-angle-down"></i></label>
 </div>
 
@@ -442,8 +441,7 @@ left: 60%;" class="fa fa-solid fa-angle-down"></i>
 bottom: 26px;
 right: 48%;"/> {% endcomment %}
 {% comment %} {% if invoices.invoice_date is not None%} {% endcomment %}
-<button id="myButton" class="btn btn-dark bg-dark my-4" style="left: 44%;" onclick="myFunction()
-">Generate PDF</button>
+<button id="myButton" onclick="myFunction()" class="btn btn-dark bg-dark my-4" style="left: 44%;">Generate PDF</button>
    {% comment %} <p id="result"></p>
    <script>
       var count = 0;
@@ -454,7 +452,7 @@ right: 48%;"/> {% endcomment %}
          result.innerHTML = count;
          result.save()
       }
-   </script> {% endcomment %}
+   </script>  {% endcomment %}
 {% comment %} {% endif %} {% endcomment %}
   </div>
 <br>
@@ -465,19 +463,6 @@ right: 48%;"/> {% endcomment %}
 
 </body>
 <script>
-    function myFunction() {
-      var user='New';
-      if(id_send_email.value == 'only_generate')
-      {
-      alert("Invoice Created  !");
-      }
-      else if(id_send_email.value == 'generate_and_send')
-      {
-      alert("Invoice Created and mail has been sent !");
-      }
-  }
-
-    
 function changestatus()
 {
 var paymentmode = document.getElementById('payment_status').value
@@ -521,6 +506,15 @@ id_t_4.rows = 2;
 id_t_5.rows = 2;
 $('#sacid').css('visibility','hidden')
   $("#sacid2").html($('#sacid').val())
+
+
+  function myFunction() {
+    if (id_send_email.value=="only_generate"){
+    alert("Invoice Created successfully !");
+  }else if(id_send_email.value=="generate_and_send"){
+    alert("Invoice Created and sent to registered email-id")
+  }
+  }
 
 </script>
 </html>

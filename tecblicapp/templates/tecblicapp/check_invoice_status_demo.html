@@ -62,7 +62,7 @@
 
     {% endblock %}
     <form action="shelve" style="position: absolute;left: 1%;">
-    <button id="details" class="btn text-dark bg-light"  disabled style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;height: 40px;">unarchive </button>
+    <button id="details" class="btn text-dark bg-light" disabled  style="z-index: 3;position: relative;bottom: -20px;left: 0.9%;height: 40px;">unarchive </button>
         <button type="submit" id="addclient"  class="btn bg-dark" style="z-index: 3;position: relative;bottom: -20px;left: 1%; height: 40px;">archive</button>
     </form>
 
@@ -85,7 +85,8 @@
                     <label for="" class="col-5" style="text-align:center;" ><b>End Date</b></label>
                 </div>
                 <div class="row" style="position: relative;left: 10%;">
-                    <input type="date" name="startdate" class="col-4 mx-1" required><input name="enddate" type="date" class="col-4 mx-3" selected required>
+                    <input type="date" name="startDate" id="startDate" class="col-4 mx-1" required>
+                    <input name="endDate" type="date" id="endDate" class="col-4 mx-3" selected required>
                         <div style="col-2">
                             <input  class="btn-dark btn-dark btn-sm" style= "position: relative;
                             bottom: 2.1rem;
@@ -186,11 +187,8 @@
             </ul>
         </nav>
     </div>
-
-        <br>
-
+<br>
 <script>
-
 </script>
 </body>
 

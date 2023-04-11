@@ -1,4 +1,88 @@
-<label for="site-search">Search the site:</label>
-<input type="search" id="site-search" name="q">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date Filter Example with Disabled End Date</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
 
-<button>Search</button>
+    label {
+      margin-right: 10px;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Date Filter Example with Disabled End Date</h1>
+  <form id="dateFilterForm">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate">
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" disabled>
+    <button type="submit">Apply Filter</button>
+    <p id="errorMessage" class="error-message"></p>
+  </form>
+  <div id="filteredData">
+    <!-- Placeholder for displaying filtered data -->
+  </div>
+
+  <script>
+    document.getElementById('dateFilterForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent form submission
+
+      var startDate = document.getElementById('startDate').value;
+      var endDate = document.getElementById('endDate').value;
+
+      if (startDate === "" || endDate === "") {
+        // Check if start date and end date are not empty
+        document.getElementById('errorMessage').textContent = "Please select both start date and end date.";
+        return;
+      }
+
+      if (new Date(startDate) > new Date(endDate)) {
+        // Check if start date is greater than end date
+        document.getElementById('errorMessage').textContent = "End date cannot be earlier than start date.";
+        return;
+      }
+
+      // Perform filtering logic here using the startDate and endDate values
+      // and update the #filteredData element with the filtered data
+
+      // Example: Display filtered data in the #filteredData element
+      var filteredDataElement = document.getElementById('filteredData');
+      filteredDataElement.innerHTML = '<p>Filtered data:</p>' +
+        '<p>Start Date: ' + startDate + '</p>' +
+        '<p>End Date: ' + endDate + '</p>';
+      
+      // Reset error message
+      document.getElementById('errorMessage').textContent = "";
+    });
+
+    document.getElementById('startDate').addEventListener('input', function() {
+      // Enable or disable end date based on selected start date
+      var startDate = document.getElementById('startDate').value;
+      var endDateElement = document.getElementById('endDate');
+      if (startDate !== "") {
+        endDateElement.disabled = false;
+        // Set the min attribute of end date input to selected start date
+        endDateElement.min = startDate;
+      } else {
+        endDateElement.disabled = true;
+        endDateElement.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
