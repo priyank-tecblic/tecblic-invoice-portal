@@ -78,19 +78,20 @@
        
         <div style="text-align: right;margin-right: -2%;" class="row">
             <div class="col-7"></div>
-            <form action="/filter/" class="col-5" method="post">
+            <form action="/filter/" class="col-5" method="post" id="dateFilterForm">
                 {% csrf_token %}
                 <div class="row my-1" style="position: relative;left: 10%;">
                     <label for="" style="text-align:left;" class="col-3"><b style="text-align:left;" >Start Date</b></label>
                     <label for="" class="col-5" style="text-align:center;" ><b>End Date</b></label>
                 </div>
                 <div class="row" style="position: relative;left: 10%;">
-                    <input type="date" name="startDate" id="startDate" class="col-4 mx-1" required>
-                    <input name="endDate" type="date" id="endDate" class="col-4 mx-3" selected required>
+                    <input type="date" name="startdate" id="startdate" class="col-4 mx-1" required>
+                    <input name="enddate" type="date" id="enddate" class="col-4 mx-3" selected required>
                         <div style="col-2">
                             <input  class="btn-dark btn-dark btn-sm" style= "position: relative;
                             bottom: 2.1rem;
                             right: 15%;border-radius:20px;padding: 6px;" type="submit" value="Search">
+                            {% comment %} <p id="errorMessage" class="error-message"></p> {% endcomment %}
                         </div>
                 </div>
             </form>
@@ -150,7 +151,7 @@
                                     </button>
                                 </i></td>
                             </form>
-                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;  " class=" ">Download</a></td>
+                            <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;" class=" ">Download</a></td>
                             {% endfor %}
                         </tr>
                     </tbody>
@@ -189,6 +190,50 @@
     </div>
 <br>
 <script>
+    document.getElementById('dateFilterForm').addEventListener('submit', function(event) {
+        // prevent form submission
+  
+        var startDate = document.getElementById('startdate').value;
+        var endDate = document.getElementById('enddate').value;
+  
+        if (startDate === "" || endDate === "") {
+          // Check if start date and end date are not empty
+          document.getElementById('errorMessage').textContent = "Please select both start date and end date.";
+          return;
+        }
+  
+        if (new Date(startDate) > new Date(endDate)) {
+          // Check if start date is greater than end date
+          document.getElementById('errorMessage').textContent = "End date cannot be earlier than start date.";
+          return;
+        }
+  
+        // Perform filtering logic here using the startDate and endDate values
+        // and update the #filteredData element with the filtered data
+  
+        // Example: Display filtered data in the #filteredData element
+        var filteredDataElement = document.getElementById('filteredData');
+        filteredDataElement.innerHTML = '<p>Filtered data:</p>' +
+          '<p>Start Date: ' + startDate + '</p>' +
+          '<p>End Date: ' + endDate + '</p>';
+        
+        // Reset error message
+        document.getElementById('errorMessage').textContent = "";
+      });
+  
+      document.getElementById('startdate').addEventListener('input', function() {
+        // Enable or disable end date based on selected start date
+        var startDate = document.getElementById('startdate').value;
+        var endDateElement = document.getElementById('enddate');
+        if (startDate !== "") {
+          endDateElement.disabled = false;
+          // Set the min attribute of end date input to selected start date
+          endDateElement.min = startDate;
+        } else {
+          endDateElement.disabled = true;
+          endDateElement.value = "";
+        }
+      }); 
 </script>
 </body>
 

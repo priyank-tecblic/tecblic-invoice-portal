@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html>
 <head>
   <title>Date Filter Example with Disabled End Date</title>
@@ -19,48 +19,44 @@
       margin-top: 10px;
     }
 
-    .error-message {
+    {% comment %} .error-message {
       color: red;
-    }
-  </style>
+    } {% endcomment %}
+  {% comment %} </style>
 </head>
-<body>
-  <h1>Date Filter Example with Disabled End Date</h1>
-  <form id="dateFilterForm">
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate">
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate" disabled>
-    <button type="submit">Apply Filter</button>
-    <p id="errorMessage" class="error-message"></p>
-  </form>
-  <div id="filteredData">
+<body> {% endcomment %}
+  {% comment %} <h1>Date Filter Example with Disabled End Date</h1> {% endcomment %}
+  {% comment %} <form id="dateFilterForm"> {% endcomment %}
+    {% comment %} <label for="startDate">Start Date:</label> {% endcomment %}
+    {% comment %} <input type="date" id="startdate" name="startdate"> {% endcomment %}
+    {% comment %} <label for="endDate">End Date:</label> {% endcomment %}
+    {% comment %} <input type="date" id="enddate" name="enddate" disabled> {% endcomment %}
+    {% comment %} <button type="submit">Apply Filter</button> {% endcomment %}
+    {% comment %} <p id="errorMessage" class="error-message"></p> {% endcomment %}
+  {% comment %} </form> {% endcomment %}
+  {% comment %} <div id="filteredData"> {% endcomment %}
     <!-- Placeholder for displaying filtered data -->
-  </div>
+  {% comment %} </div> {% endcomment %}
 
-  <script>
-    document.getElementById('dateFilterForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // prevent form submission
+  {% comment %} <script> {% endcomment %}
+    {% comment %} document.getElementById('dateFilterForm').addEventListener('submit', function(event) { {% endcomment %}
+      {% comment %} event.preventDefault(); // prevent form submission
 
-      var startDate = document.getElementById('startDate').value;
-      var endDate = document.getElementById('endDate').value;
+      var startDate = document.getElementById('startdate').value;
+      var endDate = document.getElementById('enddate').value;
 
       if (startDate === "" || endDate === "") {
         // Check if start date and end date are not empty
         document.getElementById('errorMessage').textContent = "Please select both start date and end date.";
         return;
-      }
+      } {% endcomment %}
 
-      if (new Date(startDate) > new Date(endDate)) {
-        // Check if start date is greater than end date
+      {% comment %} if (new Date(startDate) > new Date(endDate)) {
+        
         document.getElementById('errorMessage').textContent = "End date cannot be earlier than start date.";
         return;
       }
 
-      // Perform filtering logic here using the startDate and endDate values
-      // and update the #filteredData element with the filtered data
-
-      // Example: Display filtered data in the #filteredData element
       var filteredDataElement = document.getElementById('filteredData');
       filteredDataElement.innerHTML = '<p>Filtered data:</p>' +
         '<p>Start Date: ' + startDate + '</p>' +
@@ -70,10 +66,10 @@
       document.getElementById('errorMessage').textContent = "";
     });
 
-    document.getElementById('startDate').addEventListener('input', function() {
+    document.getElementById('startdate').addEventListener('input', function() {
       // Enable or disable end date based on selected start date
-      var startDate = document.getElementById('startDate').value;
-      var endDateElement = document.getElementById('endDate');
+      var startDate = document.getElementById('startdate').value;
+      var endDateElement = document.getElementById('enddate');
       if (startDate !== "") {
         endDateElement.disabled = false;
         // Set the min attribute of end date input to selected start date
@@ -85,4 +81,4 @@
     });
   </script>
 </body>
-</html>
+</html>  {% endcomment %}
