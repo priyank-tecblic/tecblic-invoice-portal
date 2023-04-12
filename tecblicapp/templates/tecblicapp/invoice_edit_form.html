@@ -45,7 +45,7 @@ textarea
 
 {% endblock %}
 
-    <form action="" method="post">
+    <form action="/edit_invoice/{{invoice.invoice_no}}/" method="post">
         <br>
         <h4 class="text-center text-dark " style="margin-bottom:2%;font-size: 35px;font-weight: 800">Edit Invoice</h4>
         <hr>
@@ -55,27 +55,26 @@ textarea
 
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Invoice Number</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <label><h4 style="color: black;position: relative; top: 10px;">{{invoice.invoice_no}}</h4></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Invoice date</label>
-            <div class="col-auto" style="    position: relative;
-    right: 5%;">
-                <label><input type="date" value="2023-03-15" class="form-control",id="dateid" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "invoice_date"  placeholder="Email" required></label>
+            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Invoice date </label>
+            <div class="col-auto" style="position: relative;right: 5%;">
+                <label><input type="date" value="{{invoice.invoice_date|date:"Y-m-d"}}" class="form-control" id="dateid" style="width:;background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);" name = "invoice_date"  placeholder="Email" required></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
-            <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Payment method</label>
-            <div class="col-auto" style="    position: relative;
+            <label class="col-sm-2 col-form-label text-dark" value="{{invoice.payment_method}}" style="font-weight: bold;">Payment method</label>
+            <div class="col-auto" style="position: relative;
     right: 5%;">
-                
-                    <select name="payment_method" id="id_payment_method" style="height: 100%;padding:12px;
-                    border: 1px solid #ccc;
+                <select name="payment_method" id="id_payment_method" style="height: 100%;padding:12px;
+                    border: 1px solid #000;
                     border-radius: 4px;
-                    resize: vertical;" > 
+                    resize: vertical;
+                    width: 153px;" > 
                         <option value="Cash" {% if invoice.payment_method == "Cash" %} selected{% endif %}>Cash</option>
 
                         <option value="Online" {% if invoice.payment_method == "Online" %} selected{% endif %}>Online</option>
@@ -83,25 +82,21 @@ textarea
                         <option value="Cheque" {% if invoice.payment_method == "Cheque" %} selected{% endif %}>Cheque</option>
                       
                         <option value="Swift Transfer" {% if invoice.payment_method == "Swift Transfer" %} selected{% endif %}>Swift Transfer</option>
-                    </select>
+                </select>
                     <i style="font-size: 21px;
                         color: black;
                         position: relative;
                         bottom: -3px;
                         left: -37px;
                         " class="fa fa-solid fa-angle-down"></i></label>
-                  
+
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Payment status</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
-
-                    <select name="payment_status" id="payment_status" onchange="changestatus()"  style="height: 100%;padding: 12px;
-                    border: 1px solid #ccc;
-                    border-radius: 4px;
-                    resize: vertical;">
+        <select name="payment_status" id="payment_status" onchange="changestatus()"  style="height: 100%;padding: 12px;border: 1px solid #000;border-radius: 4px;resize: vertical;width: 153px;">
                         <option value="PENDING" {% if invoice.payment_status == "PENDING" %} selected{% endif %}>PENDING</option>
                         <option value="PAID" {% if invoice.payment_status == "PAID" %} selected{% endif %}>PAID</option>
                       
@@ -119,13 +114,12 @@ textarea
 
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Currency type</label>
-            <div class="col-auto" style="    position: relative;
-    right: 5%;">
+            <div class="col-auto" style="position: relative;right: 5%;">
              <select name="currency_type" id="id_currency_type" style="height: 65%;padding: 12px;
-             border: 1px solid #ccc;
+             border: 1px solid #000;
              border-radius: 4px;
              resize: vertical;
-             width: 126%;">
+             width: 191%;">
                 <option value="INR" {% if invoice.payment_status == "INR" %} selected{% endif %}>INR</option>
               
                 <option value="USD" {% if invoice.payment_status == "USD" %} selected{% endif %}>USD</option>
@@ -137,23 +131,23 @@ textarea
               color: black;
               position: relative;
               bottom: 33px;
-              left: 67px;
+              left: 121px;
               " class="fa fa-solid fa-angle-down"></i></label>
             </div>
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Qty type</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
                 <select name="qty_type" id="id_qty_type" style="height: 68%; padding: 12px;
-                border: 1px solid #ccc;
+                border: 1px solid #000;
                 border-radius: 4px;
                 resize: vertical;width: 100%">
-                    <option value="No&#x27;s" {% if invoice.payment_status == "No&#x27;s" %} selected{% endif %}>No&#x27;s</option>
+                    <option value="No&#x27;s" {% if invoices.qty_type == "No&#x27;s" %} selected{% endif %}>No&#x27;s</option>
                 
-                    <option value="HRS" {% if invoice.payment_status == "HRS" %} selected{% endif %}>HRS</option>
+                    <option value="HRS" {% if invoices.qty_type == "HRS" %} selected{% endif %}>HRS</option>
                 
-                    <option value="DAY" {% if invoice.payment_status == "DAY" %} selected{% endif %}>DAY</option>
+                    <option value="DAY" {% if invoices.qty_type == "DAY" %} selected{% endif %}>DAY</option>
                 
                 </select>
                 <i style="font-size: 21px;
@@ -166,12 +160,12 @@ textarea
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">Gst type</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
              <select name="gst_type" id="id_gst_type" style="padding: 12px;
-             border: 1px solid #ccc;
+             border: 1px solid #000;
              border-radius: 4px;
-             resize: vertical;width: 122%;">
+             resize: vertical;width: 107%;">
              
                 <option value="DOMESTIC"  {% if invoice.payment_status == "DOMESTIC" %} selected{% endif %}>DOMESTIC</option>
               
@@ -190,10 +184,10 @@ textarea
         </div>
         <div class="form-group row" style="position: relative;left: 40%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;">T 2</label>
-            <div class="col-auto" style="    position: relative;
+            <div class="col-auto" style="position: relative;
     right: 5%;">
 <textarea name="t_2" cols="20" rows="7" required id="id_t_2" style="padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;">
    {{invoice.t_2}}</textarea>
@@ -204,7 +198,7 @@ resize: vertical;">
             <div class="col-auto" style="position: relative;
     right: 5%;">
 <textarea name="t_3" cols="20" rows="7" required id="id_t_3" style="padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;">
    {{invoice.t_3}}</textarea>
@@ -215,7 +209,7 @@ resize: vertical;">
             <div class="col-auto" style="    position: relative;
     right: 5%;">
 <textarea name="t_4" cols="20" rows="7" required id="id_t_4" style="padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;">
    {{invoice.t_4}}</textarea>
@@ -226,7 +220,7 @@ resize: vertical;">
             <div class="col-auto" style="    position: relative;
     right: 5%;">
 <textarea name="t_5" cols="20" rows="7" required id="id_t_5" style="padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;">
    {{invoice.t_5}}</textarea>
@@ -239,9 +233,10 @@ resize: vertical;">
                 <div class="col-auto" style="position: relative;
         right: 5%;">
      <select name="client" id="id_client" style="padding: 12px;
-     border: 1px solid #ccc;
+     border: 1px solid #000;
      border-radius: 4px;
-     resize: vertical;">
+     resize: vertical;
+     width: 228px;">
      
          {% for i in client %}
          <option value="{{i.clientName}}"  {% if invoice.client.id == i.id %} selected{% endif %}>{{i.clientName}}</option>
@@ -262,9 +257,9 @@ resize: vertical;">
                 <div class="col-auto" style="position: relative;
         right: 5%;">
                  <select name="send_email" id="id_send_email" style="padding: 12px;
-                 border: 1px solid #ccc;
+                 border: 1px solid #000;
                  border-radius: 4px;
-                 resize: vertical;">
+                 resize: vertical;width: 232px;">
                      <option value="generate_and_send"  {% if invoice.send_email == "generate_and_send" %} selected{% endif %}>Generate And Send Mail</option>                  
                     <option value="only_generate"  {% if invoice.send_email == "only_generate" %} selected{% endif %}> Only Generate</option>
 
@@ -282,10 +277,10 @@ resize: vertical;">
                 <div class="col-auto" style="    position: relative;
         right: 5%;">
 <select name="bank" id="id_bank" style="padding: 12px;
-border: 1px solid #ccc;
+border: 1px solid #000;
 border-radius: 4px;
 resize: vertical;
-width: 103%;"> 
+width: 129%;"> 
     {% for i in bank %}
     <option value="{{invoice.bank.id}}" {% if invoice.bank.id == i.id %} selected{% endif %}>{{i.bank_name}}</option>
     {% endfor %}
@@ -295,7 +290,7 @@ width: 103%;">
   color: black;
   position: relative;
   bottom: 34px;
-  left: 131px;
+  left: 200px;
   " class="fa fa-solid fa-angle-down"></i></label>
                 </div>
             </div>
@@ -317,11 +312,11 @@ width: 103%;">
         <div class="form-group row" style="position: relative;left: 15%;">
             <label class="col-sm-2 col-form-label text-dark" style="font-weight: bold;left: 25%">Cost of Unit{{forloop.counter}}</label>
         <div class="col-auto">
-            <input type="number" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);position: relative; left: 158%" name="cost{{forloop.counter}}" value="{{i.cost_per_unit}}" class="form-control",id="cost{{forloop.counter}}" placeholder="Cost Per Unit" required>
+            <input type="number" style="background-image: linear-gradient(to top, rgb(39, 37, 37) 2px, rgba(255, 255, 255, 0) 2px), linear-gradient(to top, #1d1b1b 1px, rgba(255, 255, 255, 0) 1px);color:rgb(39, 37, 37);position: relative; left: 177%" name="cost{{forloop.counter}}" value="{{i.cost_per_unit}}" class="form-control",id="cost{{forloop.counter}}" placeholder="Cost Per Unit" required>
         </div>
     </div>
     {% endfor %}<br>
-    <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="position: relative;left: 42rem;border-radius:40px;">
+    <input type="submit" value="SUBMIT" class="ml-3 btn btn-dark bg-dark" style="position: relative;left: 48rem;border-radius:40px;">
     <br><br>
 </div>
 </form>

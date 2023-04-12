@@ -96,7 +96,7 @@ class Invoice(SoftDeleteModel):
 
     invoice_no = models.IntegerField(primary_key=True, blank=True)
     sac_code = models.CharField(null=True, blank=True, max_length=6)
-    invoice_date = models.DateField(null=True, blank=True )
+    invoice_date = models.DateField(null=True, blank=True)
     payment_method = models.CharField(choices=Method, default='Select Payment Method', max_length=100)
     payment_status = models.CharField(choices=STATUS, default='PAID', max_length=100)
     gross_amount=models.IntegerField(null=True,blank=True)

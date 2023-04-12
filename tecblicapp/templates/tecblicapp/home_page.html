@@ -246,7 +246,7 @@ border: solid 2px #0066cc;
   <h2 style="margin-left: 6rem;"> Tecblic Dashboard</h2>
     <form action="/home" method="get">
         <select id="date-filtering-select" name="drop-down" onChange="this.form.submit()" class="btn btn-info btn-sm m-4 float-right" style="right: 3rem; bottom: 4rem;"> 
-             
+            <option value="upcoming" {% if drop_down == "upcoming" %}selected{%endif%}>Upcoming</option> 
             <option value="today" {% if drop_down == "today" %}selected{% endif %}>Today </option>
             <option value="last-7-days" {% if drop_down == "last-7-days" %}selected{% endif %}>Last 7 Days</option>
             <option value="Last-Month" {% if drop_down == "Last-Month" %}selected{% endif %}>Last month</option>

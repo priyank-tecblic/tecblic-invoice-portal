@@ -51,12 +51,14 @@ class invoiceForm(forms.ModelForm):
     class Meta:
         
         model=Invoice
-        # fields=['invoice_no','invoice_date']
+        fields=['invoice_no','invoice_date','payment_method','payment_status','currency_type','t_2','t_3','t_4','t_5','gst_type','send_email','client','sac_code']
         exclude=('cgst','sgst','igst','slug','uniqueId','gross_amount')
         widgets={
             'invoice_no':forms.TextInput(attrs= {'class':'form-control','id':'invoiceid','placeholder':'Invoice No','readonly':True}),
             'invoice_date':forms.DateInput(attrs= {'class':'form-control','id':'dateid','placeholder':'Enter date','type': 'date', 'class': 'form_input','required':'required',}),
             'sac_code': forms.TextInput(attrs={'class': 'form-control', 'id': 'sacid', 'placeholder': 'SAC','value':'998314','required':'required',}),
+            'payment_method':forms.Select(attrs = {'id':'payment_method','onchange':'changestatus()'}),
+            'currency_type':forms.Select(attrs = {'id':'currency_type','onchange':'changestatus()'}),
             # 'cost_per_unit1':forms.NumberInput(attrs= {'class':'form-control','id':'costperunitid','placeholder':'Cost Per Unit','required':'required',}),
             # 'description1':forms.TextInput(attrs= {'class':'form-control','id':'desriptionid','placeholder':'Description','required':'required',}),
             # 'quantity1':forms.NumberInput(attrs= {'class':'form-control','id':'quantityid','placeholder':'Quantity','required':'required',}),
@@ -99,4 +101,37 @@ class InvoiceDetailForm(forms.ModelForm):
            'cost_per_unit':forms.NumberInput(attrs= {'class':'form-control','id':'costperunitid','placeholder':'Cost Per Unit','required':'required',}),
             'description':forms.TextInput(attrs= {'class':'form-control','id':'desriptionid','placeholder':'Description','required':'required',}),
             'quantity':forms.NumberInput(attrs= {'class':'form-control','id':'quantityid','placeholder':'Quantity','required':'required',})
+        }
+
+
+class invoiceEditForm(forms.ModelForm):
+    class Meta:
+        
+        model=Invoice
+        fields=['invoice_no','invoice_date','payment_method','payment_status','currency_type']
+        exclude=('cgst','sgst','igst','slug','uniqueId','gross_amount')
+        widgets={
+            'invoice_no':forms.TextInput(attrs= {'class':'form-control','id':'invoiceid','placeholder':'Invoice No','readonly':True}),
+            'invoice_date':forms.DateInput(attrs= {'class':'form-control','id':'dateid','placeholder':'Enter date','type': 'date', 'class': 'form_input','required':'required',}),
+            'sac_code': forms.TextInput(attrs={'class': 'form-control', 'id': 'sacid', 'placeholder': 'SAC','value':'998314','required':'required',}),
+            'payment_method':forms.Select(attrs = {'id':'payment_method','onchange':'changestatus()'}),
+            'currency_type':forms.Select(attrs = {'id':'currency_type','onchange':'changestatus()'}),
+            # 'cost_per_unit1':forms.NumberInput(attrs= {'class':'form-control','id':'costperunitid','placeholder':'Cost Per Unit','required':'required',}),
+            # 'description1':forms.TextInput(attrs= {'class':'form-control','id':'desriptionid','placeholder':'Description','required':'required',}),
+            # 'quantity1':forms.NumberInput(attrs= {'class':'form-control','id':'quantityid','placeholder':'Quantity','required':'required',}),
+
+            # 'cost_per_unit2': forms.NumberInput(
+            #     attrs={'class': 'form-control', 'id': 'costperunitid', 'placeholder': 'Cost Per Unit', }),
+            # 'description2': forms.TextInput(
+            #     attrs={'class': 'form-control', 'id': 'desriptionid', 'placeholder': 'Description', }),
+            # 'quantity2': forms.NumberInput(
+            #     attrs={'class': 'form-control', 'id': 'quantityid', 'placeholder': 'Quantity',  }),
+
+            # 'cost_per_unit3': forms.NumberInput(
+            #     attrs={'class': 'form-control', 'id': 'costperunitid', 'placeholder': 'Cost Per Unit', }),
+            # 'description3': forms.TextInput(
+            #     attrs={'class': 'form-control', 'id': 'desriptionid', 'placeholder': 'Description', }),
+            # 'quantity3': forms.NumberInput(
+            #     attrs={'class': 'form-control', 'id': 'quantityid', 'placeholder': 'Quantity', }),
+            'payment_status':forms.Select(attrs = {'id':'payment_status','onchange':'changestatus()'})
         }
