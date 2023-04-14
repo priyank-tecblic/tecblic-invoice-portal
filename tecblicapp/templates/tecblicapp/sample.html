@@ -1,4 +1,4 @@
-{% comment %} <!DOCTYPE html>
+<!-- {% comment %} <!DOCTYPE html>
 <html>
 <head>
   <title>Date Filter Example with Disabled End Date</title>
@@ -35,12 +35,12 @@
     {% comment %} <p id="errorMessage" class="error-message"></p> {% endcomment %}
   {% comment %} </form> {% endcomment %}
   {% comment %} <div id="filteredData"> {% endcomment %}
-    <!-- Placeholder for displaying filtered data -->
-  {% comment %} </div> {% endcomment %}
+     Placeholder for displaying filtered data -->
+ <!-- </div> 
 
-  {% comment %} <script> {% endcomment %}
-    {% comment %} document.getElementById('dateFilterForm').addEventListener('submit', function(event) { {% endcomment %}
-      {% comment %} event.preventDefault(); // prevent form submission
+  <script>
+    document.getElementById('dateFilterForm').addEventListener('submit', function(event) { 
+event.preventDefault(); // prevent form submission
 
       var startDate = document.getElementById('startdate').value;
       var endDate = document.getElementById('enddate').value;
@@ -49,9 +49,9 @@
         // Check if start date and end date are not empty
         document.getElementById('errorMessage').textContent = "Please select both start date and end date.";
         return;
-      } {% endcomment %}
+      } 
 
-      {% comment %} if (new Date(startDate) > new Date(endDate)) {
+     if (new Date(startDate) > new Date(endDate)) {
         
         document.getElementById('errorMessage').textContent = "End date cannot be earlier than start date.";
         return;
@@ -81,4 +81,47 @@
     });
   </script>
 </body>
-</html>  {% endcomment %}
+</html>    -->
+
+
+<!-- 
+<style>
+  .sd-container {
+    position: relative;
+    float: left;
+    left: 25%
+  }
+  
+  .sd {
+    border: 1px solid #1cbaa5;
+    padding: 5px 10px;
+    height: 30px;
+    width: 150px;
+  }
+  
+  .open-button {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    pointer-events: none;
+  }
+  
+  .open-button button {
+    border: none;
+    background: transparent;
+  }
+</style>
+<div class="col-1">
+  {% comment %} <h5> Choose Date : </h5> {% endcomment %}
+<form>
+  <div class="sd-container">
+    <input class="sd" type="date" name="selected_date" />
+    <span class="open-button">
+      <button type="button">📅</button>
+    </span>
+  </div>
+</form>
+</div> -->
