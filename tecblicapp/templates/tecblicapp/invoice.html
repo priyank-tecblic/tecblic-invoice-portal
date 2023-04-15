@@ -21,7 +21,7 @@ href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab
 <link href="/static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 <link href="/static/assets/css/material-dashboard-rtl.css?v=2.1.2" rel="stylesheet" />
 <title>Invoice</title>
-
+{% load widget_tweaks %}
 <style>
 
 body{
@@ -220,6 +220,13 @@ input[type="radio"]:checked~.value {
   {% csrf_token %}
 <h4 class="text-sm-left text-orange " style="font-weight:bold;font-size: 35px;font-weight: 800; margin-left: 45rem; color: #000;">Generate Invoice</h4>
 
+<div class="col-25">
+  <h3 class="text-right" style="font-weight: bold;position: relative;left: 1058px;bottom: 62px;">
+    <b>Invoice Number :</b></h4>
+  <label style="position: relative;font-weight:bold;">{{invoices.sac_code}}<h4 style="position: relative;left: 983px;bottom: 86px;left: 1015px;font-weight:bold;" id="sacid2" class="text-right text-dark"></h4></label>
+    <br/>
+  </div>
+
 
 <br>
 <hr>
@@ -413,13 +420,13 @@ input[type="radio"]:checked~.value {
   right: 33px;" class="fa fa-solid fa-angle-down"></i>
   </label>
 </div>
-<div class="row" style="margin-left:6.3rem ;">
+{% comment %} <div class="row" style="margin-left:6.3rem ;">
   <b style="font-weight:bold;font-size: 26px;margin-left: 354px;">Service1  </b>
   <div class="col-25">
     <div class="form-outline">
       <textarea class="form-control" name="description1" placeholder="Description" id="textAreaExample1" rows="6" style="position: relative;top: 27px;width: 774px; height: 94px;margin-left: 362px;" required></textarea>
       <label class="form-label" for="textAreaExample"></label>
-    </div>
+    </div> {% endcomment %}
 {% comment %} <label><input type="text" class="form-control" style="height: 159%;width: 130%;" id="desription" name = "description1" placeholder="Description" aria-describedby="basic-addon2" required></label> {% endcomment %}
 
 </div>
@@ -431,19 +438,20 @@ input[type="radio"]:checked~.value {
 </div> {% endcomment %}
 </div>
 </div>
-<div class="col-25">
+{% comment %} <div class="col-25">
   <label onfocusout="n()" ><input type="number" min="0" name="cost1" class="form-control",id="cost1" placeholder="Cost Per Unit" style="position: relative; left: 476px;" required></label>
 </div>
 <div class="col-25">
   <label><input type="number" min="0" name="quantity1" class="form-control",id="quantity1" placeholder="quantity" style="position: relative; left: 443px;" required></label>
   </div>
-<button type="submit" class="btn btn-dark bg-dark text-right my-2" style="margin-left: 16px;height:45px;bottom: 224px;" id="btn">Add Service</button>
+<button type="submit" class="btn btn-dark bg-dark text-right my-2" style="margin-left: 16px;height:45px;bottom: 224px;" id="btn">Add Service</button> {% endcomment %}
 
 
-<div class="row" style="margin-left: 2%;">
+<div class="row" style="margin-left: 0%;">
 <div class="col-25">
 <label hidden="hidden">{{invoices.invoice_no}}</label>
 </div>
+
 
 <!-- <div class="col-25">
 <label>{{invoices.cgst}}</label>
@@ -456,9 +464,9 @@ input[type="radio"]:checked~.value {
 </div> -->
 </div>
 <div class="test" style="top: 20px;">
-<h3 style="font-weight: bold;margin-left: 123px;position: relative;top: 73px;">Client details :</h3>
+<h3 style="font-weight: bold;position: relative;left: 482px;">Client details :</h3>
 <label style="width: 25%;">
-<select name="client" id="id_client" style="position: relative;left: 345px;width: 75%;">
+<select name="client" id="id_client" style="position: relative;left: 476px;width: 295px;top: -5px;">
 {% for i in clientdetails %}
 
 <option value="{{i.id}}" name="client"> {{i.clientName}}</option>
@@ -469,17 +477,17 @@ input[type="radio"]:checked~.value {
 <i style="   font-size: 21px;
 color: black;
 position: relative;
-left: 301px;" class="fa fa-solid fa-angle-down"></i>
+left: 440px;top: -3px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
 
 </div>
 
-<h3 style="margin-left: 125px; font-weight: bold;position: relative;top: 4rem;">Supplier Details :</h3>
-<div class="row" style="margin-left: 2%;">
+<h3 style="font-weight: bold;position: relative;margin-left:1027px;bottom: 150px;">Supplier Details :</h3>
+<div class="row" style="margin-bottom:-124px;">
 <div >
 <label style="width: 25%;">
-<select name="bank_info" style="position: relative; left: 296px;width: 77%;top: -16px;" >
+<select name="bank_info" style="position: relative;left: 1015px;bottom: 165px;width: 280px;" >
 {% for i in bank %}
 <option value="{{i.id}}" > {{i.bank_name}}</option>
 {% endfor %}
@@ -488,27 +496,66 @@ left: 301px;" class="fa fa-solid fa-angle-down"></i>
 <i style="font-size: 21px;
 color: black;
 position: relative;
-left:251px;bottom: 13px;" class="fa fa-solid fa-angle-down"></i>
+left:974px;bottom: 163px;" class="fa fa-solid fa-angle-down"></i>
 </label>
 </div>
-
 </div>
-<div class="row" style="margin-left: 2%;">
+
+{% comment %} <div class="row">
+  <h3 style="position: relative;bottom: 132px;margin-left: 816px;font-weight: bold;">Generate Mode </h3>
+</div> {% endcomment %}
+{% comment %} <div class="row" style="margin-left: 2%;">
+  
 <div class="col-25">
-<label style="position: relative; left: 79%;width: 315px;">{{invoices.send_email}}<i style="  
+ 
+<label style="position: relative; left: 700px;width: 315px;bottom: 152px;">{{invoices.send_email}}<i style="  
   font-size: 21px;
   color: black;
   position: relative;
   bottom: 0rem;
   right: 2.4rem;
 ;" class="fa fa-solid fa-angle-down"></i></label>
-</div>
+</div> {% endcomment %}
+<hr>
+{% comment %} <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+  <div class="card-block">
+    <h3 class="card-title">Special title treatment</h3>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> {% endcomment %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="card-body">
+  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service1 : </h3>
+
+<div id="service_element_main">
+
+  <div class="row">
+    <div class="form-outline">
+      <textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -73px;width: 823px;margin-left: 500px;" required></textarea>
+      <label class="form-label" for="textAreaExample"></label>
+    </div>
+
+    <div class="col-25" style="position: relative;bottom: 113px;margin-left: 484px;">
+      <label onfocusout="n()" ><input type="number" min="0" name="cost1" class="form-control",id="cost1" placeholder="Enter Cost per Unit" style="width: 308px;" required></label>
+      </div>
+
+      <div class="col-25">
+        <label><input type="number" min="0" name="quantity1" class="form-control",id="quantity1" placeholder="Enter Quantity" style="position:relative;width: 305px;bottom: 106px;left: 75px;" required></label>
+        </div>
 
 </div>
+</div>
+
+<button type="submit" class="btn btn-dark bg-dark btn-sm" style="width: 76px;margin-left: 1232px;bottom: 194px;font-size: 40px;" id="btn">+</button>
 <h3 style="font-weight:bold;margin-left: 120px;">Terms and Conditions:</h3>
 
 <div class="row" style="margin-left: 2%;" >
-<label>{{invoices.t_2}}</label>
+<label>{{invoices.t_2 }}</label>
 </div>
 
 <div class="row" style="margin-left: 2%;">
@@ -521,11 +568,25 @@ left:251px;bottom: 13px;" class="fa fa-solid fa-angle-down"></i>
 <label>{{invoices.t_5}}</label>
 </div>
 </div>
+
+<div class="radio-inline">
+  <label class="text-dark" style="margin-left: 730px;position: relative;"> <br>
+    <label style= "color: black;">
+      <input type="radio" name="send_email"  value="only_generate" required>
+      <span class="design"></span>
+      <span class="value">Generate PDF</span>
+    </label>
+    <label style="color: black;">
+      <input type="radio" name="send_email"  value="generate_and_send">
+      <span class="design"></span>
+      <span class="value">Email</span>
+    </label>
+  </div>
 {% comment %} <input id="submitt" type="submit" value="Generate PDF" class="btn btn-dark bg-dark my-4" style="position: relative;
 bottom: 26px;
 right: 48%;"/> {% endcomment %}
 {% comment %} {% if invoices.invoice_date is not None%} {% endcomment %}
-<button id="myButton" onclick="myFunction()" class="btn btn-dark bg-dark my-4" style="left: 44%;">Generate PDF</button>
+<button id="myButton" onclick="myFunction()" class="btn btn-dark bg-dark my-4" style="width: 170px;left: 843px;bottom: 35px;">Generate PDF</button>
    {% comment %} <p id="result"></p>
    <script>
       var count = 0;
@@ -538,7 +599,7 @@ right: 48%;"/> {% endcomment %}
       }
    </script>  {% endcomment %}
 {% comment %} {% endif %} {% endcomment %}
-  </div>
+
 <br>
 <br>
  
@@ -547,6 +608,7 @@ right: 48%;"/> {% endcomment %}
 
 </body>
 <script>
+var textt = document.getElementById("id_t_2");
 function changestatus()
 {
 var paymentmode = document.getElementById('payment_status').value
@@ -573,21 +635,24 @@ k=k+1
 $(document).ready(function(){
 $("#btn").click(function(){
 k=k+1
-$("#service_element").append('<div class="row" style="margin-left:5.7rem ;" id="element'+k+'"><b ">Service'+k+'  </b><div class="col-25" ><label><textarea class="form-control" style="height: 159%;width: 130%;" row="4" id="description1'+k+'" name = "description'+k+'" placeholder="Description" ></textarea></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
-});
+// $("#service_element").append('<div class="row" id="element'+k+'>  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service'+k+' : </h3><div class="col-25" ><label><textarea class="form-control" style="height: 159%;width: 130%;" row="4" id="description1'+k+'" name = "description'+k+'" placeholder="Description" ></textarea></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
+// });
 
+$("#service_element_main").append('<div class="row" id="element'+k+'">  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service'+k+' : </h3><div class="col-25" ><div class="col-25" style="margin-top: 48px;"><textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -109px;width: 823px;margin-left: 500px;" required></textarea><label class="form-label" for="textAreaExample"></label></div><div class="col-25" style="position: relative;bottom: 113px;margin-left: 484px;"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Enter Cost Per Unit" style="width: 308px;"  required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="Enter Quantity"  style="position: relative;width: 200px;bottom: 207px;left: 1091px;" required></label></div><div class="col" style="margin-left: 613px;bottom: 133px;"><button class="btn btn-danger btn-d-sm-flex" onclick="del(this.id)" id="bttn'+k+'"><i class="fa fa-close"></i> </button></div></div>');
+});
 });
 function del(id)
 {
 var id= String(id)
 id = id.slice(4)
+console.log("im in deleted")
 document.getElementById("element"+id+"").remove()
 k=k-1
 }
-id_t_2.rows = 2;
-id_t_3.rows = 2;
-id_t_4.rows = 2;
-id_t_5.rows = 2;
+id_t_2.rows = 5;
+id_t_3.rows = 5;
+id_t_4.rows = 5;
+id_t_5.rows = 5;
 $('#sacid').css('visibility','hidden')
   $("#sacid2").html($('#sacid').val())
 
