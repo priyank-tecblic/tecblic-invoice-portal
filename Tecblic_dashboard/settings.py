@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tecblicapp',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

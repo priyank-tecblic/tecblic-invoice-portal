@@ -119,7 +119,7 @@ class Invoice(SoftDeleteModel):
     # cost_per_unit3 = models.DecimalField(max_digits =9,null=True, blank=True, default=0, decimal_places=2)
 
     t_2 = models.TextField(
-        default="2) This Bill is payable by Electronic transfer/ DD/ Cheque in favor of Tecblic Private Limited. For payment made by electronic fund transfer, please send details to accounts@tecblic.com (Invoice number, Invoice amount, Tecblic Bank name and Account number, Payment date, Amount paid, TDS if applicable). Queries can be sent to us at accounts@tecblic.com.")
+        default="2) This Bill is payable by Electronic transfer/ DD/ Cheque in favor of Tecblic Private Limited. For payment made by electronic fund transfer, please send details to accounts@tecblic.com (Invoice number, Invoice amount, Tecblic Bank name and Account number, Payment date, Amount paid, TDS if applicable). Queries can be sent to us at accounts@tecblic.com.",)
     t_3 = models.TextField(default="3) Please make payment within 7 days of receipt of this invoice.")
     t_4 = models.TextField(
         default="4) TDS certificate, if applicable, should be issued in favor of Tecblic Private Limited, AAHCT7338J of the Billing Entity and emailed to accounts@tecblic.com or couriered to above address.")
