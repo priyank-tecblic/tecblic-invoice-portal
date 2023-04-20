@@ -87,7 +87,7 @@
                             <th scope="col">SGST</th> -->
                             <th scope="col" style="font-weight:800;font-size: large;">Gross Amount</th>
                             <th scope="col" style="font-weight:800;font-size: large;">Currency Type</th>
-                            <th scope="col" style="font-weight:800;font-size: large;">Generate Type</th>
+                            {% comment %} <th scope="col" style="font-weight:800;font-size: large;">Generate Type</th> {% endcomment %}
 
                             <th scope="col" colspan="3" style="font-weight:800;font-size: large;">Action</th>
                         </tr>
@@ -111,11 +111,11 @@
                 <td>{{ i.sgst}}</td> -->
                             <td>{{ i.gross_amount}}</td>
                             <td>{{ i.currency_type}}</td>
-                            <td>{{ i.send_email}}
+                            {% comment %} <td>{{ i.send_email}} {% endcomment %}
                             </td>
                                 
                             <td><a  href="{% url 'edit_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=" "><i class="fa fa-edit"></i></a></td>
-                            <td><a href="{% url 'delete_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=""><i class="fa fa-trash"></i></a></td>
+                            <td><a href="{% url 'delete_invoice' i.invoice_no %}" style="border-radius: 20px;color: black;" class=""><i class="fa fa-archive"></i></a></td>
                             <td><a  href="download_invoice/{{i.invoice_no}}" style="text-decoration-line: underline;" class=" ">Download</a></td>
                             {% endfor %}
                         </tr>
