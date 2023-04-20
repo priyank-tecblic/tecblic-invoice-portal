@@ -27,6 +27,7 @@ href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab
 body{
 background-color: #ffffff;
 overflow-x: hidden;
+
 }
 
 * {
@@ -221,13 +222,11 @@ input[type="radio"]:checked~.value {
 <h4 class="text-sm-left text-orange " style="font-weight:bold;font-size: 35px;font-weight: 800; margin-left: 45rem; color: #000;">Generate Invoice</h4>
 
 <div class="col-25">
-  <h3 class="text-right" style="font-weight: bold;position: relative;left: 1058px;bottom: 62px;">
+  <h3 class="text-right" style="font-weight: bold;position: relative;left: 1099px;bottom: 69px;">
     <b>Invoice Number :</b></h4>
-  <label style="position: relative;font-weight:bold;">{{invoices.sac_code}}<h4 style="position: relative;left: 983px;bottom: 86px;left: 1015px;font-weight:bold;" id="sacid2" class="text-right text-dark"></h4></label>
+  <label style="position: relative;font-weight:bold;">{{invoices.sac_code}}<h4 style="position: relative;left: 1062px;bottom: 86px;left: 1060px;font-weight:bold;" id="sacid2" class="text-right text-dark"></h4></label>
     <br/>
   </div>
-
-
 <br>
 <hr>
 <div class="section-content" style="margin-left: 494px; margin-top: 50px;">
@@ -412,7 +411,7 @@ input[type="radio"]:checked~.value {
     </div>
 <div id="service_element" style="margin-left: 1%;">
 <div style="height: 100px;">
-  <label style="position: relative;margin-left: 481px;width: 300px;bottom: 73px;">{{invoices.payment_method}}
+  <label style="position: relative;margin-left: 467px;width: 309px;bottom: 73px;">{{invoices.payment_method}}
     <i style="  
   font-size: 21px;
   color: black;
@@ -466,7 +465,7 @@ input[type="radio"]:checked~.value {
 <div class="test" style="top: 20px;">
 <h3 style="font-weight: bold;position: relative;left: 482px;">Client details :</h3>
 <label style="width: 25%;">
-<select name="client" id="id_client" style="position: relative;left: 476px;width: 295px;top: -5px;">
+<select name="client" id="id_client" style="position: relative;left: 464px;width: 286px;top: -5px;">
 {% for i in clientdetails %}
 
 <option value="{{i.id}}" name="client"> {{i.clientName}}</option>
@@ -487,7 +486,7 @@ left: 440px;top: -3px;" class="fa fa-solid fa-angle-down"></i>
 <div class="row" style="margin-bottom:-124px;">
 <div >
 <label style="width: 25%;">
-<select name="bank_info" style="position: relative;left: 1015px;bottom: 165px;width: 280px;" >
+<select name="bank_info" style="position: relative;left: 1012px;bottom: 165px;width: 290px;" >
 {% for i in bank %}
 <option value="{{i.id}}" > {{i.bank_name}}</option>
 {% endfor %}
@@ -525,33 +524,35 @@ left:974px;bottom: 163px;" class="fa fa-solid fa-angle-down"></i>
   </div>
 </div> {% endcomment %}
 <br>
-<br>
-<br>
-<br>
-<br>
-<div class="card-body">
-  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service1 : </h3>
 
+<h3 style="position: relative;font-weight: bold;left: 785px;font-size: 50px;">Services</h3>
+
+<div class="card-body">
+  <h3 style="font-weight:bold;position: relative;left: 477px;bottom: 7px;">Service1 : </h3>
+  <button  class="btn bg-dark btn-sm" style="width: 76px;margin-left: 1218px;bottom: 168px;font-size: 40px;border-radius: 81px;" id="btn">+</button>
+</div>
 <div id="service_element_main">
 
   <div class="row">
     <div class="form-outline">
-      <textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -73px;width: 823px;margin-left: 500px;" required></textarea>
+      <textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -73px;width: 823px;margin-left: 500px;font-size: 20px;font-weight: bold;" required></textarea>
       <label class="form-label" for="textAreaExample"></label>
     </div>
 
     <div class="col-25" style="position: relative;bottom: 113px;margin-left: 484px;">
-      <label onfocusout="n()" ><input type="number" min="0" name="cost1" class="form-control",id="cost1" placeholder="Enter Cost per Unit" style="width: 308px;" required></label>
+      <label onfocusout="n()" ><input type="number" min="0" name="cost1" class="form-control",id="cost1" placeholder="Enter Cost per Unit" style="width: 308px;font-weight: bold;" required></label>
       </div>
 
       <div class="col-25">
-        <label><input type="number" min="0" name="quantity1" class="form-control",id="quantity1" placeholder="Enter Quantity" style="position:relative;width: 305px;bottom: 106px;left: 75px;" required></label>
+        <label><input type="number" min="0" name="quantity1" class="form-control",id="quantity1" placeholder="Enter Quantity" style="position:relative;width: 260px;bottom: 106px;left: 75px;font-weight: bold;" required></label>
         </div>
-
 </div>
 </div>
 
-<button type="submit" class="btn btn-dark bg-dark btn-sm" style="width: 76px;margin-left: 1232px;bottom: 194px;font-size: 40px;" id="btn">+</button>
+<hr style="margin-left: -58px; width: 109%;">
+
+
+{% comment %} <button type="submit" class="btn bg-dark btn-sm" style="width: 76px;margin-left: 1232px;bottom: 414px;font-size: 40px;" id="btn">+</button> {% endcomment %}
 <h3 style="font-weight:bold;margin-left: 120px;">Terms and Conditions:</h3>
 
 <div class="row" style="margin-left: 2%;" >
@@ -572,12 +573,12 @@ left:974px;bottom: 163px;" class="fa fa-solid fa-angle-down"></i>
 <div class="radio-inline">
   <label class="text-dark" style="margin-left: 730px;position: relative;"> <br>
     <label style= "color: black;">
-      <input type="radio" name="send_email"  value="only_generate" required>
+      <input type="radio" name="send_email"  value="only_generate" id="send_email" required>
       <span class="design"></span>
       <span class="value">Generate PDF</span>
     </label>
     <label style="color: black;">
-      <input type="radio" name="send_email"  value="generate_and_send">
+      <input type="radio" name="send_email"  value="generate_and_send" id="send_email2">
       <span class="design"></span>
       <span class="value">Email</span>
     </label>
@@ -586,7 +587,7 @@ left:974px;bottom: 163px;" class="fa fa-solid fa-angle-down"></i>
 bottom: 26px;
 right: 48%;"/> {% endcomment %}
 {% comment %} {% if invoices.invoice_date is not None%} {% endcomment %}
-<button id="myButton" onclick="myFunction()" class="btn btn-dark bg-dark my-4" style="width: 170px;left: 843px;bottom: 35px;">Generate PDF</button>
+<button id="myButton" onclick="myFunction()" class="btn btn-dark bg-dark my-4" style="width: 170px;left: 830px;bottom: 35px;font-size: 16px;">Generate PDF</button>
    {% comment %} <p id="result"></p>
    <script>
       var count = 0;
@@ -608,11 +609,14 @@ right: 48%;"/> {% endcomment %}
 
 </body>
 <script>
+
 var textt = document.getElementById("id_t_2");
 function changestatus()
 {
+  
 var paymentmode = document.getElementById('payment_status').value
 var paymentmethod = document.getElementById('id_payment_method')
+
 if(paymentmode=="PENDING")
 {
 paymentmethod.value = "----";
@@ -624,23 +628,27 @@ paymentmethod.disabled = false;
 }
 
 }
+
 service = document.getElementById("service_element")
 var k=1
 function addElement(event)
 {
 
 k=k+1
+
 // service.innerHTML = service.innerHTML + '<b>Service'+k+' :: </b><div class="row"><div class="col-25"><label><input type="text" class="form-control",id="desription'+k+'" name = "description'+k+'" placeholder="Description" ></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div></div>';
 }
 $(document).ready(function(){
 $("#btn").click(function(){
 k=k+1
+event.preventDefault();
 // $("#service_element").append('<div class="row" id="element'+k+'>  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service'+k+' : </h3><div class="col-25" ><label><textarea class="form-control" style="height: 159%;width: 130%;" row="4" id="description1'+k+'" name = "description'+k+'" placeholder="Description" ></textarea></label><br/></div><div class="col-25"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Cost Per Unit" required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="quantity" required></label></div><div class="col"><button class="mt-3 btn btn-outline-secondary" onclick="del(this.id)" id="bttn'+k+'">Remove</button></div></div>');
 // });
+$("#service_element_main").append('<div class="row" id="element'+k+'"><h3 style="font-weight:bold;position: relative;left: 500px;bottom: 78px;">Service'+k+' : </h3><div class="col-25"><div class="col-25" style="margin-top: 48px;"><textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -109px;width: 823px;margin-left: 500px;font-size:20px;font-weight: bold;" required></textarea><label class="form-label" for="textAreaExample"></label></div><div class="col-25" style="position: relative;bottom: 113px;margin-left: 484px;"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Enter Cost Per Unit" style="width: 308px;font-weight: bold;"  required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="Enter Quantity"  style="position: relative;width: 200px;bottom: 207px;left: 1091px;font-weight: bold;" required></label></div><div class="col" style="margin-left: 613px;bottom: 133px;"><button class="btn btn-danger btn-d-sm-flex" onclick="del(this.id)" id="bttn'+k+'"><i class="fa fa-close"></i> </button></div></div>');
+});
+service_element_main.scrollIntoView({behavior: "smooth"});
+});
 
-$("#service_element_main").append('<div class="row" id="element'+k+'">  <h3 style="font-weight:bold;position: relative;left: 489px;bottom: 78px;">Service'+k+' : </h3><div class="col-25" ><div class="col-25" style="margin-top: 48px;"><textarea class="form-control" name="description1" placeholder="Enter your Service details" id="textAreaExample1" rows="6" style="position: relative;top: -109px;width: 823px;margin-left: 500px;" required></textarea><label class="form-label" for="textAreaExample"></label></div><div class="col-25" style="position: relative;bottom: 113px;margin-left: 484px;"><label onfocusout="n()" ><input type="number" name="cost'+k+'" class="form-control",id="cost'+k+'" placeholder="Enter Cost Per Unit" style="width: 308px;"  required></label></div><div class="col-25"><label><input type="number" name="quantity'+k+'" class="form-control",id="quantity'+k+'" placeholder="Enter Quantity"  style="position: relative;width: 200px;bottom: 207px;left: 1091px;" required></label></div><div class="col" style="margin-left: 613px;bottom: 133px;"><button class="btn btn-danger btn-d-sm-flex" onclick="del(this.id)" id="bttn'+k+'"><i class="fa fa-close"></i> </button></div></div>');
-});
-});
 function del(id)
 {
 var id= String(id)
@@ -649,6 +657,7 @@ console.log("im in deleted")
 document.getElementById("element"+id+"").remove()
 k=k-1
 }
+
 id_t_2.rows = 5;
 id_t_3.rows = 5;
 id_t_4.rows = 5;
@@ -657,10 +666,11 @@ $('#sacid').css('visibility','hidden')
   $("#sacid2").html($('#sacid').val())
 
 
-  function myFunction() {
-    if (id_send_email.value=="only_generate"){
+function myFunction() {
+
+  if (send_email.checked == true){
     alert("Invoice Created successfully !");
-  }else if(id_send_email.value=="generate_and_send"){
+  }else if(send_email2.checked == true){
     alert("Invoice Created and sent to registered email-id")
   }
   }
